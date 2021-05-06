@@ -38,7 +38,63 @@
             {
               "key": "ypg8un",
               "type": "unstyled",
-              "text": " "
+              "text": ""
+            },
+            {
+              "text": " ",
+              "type": "text",
+              "key": "cte00",
+              "header": "Test 1",
+              "placeholder": "placeholder",
+              "helpText": "help text"
+            },
+            {
+              "text": " ",
+              "type": "unstyled",
+              "key": "ckf4b"
+            },
+            {
+              "text": " ",
+              "type": "date",
+              "key": "746nq",
+              "header": "Date field"
+            },
+            {
+              "text": "",
+              "type": "unstyled",
+              "key": "emrid"
+            },
+            {
+              "text": " ",
+              "type": "list",
+              "key": "d8u1a",
+              "header": "List field",
+              "values": [
+                "item 1",
+                "item 2",
+                "item 3"
+              ]
+            },
+            {
+              "text": "",
+              "type": "unstyled",
+              "key": "3evig"
+            },
+            {
+              "text": " ",
+              "type": "radio",
+              "key": "dmu5d",
+              "header": "Radio field",
+              "values": [
+                "item 1",
+                "item 2",
+                "item 3"
+              ]
+            },
+            {
+              "text": "",
+              "type": "unstyled",
+              "key": "2doeu"
             }
           ],
           "key": "tycc6n"
