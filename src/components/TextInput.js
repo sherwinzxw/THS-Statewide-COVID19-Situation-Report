@@ -2,12 +2,12 @@ import * as React from 'react'
 import classNames from 'classnames'
 
 const TextInput = props => {
-  const { header, onChangeText, errorMessage } = props
+  const { header, onChangeText, errorMessage, invalid } = props
   return <div 
     className={classNames({
       ['Control']: true,
       ['TextInput']: true,
-      ['error']: !!errorMessage,
+      ['invalid']: invalid,
     })}
   >
     {header ? <label>{header}</label> : null}
@@ -16,7 +16,7 @@ const TextInput = props => {
         onChangeText(e.target.value)
       }}
     />
-    {/*errorMessage ? <p className="errorMessage">{errorMessage}</p> : null*/}
+    {errorMessage ? <p className="errorMessage">{errorMessage}</p> : null}
   </div>
 }
 

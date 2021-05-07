@@ -10,6 +10,7 @@ const Control = props => {
     text, 
     type, 
     onChangeValue, 
+    errorMessage
   } = props
 
 
@@ -19,11 +20,13 @@ const Control = props => {
     case 'Number': return <NumberInput 
         header={header}
         onChange={onChangeValue}
+        errorMessage={errorMessage}
       />
     default:
       return <TextInput 
         header={header}
         onChangeText={onChangeValue}
+        errorMessage={errorMessage}
       />
   }
 }

@@ -33,3 +33,20 @@ export const debounce = function(func, waitMs){
     }, waitMs)
   }
 }
+
+/**
+ * Iterate over a schema and run a function over each control and replace the
+ * control with what's returned from the function.
+ */
+export const runOnControl = function(schema, controlMapFunc){
+  return {
+    ...schema,
+    layout: schema.layout.map(page => ({
+      ...page,
+      layout: page.layout.map(form => ({
+        ...form,
+        layout: form.layout.map(controlMapFunc)
+      }))
+    }))
+  }
+}

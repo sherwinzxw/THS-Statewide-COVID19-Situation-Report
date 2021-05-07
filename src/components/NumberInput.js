@@ -5,14 +5,18 @@ const { useState } = React
 
 const NumberInput = props => {
 
-  const { onChange } = props
+  const { 
+    onChange, 
+    errorMessage, 
+  } = props
 
-  const [errorMessage, setErrorMessage] = useState('')
+  const [validationMessage, setValidationMessage] = useState('')
 
   const onChangeText = str => {
+    setValidationMessage('')
     var value = Number(str)
     if (Number.isNaN(value)){
-      setErrorMessage('Invalid.')
+      setValidationMessage('Invalid.')
     }
     onChange(value)
   }
@@ -20,7 +24,8 @@ const NumberInput = props => {
   return <TextInput
     {...props}
     onChangeText={onChangeText}
-    errorMessage={errorMessage}
+    errorMessage={validationMessage || errorMessage}
+    invalid={!!validationMessage}
   />
 }
 
