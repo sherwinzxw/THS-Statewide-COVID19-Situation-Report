@@ -2,6 +2,7 @@ import * as React from 'react'
 import Engine from './scenes/Engine'
 import { splitObjectsByKeyValue } from './util/misc'
 import { getViews, getControls } from './api/api'
+import AppErrorBoundary from './AppErrorBoundary'
 
 const { useEffect, useState, Fragment } = React
 
@@ -31,13 +32,14 @@ const App = props => {
           var view = views.find(v => v && v.viewIdentifier == viewId)
           layout.splice(0, 0, {
             text: view.description || `Form ${index + 1}`,
-            type: "header-two",
+            type: "header-five",
             key: viewId,
           })
           
           return {
             "type": "form",
-            layout
+            layout,
+            key: viewId,
           }
         }
       )
@@ -48,6 +50,7 @@ const App = props => {
           {
             "type": "page",
             "layout": forms,
+            key: 'Page1',
           }
         ]
       }
@@ -60,10 +63,16 @@ const App = props => {
       
   }, [])
 
-  return <Fragment>
+  return <AppErrorBoundary>
     {errorMessage ? <p className="ErrorMessage">{errorMessage}</p> : null}
-    {schema ? <Engine schema={schema} /> : <p>Loading...</p>}
-  </Fragment>
+    {schema ? 
+      <Engine 
+        schema={schema} 
+        onError={e => setErrorMessage(e.message)}
+      /> : 
+      <p>Loading...</p>
+    }
+  </AppErrorBoundary>
 }
 
 export default App

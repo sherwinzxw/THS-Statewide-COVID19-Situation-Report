@@ -18,3 +18,18 @@ export const splitObjectsByKeyValue = function(arr, splitKey){
   return result
 }
 
+/**
+ * Only calls a function after the specified wait time, if the function is
+ * called again before the wait time then all previous calls are disregarded.
+ */
+export const debounce = function(func, waitMs){
+  var timeout
+  return function(){
+    var context = this
+    var args = arguments
+    clearTimeout(timeout)
+    timeout = setTimeout(() => {
+      func.apply(context, args)
+    }, waitMs)
+  }
+}

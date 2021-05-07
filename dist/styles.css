@@ -12,7 +12,7 @@ body {
   margin-bottom: 1.5rem;
 }
 
-.form-control {
+.Control input {
   display: block;
   width: 100%;
   height: calc(2.25rem + 2px);
@@ -26,17 +26,60 @@ body {
   border-radius: 0.25rem;
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
   box-sizing: border-box;
+  border: 0;
 }
 
-.TextInput {
+.TextInput input {
   height: 40px;
   box-shadow: rgb(18 0 59 / 12%) 0px 2px 6px, rgb(18 0 59 / 4%) 0px -1px 5px;
   background-color: #f8f9fa;
   border-color: #f8f9fa;
   border-radius: 0px;
 }
+.TextInput.error input {
+  background-color: #F3BABF;
+}
+.TextInput .errorMessage {
+  color: red;
+}
+
+.AppErrorBoundary {
+  color: red;
+}
 
 .ErrorMessage {
   color: red;
   margin: 10px 20px;
+}
+
+h5 {
+  color: #37506E;
+  font-size: 1.25rem;
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+}
+
+hr {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  border: 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.Card>.Card-Header {
+  background-color: #37506E;
+  padding: 0.75rem 1.25rem;
+  box-sizing: border-box;
+}
+
+.Card>.Card-Header>h4 {
+  color: white;
+  font-weight: 300;
+  font-size: 1.5rem;
+  line-height: 1.2;
+  margin: 0;
+}
+
+.Card>.Card-Body {
+  padding: 2rem;
 }

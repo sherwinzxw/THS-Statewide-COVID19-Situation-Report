@@ -1,12 +1,22 @@
 import * as React from 'react'
+import classNames from 'classnames'
 
 const TextInput = props => {
-  const { header } = props
-  return <div className="Control">
+  const { header, onChangeText, errorMessage } = props
+  return <div 
+    className={classNames({
+      ['Control']: true,
+      ['TextInput']: true,
+      ['error']: !!errorMessage,
+    })}
+  >
     {header ? <label>{header}</label> : null}
     <input 
-      className="form-control TextInput"
+      onInput={e => {
+        onChangeText(e.target.value)
+      }}
     />
+    {/*errorMessage ? <p className="errorMessage">{errorMessage}</p> : null*/}
   </div>
 }
 
