@@ -1,18 +1,14 @@
 import * as React from 'react'
-import { 
-  TextInput 
-} from './../../components'
+import Page from './Page'
 
 const Engine = props => {
   const { schema } = props
 
   return <div>
-    {schema.layout[0].layout[0].layout.map(control => {
-      const { header, type } = control
-      return <TextInput 
-        header={header}
-      />
+    {schema.layout.map(o => {
+      return <Page {...o} />
     })}
+    
   </div>
 }
 

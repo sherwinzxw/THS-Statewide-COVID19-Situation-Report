@@ -10,8 +10,11 @@ export const splitObjectsByKeyValue = function(arr, splitKey){
   var result = {}
   arr.forEach(item => {
     var keyValue = item[splitKey]
-    if (typeof value !== 'string')
-      throw new Error('Split key value 
+    if (keyValue === null || keyValue === undefined)
+      throw new Error('Split key value should not be null or undefined.')
+    result[keyValue] = result[keyValue] || []
+    result[keyValue].push(item)
   })
+  return result
 }
 
