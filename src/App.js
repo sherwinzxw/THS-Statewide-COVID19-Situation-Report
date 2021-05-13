@@ -4,6 +4,7 @@ import { splitObjectsByKeyValue } from './util/misc'
 import { getViews, getControls, getControlValues } from './api/api'
 import AppErrorBoundary from './AppErrorBoundary'
 import { Button } from './components'
+import Modals from './Modals'
 
 const { useEffect, useState, Fragment } = React
 
@@ -69,14 +70,16 @@ const App = props => {
   }, [])
 
   return <AppErrorBoundary>
-    {errorMessage ? <p className="ErrorMessage">{errorMessage}</p> : null}
-    {schema ? 
-      <Engine 
-        schema={schema} 
-        onError={e => setErrorMessage(e.message)}
-      /> : 
-      <p>Loading...</p>
-    }
+    <Modals>
+      {errorMessage ? <p className="ErrorMessage">{errorMessage}</p> : null}
+      {schema ? 
+        <Engine 
+          schema={schema} 
+          onError={e => setErrorMessage(e.message)}
+        /> : 
+        <p>Loading...</p>
+      }
+    </Modals>
   </AppErrorBoundary>
 }
 

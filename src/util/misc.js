@@ -124,3 +124,69 @@ export const convertObjToCsv = function(obj){
   csvString += Object.values(obj).map(escapeCsvStr)
   return csvString
 }
+
+export const convertCsvToObj = function(csv){
+  
+  var lines = csv.split('\n')
+  var parts = lines.map((line, index) => parseCsvLine(line, index + 1))
+  if (!parts[0] || !parts[1])
+    throw new Error('Expected 2 lines for CSV.')
+  var obj = {}
+  parts.forEach((key, index) => {
+    obj[key] = parts[1][index]
+  })
+}
+
+export const parseCsvLine = function(csvLine, lineNo){
+
+  var chars = csvLine.split('')
+  var cells = []
+  var currentCell = ''
+  var quoteStart = false, escapeQuoteStart = false
+  chars.forEach((c, i) => {
+    if (c == '"'){
+      if (currentCell.length == 0){
+        quoteStart = true
+        currentCell += '"'
+        return
+      } else if (escapeQuoteStart) {
+        console.log('currentCell', currentCell)
+        if (currentCell.slice(-1) != '"')
+          throw new Error(`Invalid quote escape sequence at${
+            line ? ` lineNo ${lineNo},` : ''
+          } character ${
+            (i + 1)}.`)
+        escapeQuoteStart = false 
+      } else {
+        escapeQuoteStart = true
+      }
+    }
+    if (c == ','){
+      if (quoteStart && escapeQuoteStart){
+        // Should terminate because previous character was a "
+        console.log('1#currentCell', currentCell)
+        cells.push(currentCell.slice(1, -1).replace(/""/g, '"'))
+        quoteStart = false
+        escapeQuoteStart = false
+        currentCell = ''
+        return
+      }
+      if (!quoteStart){
+        console.log('2#currentCell', currentCell)
+        cells.push(currentCell)
+        quoteStart = false
+        escapeQuoteStart = false
+        currentCell = ''
+        return
+      }
+    }
+    currentCell += c
+  })
+  if (quoteStart && escapeQuoteStart){
+    cells.push(currentCell.slice(1, -1).replace(/""/g, '"'))
+  } else { 
+    cells.push(currentCell)
+  } 
+  return cells
+
+}

@@ -123,4 +123,14 @@ describe('misc', () => {
       expect(result).toBe('123')
     })
   })
+
+  describe('parseCsvLine()', () => {
+    var line = '"Hello, World",123,"Foobar """'
+    var cells = methods.parseCsvLine(line)
+    expect(cells).toEqual([
+      'Hello, World',
+      '123',
+      'Foobar "',
+    ])
+  })
 })

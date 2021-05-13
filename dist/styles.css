@@ -78,6 +78,10 @@ hr {
   border-top: 1px solid rgba(0, 0, 0, 0.1);
 }
 
+.Card {
+  
+}
+
 .Card>.Card-Header {
   background-color: #37506E;
   padding: 0.75rem 1.25rem;
@@ -94,6 +98,7 @@ hr {
 
 .Card>.Card-Body {
   padding: 2rem;
+  position: relative;
 }
 
 label {
@@ -101,3 +106,70 @@ label {
   margin-bottom: 0.5rem;
   display: inline-block;
 }
+
+.Modal {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex: 1;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  align-items: center;
+  justify-content: center;
+}
+
+.Modal>.UIBlock {
+  background-color: grey;
+  opacity: 0.3;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.ErrorDisplay {
+  background-color: white;
+  padding: 20px;
+  width: 400px;
+  z-index: 99;
+  border: 1px solid #37506E;
+}
+
+.ErrorDisplay>.errorText {
+  color: red;
+  margin-top: 15px;
+  font-family: MONOSPACE;
+}
+
+.Page {
+  position: relative;
+}
+
+.Page .dropZone {
+  display: none;
+  padding: 20px;
+  background-color: white;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  pointer-events: none;
+}
+
+.Page .dropZoneInner {
+  border-style: dashed;
+  border-width: 5px;
+  border-color: grey;
+  width: 100%;
+  height: 100%;
+}
+
+.Page.dropZoneActive .dropZone {
+  display: block;
+}
+

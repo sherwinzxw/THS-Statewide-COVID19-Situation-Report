@@ -1,10 +1,88 @@
 import * as React from 'react'
 import Form from './Form'
+import classNames from 'classnames'
 import { Card, Button } from './../../components'
-import { exportCSV, runOnControl, convertObjToCsv } from './../../util/misc'
+import { 
+  exportCSV, 
+  runOnControl, 
+  convertObjToCsv, 
+  convertCsvToObj, 
+  debounce,
+} from './../../util/misc'
+import { useModalsContext } from './../../Modals'
+
+const { useRef, useEffect, useCallback } = React
+
+const debouncedRemoveDropZoneFlag = debounce(function(ele){
+  ele.className = 'Page'
+}, 500)
+
 
 const Page = props => {
   const { layout, onChangeValue } = props
+  const { showErrors } = useModalsContext()
+
+  const pageRef = useRef()
+
+  const onDropHandler = useCallback(e => {
+    var container = pageRef.current
+    container.className = 'Page'
+    e.preventDefault()
+    var files = []
+    for (var i = 0; i < e.dataTransfer.items.length; i++) {
+      var item = e.dataTransfer.items[i]
+      // If dropped items aren't files, reject them
+      if (item.kind != 'file' || item.type != 'text/csv')
+        return
+      files.push(item.getAsFile())
+    }
+
+    // Process the files one at a time
+    ;(async () => {
+      var errors = []
+      for (var i = 0; i < files.length; i ++){
+        var file = files[i]
+        var csvContent = await file.text()
+        try {
+          var obj = convertCsvToObj(csvContent)
+        } catch (err){
+          console.error(err)
+          errors.push(new Error(`Unable to parse file ${file.name}. ${
+            err.message}`))
+        }
+      }
+      if (errors.length){
+        return showErrors(errors)
+      }
+    })()
+
+  }, [])
+
+  const onDragOverHandler = useCallback(e => {
+    console.log('onDragOverHandler fired')
+    var container = pageRef.current
+    container.className = 'Page dropZoneActive'
+    e.preventDefault()
+  }, [])
+
+  const onDragLeaveHandler = useCallback(e => {
+    console.log('onDragLeaveHandler fired')
+    var container = pageRef.current
+    debouncedRemoveDropZoneFlag(container)
+    e.preventDefault()
+  }, [])
+
+  useEffect(() => {
+    var container = pageRef.current
+    container.addEventListener('drop', onDropHandler)
+    container.addEventListener('dragover', onDragOverHandler)
+    container.addEventListener('dragleave', onDragLeaveHandler)
+    return () => {
+      container.removeEventListener('drop', onDragOverHandler)
+      container.removeEventListener('dragover', onDragOverHandler)
+      container.removeEventListener('dragleave', onDragLeaveHandler)
+    }
+  }, [])
 
   var keyValueMap = {}
   runOnControl(
@@ -62,14 +140,21 @@ const Page = props => {
     exportCSV(convertObjToCsv(csvJsonMap), 'temp.csv')
   }
 
-  return <div className="Page">
+  return <div 
+    className={"Page"} 
+    ref={pageRef}
+  >
     <Card title="Data Request Form">
       <Button 
         title="Download CSV Import Template" 
         onPress={onExportCSV}
       />
       {layout.map(o => <Form {...o} onChangeValue={onChangeValue} />)}
+      <div className="dropZone">
+        <div className="dropZoneInner" />
+      </div>
     </Card>
+    
   </div>
 }
 
