@@ -1,8 +1,9 @@
 import * as React from 'react'
 import Engine from './scenes/Engine'
 import { splitObjectsByKeyValue } from './util/misc'
-import { getViews, getControls } from './api/api'
+import { getViews, getControls, getControlValues } from './api/api'
 import AppErrorBoundary from './AppErrorBoundary'
+import { Button } from './components'
 
 const { useEffect, useState, Fragment } = React
 
@@ -17,17 +18,21 @@ const App = props => {
 
       /**/
       var result = await getControls()
-
-      var controlsByView = splitObjectsByKeyValue(result, 'fk_ViewID')
+      var controlIds = result.map(c => c.controlIdentifier)
+      var controlsByView = splitObjectsByKeyValue(result, 'fk_ViewIdentifier')
       
-      // Grab the views relating to the view ids
-      var views = await getViews(Object.keys(controlsByView))
+      const [ views, data ] = await Promise.all([
+        // Grab the views relating to the view ids
+        getViews(Object.keys(controlsByView)),
+        //getControlValues(controlIds),
+      ])
       var forms = Object.entries(controlsByView).map(
         ([viewId, controls], index) => {
           var layout = controls.map(r => ({ 
             key: r.controlIdentifier, 
             type: r.ref_Type, 
             header: r.label, 
+            maxLength: r.maxLength,
           }))
           var view = views.find(v => v && v.viewIdentifier == viewId)
           layout.splice(0, 0, {

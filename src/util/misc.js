@@ -50,3 +50,77 @@ export const runOnControl = function(schema, controlMapFunc){
     }))
   }
 }
+
+/**
+ * Iterates over an array and calls the func for each item. Assumes the func
+ * will return a Promise, ensures only X (chunkSize) promises are active
+ * at any one time.
+ */
+export const iteratePromiseChunks = function(arr, func, chunkSize){
+  
+  return new Promise((resolve, reject) => {
+    try {
+      arr = arr.slice(0)
+      if (chunkSize <= 0)
+        throw new Error(`'chunkSize' must be more than 0.`)
+      var activePromises = []
+
+      var maybeProcessNext = () => {
+        if (activePromises.length >= chunkSize) return
+        if (arr.length == 0)
+          return
+        var nextRecord = arr.shift()
+        var p = func(nextRecord)
+        .then(() => {
+          var pIndex = activePromises.findIndex(p2 => p2 == p)
+          if (pIndex == -1)
+            throw new Error('Cannot find promise.')
+          activePromises.splice(pIndex, 1)
+          if (activePromises.length == 0 && arr.length == 0){
+            resolve()
+          } else {
+            maybeProcessNext()
+          }
+        }).catch(reject)
+        activePromises.push(p)
+      }
+
+      var concurrentLimit = chunkSize
+      while(concurrentLimit){
+        concurrentLimit--
+        maybeProcessNext()
+      }
+    } catch (err){
+      reject(err)
+    }
+  })
+}
+
+/**
+ * Exports a CSV file in the browser.
+ */
+export const exportCSV = function(csvData, filename = 'example.csv'){
+  var blob = new Blob([csvData], { type: 'text/csv;charset=utf-8;' })
+  var link = document.createElement("a")
+  var url = URL.createObjectURL(blob)
+  link.setAttribute("href", url)
+  link.setAttribute("download", "test.csv")
+  link.style.visibility = 'hidden'
+  document.body.appendChild(link)
+  link.click()
+  document.body.removeChild(link)
+}
+
+export const escapeCsvStr = function(str = ''){
+  str = str.replace(/"/g, '""')
+  if (str.indexOf(',') != -1 || str.indexOf('"') != -1)
+    str = '"' + str + '"'
+  return str
+}
+
+export const convertObjToCsv = function(obj){
+  var csvString = ''
+  csvString += Object.keys(obj).map(escapeCsvStr) + '\n'
+  csvString += Object.values(obj).map(escapeCsvStr)
+  return csvString
+}

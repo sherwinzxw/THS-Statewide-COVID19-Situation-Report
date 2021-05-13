@@ -9,12 +9,14 @@ const Engine = props => {
   const { schema, onError } = props
 
   var localErrorProps = useRef({}).current
+  var localValueProps = useRef({}).current
   // A little hack to force a rerender
   const [rerenderHash, setRerenderHash] = useState('')
 
 
   const onChangeValue = debounce(useCallback(params => {
     const { value, key } = params
+    localValueProps[key] = value
     putControlValue({ value, controlId: key })
     .catch(error => {
       console.error(error)
@@ -24,13 +26,24 @@ const Engine = props => {
     })
   }, []), 1000)
 
-  var schemaWithErrorProps = runOnControl(
+  var schemaWithValueProps = runOnControl(
     schema, 
+    o => {
+      if (localValueProps[o.key] !== undefined)
+      o.value = localValueProps[o.key]
+      return o
+    }
+  )
+
+  var schemaWithErrorProps = runOnControl(
+    schemaWithValueProps, 
     o => {
       o.errorMessage = localErrorProps[o.key]
       return o
     }
   )
+
+  
 
   return <div hash={rerenderHash}>
     {schemaWithErrorProps.layout.map(o => {

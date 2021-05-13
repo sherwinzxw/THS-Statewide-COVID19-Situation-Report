@@ -29,14 +29,26 @@ body {
   border: 0;
 }
 
-.TextInput input {
-  height: 40px;
+.TextInput input,
+.TextInput textarea {
   box-shadow: rgb(18 0 59 / 12%) 0px 2px 6px, rgb(18 0 59 / 4%) 0px -1px 5px;
   background-color: #f8f9fa;
   border-color: #f8f9fa;
   border-radius: 0px;
 }
-.TextInput.invalid input {
+
+.TextInput input {
+  height: 40px;
+}
+
+
+.TextInput textarea {
+  width: 100%;
+  height: 120px;
+}
+
+.TextInput.invalid input,
+.TextInput.invalid textarea{
   background-color: #F3BABF;
 }
 .TextInput .errorMessage {

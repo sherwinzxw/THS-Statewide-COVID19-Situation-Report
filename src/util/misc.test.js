@@ -105,4 +105,22 @@ describe('misc', () => {
       })
     })
   })
+
+  describe('escapeCsvStr()', () => {
+    it('should escape a comma', () => {
+      var str = 'Hello, World'
+      var result = methods.escapeCsvStr(str)
+      expect(result).toBe('"Hello, World"')
+    })
+    it('should escape a quote', () => {
+      var str = 'Foobar "'
+      var result = methods.escapeCsvStr(str)
+      expect(result).toBe('"Foobar """')
+    })
+    it('should leave a valid string untouched', () => {
+      var str = '123'
+      var result = methods.escapeCsvStr(str)
+      expect(result).toBe('123')
+    })
+  })
 })

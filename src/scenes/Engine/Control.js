@@ -8,9 +8,9 @@ const Control = props => {
   const { 
     header, 
     text, 
-    type, 
-    onChangeValue, 
-    errorMessage
+    type,
+    onChangeValue,
+    ...controlProps
   } = props
 
 
@@ -20,13 +20,22 @@ const Control = props => {
     case 'Number': return <NumberInput 
         header={header}
         onChange={onChangeValue}
-        errorMessage={errorMessage}
+        //{...controlProps}
+        errorMessage={controlProps.errorMessage}
       />
+    case 'RichText': return <TextInput 
+      header={header}
+      onChangeText={onChangeValue}
+      multiline
+      //errorMessage={controlProps.errorMessage}
+      {...controlProps}
+    />
+    case 'DataLabel': return <p>{header}</p>
     default:
       return <TextInput 
         header={header}
         onChangeText={onChangeValue}
-        errorMessage={errorMessage}
+        {...controlProps}
       />
   }
 }
