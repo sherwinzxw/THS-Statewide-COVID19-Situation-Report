@@ -192,6 +192,12 @@ const Page = props => {
       <div className="dropZone">
         <div className="dropZoneInner" />
       </div>
+
+      <div className="actionButtons">
+        <Button title="Save as Draft" />
+        <Button title="Submit" />
+      </div>
+
     </Card>
     
   </div>

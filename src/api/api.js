@@ -21,8 +21,8 @@ const callApi = function(path, options){
  */
 export const getViews = async function(viewIds){
   var views = await callApi(
-    //`api/SitViews?search=${encodeURIComponent('Windows User')}`)
-    `api/SitViews`)
+    `api/SitViews?search=${encodeURIComponent('Windows User')}`)
+    //`api/SitViews`)
   return viewIds.map(id => {
     return views.find(v => v.viewIdentifier == id) || null
   })
@@ -32,8 +32,8 @@ export const getViews = async function(viewIds){
  * Get all the users controls.
  */
 export const getControls = async function(){
-  //return callApi(`api/SitControls?search=${encodeURIComponent('Windows User')}`)
-  return callApi(`api/SitControls`)
+  return callApi(`api/SitControls?search=${encodeURIComponent('Windows User')}`)
+  //return callApi(`api/SitControls`)
 }
 
 /**
