@@ -10,6 +10,7 @@ import {
   debounce,
 } from './../../util/misc'
 import { useModalsContext } from './../../Modals'
+import PreApprovalPrompt from './../PreApprovalPrompt'
 
 const { useRef, useEffect, useCallback } = React
 
@@ -187,6 +188,12 @@ const Page = props => {
     />)
   }
 
+  const onSubmit = () => {
+    var { close } = showModal(<PreApprovalPrompt
+      onClose={() => close()}
+    />)
+  }
+
 
   return <div 
     className={"Page"} 
@@ -207,7 +214,10 @@ const Page = props => {
           title="Save as Draft" 
           onPress={onSaveDraft}
         />
-        <Button title="Submit" />
+        <Button 
+          title="Submit" 
+          onPress={onSubmit}
+        />
       </div>
 
     </Card>

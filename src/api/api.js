@@ -63,11 +63,20 @@ export const getControlDefaultValues = callApi => async function(controlIds){
  * Get data that was previously submitted for existing controls
  * @param {Array<string>} controlsIds
  */
-export const getControlValues = callApi => async function(controlIds){
+/*export const getControlValues = callApi => async function(controlIds){
   await iteratePromiseChunks(controlIds, async id => {
     await callApi(`api/SitUserInputs?controlIdentifier=${id}`)
     .then(result => {
       debugger
     })
   }, 4)
+}*/
+
+/**
+ * @param {boolean} params.preApproved Is this preApproved or not
+ */
+export const submitData = callApi => async function(params){
+  const { preApproved } = params
+  return callApi(`api/SitUserInputReceipts?submission=true&preapproval=${
+    preApproved ? 'True' : 'False'}`)
 }

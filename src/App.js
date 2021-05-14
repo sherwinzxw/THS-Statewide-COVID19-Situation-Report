@@ -10,7 +10,7 @@ import Requests, { useRequestsContext } from './Requests'
 const { useEffect, useState, Fragment } = React
 
 const App = props => {
-
+  const { modalContent } = props
   var [schema, setSchema] = useState()
   var [errorMessage, setErrorMessage] = useState('')
 
@@ -84,6 +84,10 @@ const App = props => {
         <p>Loading...</p>
       }
     </div>
+    {modalContent ? <div className="Modal">
+      <div className="UIBlock" />
+      {modalContent}
+    </div> : null}
   </Fragment>
 }
 

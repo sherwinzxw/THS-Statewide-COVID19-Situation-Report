@@ -7,7 +7,7 @@ export const ModalsContext = createContext()
 export const useModalsContext = () => useContext(ModalsContext)
 
 const Modals = props => {
-  const { children } = props
+  const { children,  } = props
   
   const [modalContent, setModalContent] = useState(false)
   const showModal = content => {  
@@ -23,11 +23,7 @@ const Modals = props => {
       showModal,
     }}
   >
-    {children}
-    {modalContent ? <div className="Modal">
-      <div className="UIBlock" />
-      {modalContent}
-    </div> : null}
+    {React.cloneElement(children, { showModal, modalContent })}
   </ModalsContext.Provider>
 }
 

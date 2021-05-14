@@ -242,15 +242,18 @@ h2 {
   transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
   cursor: pointer;
   margin: 4px;
+  color: #fff;
 }
 
 .Button.primary {
-  color: #fff;
-  background-color: #37506E;
-  
+  background-color: #37506E; 
 }
 
-.Button.primary:hover {
+.Button.secondary {
+  background-color: #6c757d;
+}
+
+.Button:hover {
   background-color: #0069d9;
 }
 

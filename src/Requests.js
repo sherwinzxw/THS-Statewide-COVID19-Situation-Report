@@ -8,9 +8,7 @@ export const RequestsContext = createContext()
 export const useRequestsContext = () => useContext(RequestsContext)
 
 const Requests = props => {
-  const { children } = props
-
-  const { showModal } = useModalsContext()
+  const { children, showModal, modalContent } = props
   
   const callApi = function(path, options){
     // Make it a little more forgiving if the user accidently adds a leading 
@@ -55,7 +53,7 @@ const Requests = props => {
   return <RequestsContext.Provider 
     value={methods}
   >
-    {children}
+    {React.cloneElement(children, { modalContent })}
   </RequestsContext.Provider>
 }
 
