@@ -178,10 +178,15 @@ const Page = props => {
         onChangeValue({value, key: realKey})
     })
 
-    
-
-
   }
+
+  const onSaveDraft = () => {
+    var { close } = showModal(<NotificationDisplay
+      title="Draft data has been saved."
+      onClose={() => close()}
+    />)
+  }
+
 
   return <div 
     className={"Page"} 
@@ -198,7 +203,10 @@ const Page = props => {
       </div>
 
       <div className="actionButtons">
-        <Button title="Save as Draft" />
+        <Button 
+          title="Save as Draft" 
+          onPress={onSaveDraft}
+        />
         <Button title="Submit" />
       </div>
 
@@ -214,5 +222,13 @@ const ErrorDisplay = props => {
   return <div className="ModalContent">
     {errors.map(err => <p className="errorText">{err.message}</p>)}
     <Button onPress={onClose} title="Close" />
+  </div>
+}
+
+const NotificationDisplay = props => {
+  const { title, onClose } = props
+  return <div className="ModalContent">
+    <h3>{title}</h3>
+    <Button onPress={onClose} title="Ok" />
   </div>
 }
