@@ -10,6 +10,7 @@ const TextInput = props => {
     multiline,
     maxLength,
     value,
+    id,
   } = props
 
   const Input = props => multiline ? 
@@ -25,6 +26,7 @@ const TextInput = props => {
   >
     {header ? <label>{header}</label> : null}
     <Input
+      id={id}
       maxLength={maxLength}
       onInput={e => {
         onChangeText(e.target.value)

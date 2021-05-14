@@ -1,7 +1,7 @@
 import * as React from 'react'
 import Page from './Page'
 import { debounce, runOnControl } from './../../util/misc'
-import { putControlValue } from './../../api/api'
+import { useRequestsContext } from './../../Requests'
 
 const { useCallback, useRef, useState } = React
 
@@ -12,6 +12,7 @@ const Engine = props => {
   var localValueProps = useRef({}).current
   // A little hack to force a rerender
   const [rerenderHash, setRerenderHash] = useState('')
+  const { putControlValue } = useRequestsContext()
 
 
   const onChangeValue = debounce(useCallback(params => {

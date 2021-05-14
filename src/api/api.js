@@ -1,4 +1,4 @@
-import { iteratePromiseChunks } from './../util/misc'
+//import { iteratePromiseChunks } from './../util/misc'
 
 /**
  * Get all views with the provided view identifiers. Will return null for each
@@ -6,8 +6,8 @@ import { iteratePromiseChunks } from './../util/misc'
  */
 export const getViews = callApi => async function(viewIds){
   var views = await callApi(
-    `api/SitViews?search=${encodeURIComponent('Windows User')}`)
-    //`api/SitViews`)
+    //`api/SitViews?search=${encodeURIComponent('Windows User')}`)
+    `api/SitViews`)
   return viewIds.map(id => {
     return views.find(v => v.viewIdentifier == id) || null
   })
@@ -17,8 +17,8 @@ export const getViews = callApi => async function(viewIds){
  * Get all the users controls.
  */
 export const getControls = callApi => async function(){
-  return callApi(`api/SitControls?search=${encodeURIComponent('Windows User')}`)
-  //return callApi(`api/SitControls`)
+  //return callApi(`api/SitControls?search=${encodeURIComponent('Windows User')}`)
+  return callApi(`api/SitControls`)
 }
 
 /**
@@ -50,14 +50,14 @@ export const putControlValue = callApi => async function(params){
  * Get data that was previously submitted for existing controls
  * @param {Array<string>} controlsIds
  */
-export const getControlDefaultValues = callApi => async function(controlIds){
+/*export const getControlDefaultValues = callApi => async function(controlIds){
   await iteratePromiseChunks(controlIds, async id => {
     await callApi(`api/SitControls?controlIdentifier=${id}&search=default`)
     .then(result => {
       debugger
     })
   }, 4)
-}
+}*/
 
 /**
  * Get data that was previously submitted for existing controls

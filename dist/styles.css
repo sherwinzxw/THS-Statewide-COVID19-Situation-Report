@@ -267,3 +267,30 @@ a:hover {
   color: #0056b3;
   text-decoration: underline;
 }
+
+table {
+  border-collapse: collapse;
+}
+
+td, th {
+  border: 1px solid #000000;
+  padding: 0.5rem;
+}
+
+table>thead>tr>th {
+  background-color: #dbdbdb;
+  font-weight: normal;
+  text-align: center;
+}
+
+
+table>thead>tr.header-two>th {
+  background-color: #dbdbdb;
+  font-style: italic;
+  font-weight: 300;
+}
+
+
+table>tfoot>tr>td {
+  background-color: #d9e2f2;
+}

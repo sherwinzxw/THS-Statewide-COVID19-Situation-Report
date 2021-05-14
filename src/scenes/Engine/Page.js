@@ -143,7 +143,7 @@ const Page = props => {
       csvJsonMap[label] = value
     })
 
-    exportCSV(convertObjToCsv(csvJsonMap), 'temp.csv')
+    exportCSV(convertObjToCsv(csvJsonMap), 'sit import template.csv')
   }
 
   const onImportCSV = (csvObj) => {

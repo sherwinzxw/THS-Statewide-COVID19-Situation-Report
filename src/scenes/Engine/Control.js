@@ -3,6 +3,7 @@ import {
   TextInput,
   NumberInput,
 } from './../../components'
+import ConfirmedCasesTable from './../ConfirmedCasesTable'
 
 const Control = props => {
   const { 
@@ -13,30 +14,33 @@ const Control = props => {
     ...controlProps
   } = props
 
-
   switch(type){
     case 'header-two': return <h2>{text}</h2>
     case 'header-five': return <><h5>{text}</h5><hr /></>
     case 'Number': return <NumberInput 
         header={header}
         onChange={onChangeValue}
-        //{...controlProps}
-        errorMessage={controlProps.errorMessage}
+        {...controlProps}
       />
     case 'RichText': return <TextInput 
       header={header}
       onChangeText={onChangeValue}
       multiline
-      //errorMessage={controlProps.errorMessage}
+      {...controlProps}
+    />
+    case 'Text': return <TextInput 
+      header={header}
+      onChangeText={onChangeValue}
       {...controlProps}
     />
     case 'DataLabel': return <p>{header}</p>
+    case 'ConfirmedCases': return <ConfirmedCasesTable
+      header={header}
+      onChangeValue={onChangeValue}
+      {...controlProps}
+    />
     default:
-      return <TextInput 
-        header={header}
-        onChangeText={onChangeValue}
-        {...controlProps}
-      />
+      return <p>Unknown control type: {type}</p>
   }
 }
 
