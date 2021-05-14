@@ -125,12 +125,38 @@ describe('misc', () => {
   })
 
   describe('parseCsvLine()', () => {
-    var line = '"Hello, World",123,"Foobar """'
-    var cells = methods.parseCsvLine(line)
-    expect(cells).toEqual([
-      'Hello, World',
-      '123',
-      'Foobar "',
-    ])
+    it('should parse a csv line with escaped values', () => {
+      var line = '"Hello, World",123,"Foobar """'
+      var cells = methods.parseCsvLine(line)
+      expect(cells).toEqual([
+        'Hello, World',
+        '123',
+        'Foobar "',
+      ])
+    })
+
+    it('should parse a csv line with empty values', () => {
+      var line = ',,'
+      var cells = methods.parseCsvLine(line)
+      expect(cells).toEqual([
+        '',
+        '',
+        '',
+      ])
+    })
+  })
+
+  describe('convertCsvToObj()', () => {
+    it('should parse a csv file with empty values', () => {
+      var csvFile = 'Report number,Report frequency,Date and time of distribution,Prepared by' + 
+        '\n,,,'
+      var obj = methods.convertCsvToObj(csvFile)
+      expect(obj).toEqual({
+        'Report number':'',
+        'Report frequency':'',
+        'Date and time of distribution':'',
+        'Prepared by':''
+      })
+    })
   })
 })

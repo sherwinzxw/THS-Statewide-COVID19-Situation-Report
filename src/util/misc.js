@@ -132,9 +132,10 @@ export const convertCsvToObj = function(csv){
   if (!parts[0] || !parts[1])
     throw new Error('Expected 2 lines for CSV.')
   var obj = {}
-  parts.forEach((key, index) => {
+  parts[0].forEach((key, index) => {
     obj[key] = parts[1][index]
   })
+  return obj
 }
 
 export const parseCsvLine = function(csvLine, lineNo){
@@ -150,7 +151,6 @@ export const parseCsvLine = function(csvLine, lineNo){
         currentCell += '"'
         return
       } else if (escapeQuoteStart) {
-        console.log('currentCell', currentCell)
         if (currentCell.slice(-1) != '"')
           throw new Error(`Invalid quote escape sequence at${
             line ? ` lineNo ${lineNo},` : ''
@@ -164,7 +164,6 @@ export const parseCsvLine = function(csvLine, lineNo){
     if (c == ','){
       if (quoteStart && escapeQuoteStart){
         // Should terminate because previous character was a "
-        console.log('1#currentCell', currentCell)
         cells.push(currentCell.slice(1, -1).replace(/""/g, '"'))
         quoteStart = false
         escapeQuoteStart = false
@@ -172,7 +171,6 @@ export const parseCsvLine = function(csvLine, lineNo){
         return
       }
       if (!quoteStart){
-        console.log('2#currentCell', currentCell)
         cells.push(currentCell)
         quoteStart = false
         escapeQuoteStart = false

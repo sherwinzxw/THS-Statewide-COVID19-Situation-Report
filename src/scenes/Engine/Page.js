@@ -39,12 +39,12 @@ const Page = props => {
 
     // Process the files one at a time
     ;(async () => {
-      var errors = []
+      var errors = [], csvObj = {}
       for (var i = 0; i < files.length; i ++){
         var file = files[i]
         var csvContent = await file.text()
         try {
-          var obj = convertCsvToObj(csvContent)
+          Object.assign(csvObj, convertCsvToObj(csvContent))
         } catch (err){
           console.error(err)
           errors.push(new Error(`Unable to parse file ${file.name}. ${
@@ -54,6 +54,7 @@ const Page = props => {
       if (errors.length){
         return showErrors(errors)
       }
+      onImportCSV(csvObj)
     })()
 
   }, [])
@@ -138,6 +139,44 @@ const Page = props => {
     })
 
     exportCSV(convertObjToCsv(csvJsonMap), 'temp.csv')
+  }
+
+  const onImportCSV = (csvObj) => {
+    // Map each CSV header back to their respective keys in the same way
+    // the file is createf in `onExportCSV`.
+    // List all duplicate labels
+    var tempLabelHash = {}
+    var duplicateLabelsHash = {}
+    Object.values(keyValueMap).forEach(dto => {
+      var { label } = dto
+      if (tempLabelHash[label]){
+        duplicateLabelsHash[label] = true
+        return
+      }
+      tempLabelHash[label] = true
+    })
+
+    // Aim to map to label, but if the label isn't unique, then use the key
+    var csvKeyMap = {}
+    Object.values(keyValueMap).forEach(dto => {
+      var { key, label } = dto
+      if (duplicateLabelsHash[label] || keyValueMap[label]){
+        // The label is ambigious, don't use it
+        csvKeyMap[key] = key
+        return
+      }
+      csvKeyMap[label] = key
+    })
+
+    Object.entries(csvObj).forEach(([csvKey, value]) => {
+      var realKey = csvKeyMap[csvKey]
+      if (value)
+        onChangeValue({value, key: realKey})
+    })
+
+    
+
+
   }
 
   return <div 
