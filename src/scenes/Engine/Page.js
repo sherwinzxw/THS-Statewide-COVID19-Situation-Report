@@ -20,7 +20,7 @@ const debouncedRemoveDropZoneFlag = debounce(function(ele){
 
 const Page = props => {
   const { layout, onChangeValue } = props
-  const { showErrors } = useModalsContext()
+  const { showModal } = useModalsContext()
 
   const pageRef = useRef()
 
@@ -52,7 +52,11 @@ const Page = props => {
         }
       }
       if (errors.length){
-        return showErrors(errors)
+        var { close } = showModal(<ErrorDisplay 
+          errors={errors}
+          onClose={() => close()}
+        />)
+        return
       }
       onImportCSV(csvObj)
     })()
@@ -204,3 +208,11 @@ const Page = props => {
 }
 
 export default Page
+
+const ErrorDisplay = props => {
+  const { errors, onClose } = props
+  return <div className="ModalContent">
+    {errors.map(err => <p className="errorText">{err.message}</p>)}
+    <Button onPress={onClose} title="Close" />
+  </div>
+}

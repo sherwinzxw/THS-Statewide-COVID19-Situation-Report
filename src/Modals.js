@@ -9,31 +9,26 @@ export const useModalsContext = () => useContext(ModalsContext)
 const Modals = props => {
   const { children } = props
   
-  const [errors, setErrors] = useState()
-  
+  const [modalContent, setModalContent] = useState(false)
+  const showModal = content => {  
+    setModalContent(content)
+
+    return {
+      close: () => setModalContent(null),
+    }
+  }
+
   return <ModalsContext.Provider 
     value={{
-      showErrors: setErrors,
+      showModal,
     }}
   >
     {children}
-    {errors !== undefined ? <div className="Modal">
+    {modalContent ? <div className="Modal">
       <div className="UIBlock" />
-      <ErrorDisplay 
-        errors={errors}
-        onClose={() => setErrors()}
-      />
-      
+      {modalContent}
     </div> : null}
   </ModalsContext.Provider>
 }
 
 export default Modals
-
-const ErrorDisplay = props => {
-  const { errors, onClose } = props
-  return <div className="ErrorDisplay">
-    {errors.map(err => <p className="errorText">{err.message}</p>)}
-    <Button onPress={onClose} title="Close" />
-  </div>
-}

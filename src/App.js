@@ -1,11 +1,11 @@
 import * as React from 'react'
 import Engine from './scenes/Engine'
 import { splitObjectsByKeyValue } from './util/misc'
-import { getViews, getControls, getControlValues } from './api/api'
 import AppErrorBoundary from './AppErrorBoundary'
 import { Button } from './components'
 import Modals from './Modals'
 import Header from './scenes/Header'
+import Requests, { useRequestsContext } from './Requests'
 
 const { useEffect, useState, Fragment } = React
 
@@ -13,6 +13,8 @@ const App = props => {
 
   var [schema, setSchema] = useState()
   var [errorMessage, setErrorMessage] = useState('')
+
+  const { getViews, getControls, getControlValues } = useRequestsContext()
 
   useEffect(() => {
 
@@ -70,21 +72,26 @@ const App = props => {
       
   }, [])
 
-  return <AppErrorBoundary>
-    <Modals>
-      <Header />
-      <div className="App">
-        {errorMessage ? <p className="ErrorMessage">{errorMessage}</p> : null}
-        {schema ? 
-          <Engine 
-            schema={schema} 
-            onError={e => setErrorMessage(e.message)}
-          /> : 
-          <p>Loading...</p>
-        }
-      </div>
-    </Modals>
-  </AppErrorBoundary>
+  return <Fragment>
+    <Header />
+    <div className="App">
+      {errorMessage ? <p className="ErrorMessage">{errorMessage}</p> : null}
+      {schema ? 
+        <Engine 
+          schema={schema} 
+          onError={e => setErrorMessage(e.message)}
+        /> : 
+        <p>Loading...</p>
+      }
+    </div>
+  </Fragment>
 }
 
-export default App
+export default _ => <AppErrorBoundary>
+  <Modals>
+    <Requests>
+      <App />
+    </Requests>
+  </Modals>
+</AppErrorBoundary>
+
