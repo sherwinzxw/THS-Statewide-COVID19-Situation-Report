@@ -7,7 +7,7 @@ import {
 
 const Form = props => {
   var { layout, onChangeValue } = props
-  var { layout, onChangeValue } = combineConfirmedCasesControls({ layout, onChangeValue })
+  //var { layout, onChangeValue } = combineConfirmedCasesControls({ layout, onChangeValue })
   var { layout, onChangeValue } = combineHealthECCDailySnapshotControls({ layout, onChangeValue })
 
   return <div className="Form">

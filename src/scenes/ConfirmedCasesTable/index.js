@@ -53,10 +53,20 @@ export const controlMap = {
 const ConfirmedCasesTable = props => {
 
   const { 
-    value, 
-    onChangeValue,
+    value: defaultValue, 
+    onChangeValue: parentOnChangeValue,
     errorMessage,
   } = props
+
+  const [value, setValue] = useState(defaultValue)
+  const onChangeValue = val => {
+    setValue(val)
+    parentOnChangeValue(val)
+  }
+
+  useEffect(() => {
+    setValue(defaultValue)
+  }, [defaultValue])
 
   return <Table 
     value={value} 

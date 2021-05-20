@@ -231,6 +231,7 @@ export const groupControls = ({ controlMap, newKey }) => (params) => {
     // Return the untouched layout
     return !isInMap
   })
+  console.log('groupControls#valuesMap', valuesMap)
 
   // Add the custom control
   layout.splice(replacePoint, 0, {

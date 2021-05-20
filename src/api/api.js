@@ -37,10 +37,10 @@ export const putControlValue = callApi => async function(params){
       // TODO We haven't provided this anywhere yet
       reportID: 1,
       controlIdentifier: controlId,
-      inputValue: value,
+      userInput: value,
       // When the control is a drop down, this is the value of the selected
       // drop down. And the InputValue is the text value
-      ref_ReferenceID: null,
+      //ref_ReferenceID: null,
     })
   })
 }

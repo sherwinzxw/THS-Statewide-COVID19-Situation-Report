@@ -16,7 +16,6 @@ const Engine = props => {
 
 
   const doSave = debounce(useCallback(() => {
-    
     Object.entries(localValueProps).filter(([ key, value ]) => {
       return value.synced === false
     })
@@ -43,6 +42,7 @@ const Engine = props => {
       localValueProps[key].value = value
       localValueProps[key].synced = false
     }
+    console.log('onChangeValue#localValueProps', localValueProps)
     doSave()
   }
 

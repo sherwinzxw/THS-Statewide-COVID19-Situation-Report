@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { EditableTable as Table } from './../../components'
 
-const { Fragment } = React
+const { Fragment, useState, useEffect } = React
 
 /**
  * These are the specific controls this component will render.
@@ -27,11 +27,21 @@ export const controlMap = {
 const HealthECCDailySnapshotTable = props => {
 
   const { 
-    value, 
-    onChangeValue,
+    value: defaultValue, 
+    onChangeValue: parentOnChangeValue,
     errorMessage,
   } = props
 
+  const [value, setValue] = useState(defaultValue)
+  const onChangeValue = val => {
+    setValue(val)
+    parentOnChangeValue(val)
+  }
+
+  useEffect(() => {
+    setValue(defaultValue)
+  }, [defaultValue])
+ 
   return <Table 
     value={value} 
     onChangeValue={onChangeValue}
