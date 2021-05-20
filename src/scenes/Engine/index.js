@@ -37,8 +37,12 @@ const Engine = props => {
   const onChangeValue = params => {
     const { value, key } = params
     localValueProps[key] = localValueProps[key] || {}
-    localValueProps[key].value = value
-    localValueProps[key].synced = false
+    // Only fire if the value has changed as onChange may get triggered
+    // even if nothing changes
+    if (localValueProps[key].value != value){
+      localValueProps[key].value = value
+      localValueProps[key].synced = false
+    }
     doSave()
   }
 

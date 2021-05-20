@@ -294,3 +294,17 @@ table>thead>tr.header-two>th {
 table>tfoot>tr>td {
   background-color: #d9e2f2;
 }
+
+td.userInput {
+  border-bottom: 0;
+}
+
+td.errorMessage {
+  color: red;
+  margin: 0;
+  padding: 0;
+  border-top: 0;
+  padding-left: 2px;
+  padding-right: 2px;
+  font-size: 10px;
+}

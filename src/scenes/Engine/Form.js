@@ -4,8 +4,8 @@ import { combineConfirmedCasesControls } from './../../util/misc'
 
 const Form = props => {
   var { layout, onChangeValue } = props
-
-  layout = combineConfirmedCasesControls({ layout })
+  var { layout, onChangeValue } = combineConfirmedCasesControls({ layout, onChangeValue })
+  //var { layout, onChangeValue } = combineConfirmedCasesControls(props)
 
   return <div className="Form">
     {layout.map(o => <Control 
