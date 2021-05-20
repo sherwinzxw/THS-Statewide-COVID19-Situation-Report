@@ -57,6 +57,7 @@ const EditableTable = props => {
     if (!key)
       throw new Error(`Invalid control label '${controlLabel}'.`)
     var msg = errorMessage[key]
+    if (!msg) return null
     return <td className="errorMessage" {...props}>{msg}</td>
   }
 

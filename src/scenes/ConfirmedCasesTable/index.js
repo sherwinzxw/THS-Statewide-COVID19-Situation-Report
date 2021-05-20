@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { EditableTable as Table } from './../../components'
 
-const { Fragment } = React
+const { Fragment, useState, useEffect } = React
 
 /**
  * These are the specific controls this component will render.
