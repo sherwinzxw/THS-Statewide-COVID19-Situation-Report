@@ -1,7 +1,7 @@
 const path = require('path')
 const webpack = require('webpack')
 
-module.exports = env => {
+module.exports = (env, context) => {
   return {
     entry: './src/index.js',
     output: {
@@ -29,6 +29,7 @@ module.exports = env => {
     plugins: [
       new webpack.DefinePlugin({
         API_URL: JSON.stringify(env.API_URL),
+        NODE_ENV: JSON.stringify(context.mode),
       })
     ],
   }

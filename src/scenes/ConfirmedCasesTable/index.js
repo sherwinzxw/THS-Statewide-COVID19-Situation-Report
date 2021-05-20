@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { swapKeysWithValues } from './../../util/misc'
+import { EditableTable as Table } from './../../components'
 
 const { Fragment } = React
 
@@ -44,7 +44,7 @@ export const controlMap = {
   'Control_B4D5D8A8-2123-4485-AA6A-AFFC7F73721A': 'Not Reported - Total tests conducted  - Cumulative since 2 March 2020*'
 }
 
-const cLHash = swapKeysWithValues(controlMap)
+
 
 /**
  * @property {object} props.value This is a hash map of what the original 
@@ -60,56 +60,14 @@ const ConfirmedCasesTable = props => {
 
   console.log('ConfirmedCasesTable#errorMessage', errorMessage)
 
-  const onInput = (key, e) => {
-    // By doing this we allow the user to enter anything into the editable
-    // html element and the browser will do the formatting to handle the paste
-    // but this extracts only the text content and replaces the input with
-    // only that.
-    var inputValue = e.target.innerText
-    e.target.innerText = inputValue
 
-    // This will remove the cursor to the end of the pasted content
-    var range = document.createRange()
-    range.selectNodeContents(e.target)
-    range.collapse(false)
-    var selection = window.getSelection()
-    selection.removeAllRanges()
-    selection.addRange(range)
-
-    onChangeValue({
-      ...value,
-      [key]: inputValue,
-    })
-
-  }
-
-  const renderCellInput = controlLabel => {
-    var key = cLHash[controlLabel]
-    if (!key)
-      throw new Error(`Invalid control label '${controlLabel}'.`)
-    return <td 
-      className="userInput" 
-      contentEditable
-      onInput={onInput.bind(this, key)}
-      key={key}
-      rowSpan={errorMessage[key] ? 1 : 2}
-    >
-      {value[key] || ''}
-    </td>
-  }
-
-  const renderCellError = controlLabel => {
-    var key = cLHash[controlLabel]
-    if (!key)
-      throw new Error(`Invalid control label '${controlLabel}'.`)
-    var msg = errorMessage[key]
-    if (!msg)
-      return null
-    return <td className="errorMessage">{msg}</td>
-  }
-
-  return <Fragment>
-    <table>
+  return <Table 
+    value={value} 
+    onChangeValue={onChangeValue}
+    errorMessage={errorMessage}
+    controlMap={controlMap}
+  >
+    {({ renderCellError, renderCellInput }) => <Fragment>
       <thead>
         <tr className="header-one">
           <th colSpan={3}>New cases in the last week</th>
@@ -236,9 +194,8 @@ const ConfirmedCasesTable = props => {
           <td></td>
         </tr>
       </tfoot>
-    </table>
-    {/*errorMessage ? <p className="errorMessage">{errorMessage}</p> : null*/}
-  </Fragment>
+    </Fragment>}
+  </Table>
 }
 
 export default ConfirmedCasesTable
