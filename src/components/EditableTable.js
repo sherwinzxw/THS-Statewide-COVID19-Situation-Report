@@ -1,4 +1,5 @@
 import * as React from 'react'
+import classNames from 'classnames'
 import { swapKeysWithValues } from './../util/misc'
 
 const EditableTable = props => {
@@ -41,11 +42,14 @@ const EditableTable = props => {
     if (!key)
       throw new Error(`Invalid control label '${controlLabel}'.`)
     return <td 
-      className="userInput" 
+      className={classNames({
+        userInput: true,
+        userInputWithError: !!errorMessage[key],
+      })}
       contentEditable
       onInput={onInput.bind(this, key)}
       key={key}
-      //rowSpan={errorMessage[key] ? 1 : 2}
+      rowSpan={errorMessage[key] ? 1 : 2}
       {...props}
     >
       {value[key] || ''}
@@ -64,6 +68,7 @@ const EditableTable = props => {
   var childProps = {
     renderCellInput,
     renderCellError,
+    controlLabelHashmap: cLHash,
   }
   return <table>
     {children(childProps)}

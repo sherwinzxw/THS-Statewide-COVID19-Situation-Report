@@ -3,6 +3,9 @@ import { controlMap as
 import { 
   controlMap as healthECCDailySnapshotControlsMap 
 } from './../scenes/HealthECCDailySnapshotTable'
+import {
+  controlMap as statewideRespiratoryClinicsCapacityControlsMap
+} from './../scenes/StatewideRespiratoryClinicsCapacityTable'
  
 
 
@@ -268,6 +271,11 @@ export const combineConfirmedCasesControls = groupControls({
 export const combineHealthECCDailySnapshotControls = groupControls({
   controlMap: healthECCDailySnapshotControlsMap,
   newKey: 'HealthECCDailySnapshot',
+})
+
+export const combineStatewideRespiratoryClinicsCapacityControls = groupControls({
+  controlMap: statewideRespiratoryClinicsCapacityControlsMap,
+  newKey: 'StatewideRespiratoryClinicsCapacity',
 })
 
 /**

@@ -270,6 +270,7 @@ a:hover {
 
 table {
   border-collapse: collapse;
+  margin-bottom: 20px;
 }
 
 td, th {
@@ -295,7 +296,7 @@ table>tfoot>tr>td {
   background-color: #d9e2f2;
 }
 
-td.userInput {
+td.userInput.userInputWithError {
   border-bottom: 0;
 }
 

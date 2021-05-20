@@ -5,6 +5,7 @@ import {
 } from './../../components'
 import ConfirmedCasesTable from './../ConfirmedCasesTable'
 import HealthECCDailySnapshotTable from './../HealthECCDailySnapshotTable'
+import StatewideRespiratoryClinicsCapacityTable from './../StatewideRespiratoryClinicsCapacityTable'
 
 const Control = props => {
   const { 
@@ -41,6 +42,11 @@ const Control = props => {
       {...controlProps}
     />
     case 'HealthECCDailySnapshot': return <HealthECCDailySnapshotTable
+      header={header}
+      onChangeValue={onChangeValue}
+      {...controlProps}
+    />
+    case 'StatewideRespiratoryClinicsCapacity': return <StatewideRespiratoryClinicsCapacityTable
       header={header}
       onChangeValue={onChangeValue}
       {...controlProps}
