@@ -5,6 +5,8 @@ import {
 } from './../../components'
 import ConfirmedCasesTable from './../ConfirmedCasesTable'
 
+const { useState } = React
+
 const Control = props => {
   const { 
     header, 

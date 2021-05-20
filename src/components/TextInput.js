@@ -1,6 +1,9 @@
 import * as React from 'react'
 import classNames from 'classnames'
 
+
+const { useState, useEffect } = React
+
 const TextInput = props => {
   const { 
     header, 
@@ -9,13 +12,14 @@ const TextInput = props => {
     invalid, 
     multiline,
     maxLength,
-    value,
+    value: defaultValue = '',
     id,
   } = props
 
-  const Input = props => multiline ? 
-    <textarea {...props} /> : 
-    <input {...props} />
+  var [value, setValue] = useState(defaultValue)
+  useEffect(() => {
+    setValue(defaultValue)
+  }, [defaultValue])
 
   return <div 
     className={classNames({
@@ -25,16 +29,31 @@ const TextInput = props => {
     })}
   >
     {header ? <label>{header}</label> : null}
-    <Input
-      id={id}
-      maxLength={maxLength}
-      onInput={e => {
-        onChangeText(e.target.value)
-      }}
-      value={value}
-    />
+    {multiline ?
+      <textarea 
+        id={id}
+        maxLength={maxLength}
+        onInput={e => {
+          setValue(e.target.value)
+          //debugger
+          onChangeText(e.target.value)
+        }}
+        value={value}
+        key={id}
+      /> :
+      <input 
+        id={id}
+        maxLength={maxLength}
+        onInput={e => {
+          setValue(e.target.value)
+          onChangeText(e.target.value)
+        }}
+        value={value}
+        key={id}
+      />}
     {errorMessage ? <p className="errorMessage">{errorMessage}</p> : null}
   </div>
 }
 
 export default TextInput
+

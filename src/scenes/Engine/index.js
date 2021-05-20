@@ -15,23 +15,38 @@ const Engine = props => {
   const { putControlValue } = useRequestsContext()
 
 
-  const onChangeValue = debounce(useCallback(params => {
-    const { value, key } = params
-    localValueProps[key] = value
-    putControlValue({ value, controlId: key })
-    .catch(error => {
-      console.error(error)
-      localErrorProps[key] = 'Unable to save: ' + error.message
-      setRerenderHash((Math.random() * 99999).toString(36))
-      
+  const doSave = debounce(useCallback(() => {
+    
+    Object.entries(localValueProps).filter(([ key, value ]) => {
+      return value.synced === false
     })
+    .map(([ key, value ]) => {
+      value.synced = true
+      putControlValue({ value: value.value, controlId: key })
+        .catch(error => {
+          console.error(error)
+          localErrorProps[key] = 'Unable to save: ' + error.message
+          setRerenderHash((Math.random() * 99999).toString(36))
+      })
+    })
+    
+
+    
   }, []), 1000)
+  
+  const onChangeValue = params => {
+    const { value, key } = params
+    localValueProps[key] = localValueProps[key] || {}
+    localValueProps[key].value = value
+    localValueProps[key].synced = false
+    doSave()
+  }
 
   var schemaWithValueProps = runOnControl(
     schema, 
     o => {
       if (localValueProps[o.key] !== undefined)
-      o.value = localValueProps[o.key]
+      o.value = localValueProps[o.key].value
       return o
     }
   )
