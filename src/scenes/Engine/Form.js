@@ -1,11 +1,14 @@
 import * as React from 'react'
 import Control from './Control'
-import { combineConfirmedCasesControls } from './../../util/misc'
+import { 
+  combineConfirmedCasesControls,
+  combineHealthECCDailySnapshotControls, 
+} from './../../util/misc'
 
 const Form = props => {
   var { layout, onChangeValue } = props
   var { layout, onChangeValue } = combineConfirmedCasesControls({ layout, onChangeValue })
-  //var { layout, onChangeValue } = combineConfirmedCasesControls(props)
+  var { layout, onChangeValue } = combineHealthECCDailySnapshotControls({ layout, onChangeValue })
 
   return <div className="Form">
     {layout.map(o => <Control 

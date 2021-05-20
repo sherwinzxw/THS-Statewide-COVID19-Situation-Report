@@ -36,7 +36,7 @@ const EditableTable = props => {
 
   }
 
-  const renderCellInput = controlLabel => {
+  const renderCellInput = (controlLabel, props) => {
     var key = cLHash[controlLabel]
     if (!key)
       throw new Error(`Invalid control label '${controlLabel}'.`)
@@ -45,20 +45,19 @@ const EditableTable = props => {
       contentEditable
       onInput={onInput.bind(this, key)}
       key={key}
-      rowSpan={errorMessage[key] ? 1 : 2}
+      //rowSpan={errorMessage[key] ? 1 : 2}
+      {...props}
     >
       {value[key] || ''}
     </td>
   }
 
-  const renderCellError = controlLabel => {
+  const renderCellError = (controlLabel, props) => {
     var key = cLHash[controlLabel]
     if (!key)
       throw new Error(`Invalid control label '${controlLabel}'.`)
     var msg = errorMessage[key]
-    if (!msg)
-      return null
-    return <td className="errorMessage">{msg}</td>
+    return <td className="errorMessage" {...props}>{msg}</td>
   }
 
   var childProps = {

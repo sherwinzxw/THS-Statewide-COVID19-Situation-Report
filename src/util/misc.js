@@ -1,5 +1,9 @@
 import { controlMap as 
   confirmedCasesControlMap } from './../scenes/ConfirmedCasesTable'
+import { 
+  controlMap as healthECCDailySnapshotControlsMap 
+} from './../scenes/HealthECCDailySnapshotTable'
+ 
 
 
 /**
@@ -192,16 +196,18 @@ export const parseCsvLine = function(csvLine, lineNo){
 }
 
 /**
- * Removes all the 'Confirmed cases in the last week' controls and injects
- * a single control that represents all of that data.
+ * Groups all the controls in the provided control map into a single control
+ * where values for are passed down as a hashmap. Returns a function that
+ * takes `layout` and `onChangeValue` as inputs and returns a modified 
+ * `layout` that includes only the single control and a modified 
+ * `onChangeValue` that calls the passed in `onChangeValue` for each 
+ * individual control change.
  */
-export const combineConfirmedCasesControls = function(params){
+export const groupControls = ({ controlMap, newKey }) => (params) => {
   var { 
     layout, 
     onChangeValue, 
   } = params
-
-  const controlMap = confirmedCasesControlMap
   
   var replacePoint = layout.findIndex(control => {
     return !!controlMap[control.key]
@@ -228,27 +234,40 @@ export const combineConfirmedCasesControls = function(params){
 
   // Add the custom control
   layout.splice(replacePoint, 0, {
-    type: 'ConfirmedCases',
-    key: 'ConfirmedCases',
+    type: newKey,
+    key: newKey,
     value: valuesMap,
     errorMessage: errorsMap,
   })
 
-
   let originalOnChangeValue = onChangeValue
   onChangeValue = (params) => {
     const { value, key } = params
-    if (key != 'ConfirmedCases')
+    if (key != newKey)
       return originalOnChangeValue(params)
     Object.entries(value).forEach(([key, value]) => {
       originalOnChangeValue({ value, key })
     })
   }
-
-
   return  { layout, onChangeValue }
-
 }
+
+/**
+ * Removes all the 'Confirmed cases in the last week' controls and injects
+ * a single control that represents all of that data.
+ */
+export const combineConfirmedCasesControls = groupControls({
+  controlMap: confirmedCasesControlMap,
+  newKey: 'ConfirmedCases',
+})
+
+/**
+ * Group controls into a table control for health ECC daily snapshot data.
+ */
+export const combineHealthECCDailySnapshotControls = groupControls({
+  controlMap: healthECCDailySnapshotControlsMap,
+  newKey: 'HealthECCDailySnapshot',
+})
 
 /**
  * Returns a new object with the keys and values swapped.

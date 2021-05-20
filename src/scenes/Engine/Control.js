@@ -4,8 +4,7 @@ import {
   NumberInput,
 } from './../../components'
 import ConfirmedCasesTable from './../ConfirmedCasesTable'
-
-const { useState } = React
+import HealthECCDailySnapshotTable from './../HealthECCDailySnapshotTable'
 
 const Control = props => {
   const { 
@@ -37,6 +36,11 @@ const Control = props => {
     />
     case 'DataLabel': return <p>{header}</p>
     case 'ConfirmedCases': return <ConfirmedCasesTable
+      header={header}
+      onChangeValue={onChangeValue}
+      {...controlProps}
+    />
+    case 'HealthECCDailySnapshot': return <HealthECCDailySnapshotTable
       header={header}
       onChangeValue={onChangeValue}
       {...controlProps}

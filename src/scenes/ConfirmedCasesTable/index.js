@@ -58,9 +58,6 @@ const ConfirmedCasesTable = props => {
     errorMessage,
   } = props
 
-  console.log('ConfirmedCasesTable#errorMessage', errorMessage)
-
-
   return <Table 
     value={value} 
     onChangeValue={onChangeValue}
