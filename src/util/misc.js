@@ -1,5 +1,4 @@
-import { controlMap as 
-  confirmedCasesControlMap } from './../scenes/ConfirmedCasesTable'
+import confirmedCasesControlMap from './../scenes/ConfirmedCasesTable/controlMap'
 import { 
   controlMap as healthECCDailySnapshotControlsMap 
 } from './../scenes/HealthECCDailySnapshotTable'
@@ -310,4 +309,20 @@ export const isValidControl = function(control){
     return false
   }
   return true
+}
+
+export const formatNumber = function(num){
+  var str = String(num)
+  var formattedStr = ''
+  while (str.length){
+    formattedStr = ',' + str.slice(-3) + formattedStr
+    str = str.slice(0, -3)
+  }
+  return formattedStr.slice(1)
+}
+
+export const parseIntOrZero = function(str){
+  if (/[^0-9]/.test(str))
+    return 0
+  return Number(str)
 }

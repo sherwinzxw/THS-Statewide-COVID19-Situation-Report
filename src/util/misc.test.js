@@ -159,4 +159,42 @@ describe('misc', () => {
       })
     })
   })
+
+  describe('formatNumber()', () => {
+    it('should format 1000', () => {
+      var result = methods.formatNumber(1000)
+      expect(result).toBe('1,000')
+    })
+    it('should format 100', () => {
+      var result = methods.formatNumber(100)
+      expect(result).toBe('100')
+    })
+    it('should format 10000', () => {
+      var result = methods.formatNumber(10000)
+      expect(result).toBe('10,000')
+    })
+    it('should format 0', () => {
+      var result = methods.formatNumber(0)
+      expect(result).toBe('0')
+    })
+    it('should format 9999999', () => {
+      var result = methods.formatNumber(9999999)
+      expect(result).toBe('9,999,999')
+    })
+  })
+
+  describe('parseIntOrZero()', () => {
+    it('should parse 0', () => {
+      var result = methods.parseIntOrZero('0')
+      expect(result).toBe(0)
+    })
+    it('should parse 10', () => {
+      var result = methods.parseIntOrZero('10')
+      expect(result).toBe(10)
+    })
+    it('should not parse alpha characters', () => {
+      var result = methods.parseIntOrZero('q03s')
+      expect(result).toBe(0)
+    })
+  })
 })
