@@ -28,15 +28,16 @@ export const getControls = callApi => async function(){
  * map the data to the format the server wants.
  */
 export const putControlValue = callApi => async function(params){
-  const { controlId, value, type } = params
+  const { controlId, value, reportId } = params
+  if (!reportId)
+    throw new Error(`'reportId' is required.`)
   return callApi(`api/SitUserInputs`, {
     method: 'post',
     headers: {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({
-      // TODO We haven't provided this anywhere yet
-      reportID: 1,
+      reportID: Number(reportId),
       controlIdentifier: controlId,
       userInput: value,
       // When the control is a drop down, this is the value of the selected
@@ -45,33 +46,6 @@ export const putControlValue = callApi => async function(params){
     })
   })
 }
-
-
-/**
- * Get data that was previously submitted for existing controls
- * @param {Array<string>} controlsIds
- */
-/*export const getControlDefaultValues = callApi => async function(controlIds){
-  await iteratePromiseChunks(controlIds, async id => {
-    await callApi(`api/SitControls?controlIdentifier=${id}&search=default`)
-    .then(result => {
-      debugger
-    })
-  }, 4)
-}*/
-
-/**
- * Get data that was previously submitted for existing controls
- * @param {Array<string>} controlsIds
- */
-/*export const getControlValues = callApi => async function(controlIds){
-  await iteratePromiseChunks(controlIds, async id => {
-    await callApi(`api/SitUserInputs?controlIdentifier=${id}`)
-    .then(result => {
-      debugger
-    })
-  }, 4)
-}*/
 
 /**
  * @param {boolean} params.preApproved Is this preApproved or not

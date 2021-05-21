@@ -6,7 +6,7 @@ import { useRequestsContext } from './../../Requests'
 const { useCallback, useRef, useState } = React
 
 const Engine = props => {
-  const { schema, onError } = props
+  const { schema, reportId, onError } = props
 
   var localErrorProps = useRef({}).current
   var localValueProps = useRef({}).current
@@ -21,7 +21,11 @@ const Engine = props => {
     })
     .map(([ key, value ]) => {
       value.synced = true
-      putControlValue({ value: value.value, controlId: key })
+      putControlValue({ 
+        value: value.value, 
+        controlId: key, 
+        reportId,
+      })
         .catch(error => {
           console.error(error)
           localErrorProps[key] = 'Unable to save: ' + error.message
@@ -61,8 +65,6 @@ const Engine = props => {
       return o
     }
   )
-
-  
 
   return <div hash={rerenderHash}>
     {schemaWithErrorProps.layout.map(o => {

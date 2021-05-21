@@ -62,7 +62,7 @@ export default Requests
 
 const NotAuthorizedWindow = props => {
   return <div className="ModalContent">
-    <p class="errorText">Not Authorized</p>
+    <p className="errorText">Not Authorized</p>
     <a href="http://www.dhhs.tas.gov.au/intranet">Go to login</a>
   </div>
 }

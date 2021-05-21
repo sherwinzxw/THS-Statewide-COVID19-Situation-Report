@@ -17,6 +17,10 @@ const Control = props => {
     ...controlProps
   } = props
 
+  if (controlProps.id == 'Control_DA09325A-FF65-4507-B1B4-4FA36E54B2B0'){
+    debugger
+  }
+
   switch(type){
     case 'header-two': return <h2>{text}</h2>
     case 'header-five': return <><h5>{text}</h5><hr /></>

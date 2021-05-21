@@ -50,6 +50,7 @@ const EditableTable = props => {
       onInput={onInput.bind(this, key)}
       key={key}
       rowSpan={errorMessage[key] ? 1 : 2}
+      id={key}
       {...props}
     >
       {value[key] || ''}
