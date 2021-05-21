@@ -6,6 +6,7 @@ import {
 import ConfirmedCasesTable from './../ConfirmedCasesTable'
 import HealthECCDailySnapshotTable from './../HealthECCDailySnapshotTable'
 import StatewideRespiratoryClinicsCapacityTable from './../StatewideRespiratoryClinicsCapacityTable'
+import PersonsTestedTable from '../PersonsTestedTable'
 
 const Control = props => {
   const { 
@@ -47,6 +48,11 @@ const Control = props => {
       {...controlProps}
     />
     case 'StatewideRespiratoryClinicsCapacity': return <StatewideRespiratoryClinicsCapacityTable
+      header={header}
+      onChangeValue={onChangeValue}
+      {...controlProps}
+    />
+    case 'PersonsTested': return <PersonsTestedTable
       header={header}
       onChangeValue={onChangeValue}
       {...controlProps}

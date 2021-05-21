@@ -42,7 +42,6 @@ const Engine = props => {
       localValueProps[key].value = value
       localValueProps[key].synced = false
     }
-    console.log('onChangeValue#localValueProps', localValueProps)
     doSave()
   }
 

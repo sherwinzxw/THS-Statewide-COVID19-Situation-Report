@@ -1,4 +1,4 @@
-//import { iteratePromiseChunks } from './../util/misc'
+import { isValidControl } from './../util/misc'
 
 /**
  * Get all views with the provided view identifiers. Will return null for each
@@ -6,8 +6,8 @@
  */
 export const getViews = callApi => async function(viewIds){
   var views = await callApi(
-    //`api/SitViews?search=${encodeURIComponent('Windows User')}`)
-    `api/SitViews`)
+    `api/SitViews?search=${encodeURIComponent('Windows User')}`)
+    //`api/SitViews`)
   return viewIds.map(id => {
     return views.find(v => v.viewIdentifier == id) || null
   })
@@ -17,8 +17,9 @@ export const getViews = callApi => async function(viewIds){
  * Get all the users controls.
  */
 export const getControls = callApi => async function(){
-  //return callApi(`api/SitControls?search=${encodeURIComponent('Windows User')}`)
-  return callApi(`api/SitControls`)
+  return callApi(`api/SitControls?search=${encodeURIComponent('Windows User')}`)
+  //return callApi(`api/SitControls`)
+  .then(controls => controls.filter(isValidControl))
 }
 
 /**

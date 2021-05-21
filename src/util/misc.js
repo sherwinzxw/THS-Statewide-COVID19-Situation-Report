@@ -6,7 +6,8 @@ import {
 import {
   controlMap as statewideRespiratoryClinicsCapacityControlsMap
 } from './../scenes/StatewideRespiratoryClinicsCapacityTable'
- 
+import { 
+  controlMap as personsTestedControlsMap } from './../scenes/PersonsTestedTable'
 
 
 /**
@@ -234,7 +235,6 @@ export const groupControls = ({ controlMap, newKey }) => (params) => {
     // Return the untouched layout
     return !isInMap
   })
-  console.log('groupControls#valuesMap', valuesMap)
 
   // Add the custom control
   layout.splice(replacePoint, 0, {
@@ -278,6 +278,12 @@ export const combineStatewideRespiratoryClinicsCapacityControls = groupControls(
   newKey: 'StatewideRespiratoryClinicsCapacity',
 })
 
+
+export const combinePersonsTestedControls = groupControls({
+  controlMap: personsTestedControlsMap,
+  newKey: 'PersonsTested',
+})
+
 /**
  * Returns a new object with the keys and values swapped.
  */
@@ -285,4 +291,15 @@ export const swapKeysWithValues = function(obj){
   var newObj = {}
   Object.entries(obj).forEach(([key, value]) => newObj[value] = key)
   return newObj
+}
+
+export const isValidControl = function(control){
+  if (!control.fk_ViewIdentifier){
+    console.error(new Error(`
+      Control ${control.controlIdentifier} is invalid. It has no 
+      fk_viewIdentifier.
+    `.replace(/\s+/g, ' ')))
+    return false
+  }
+  return true
 }

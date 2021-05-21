@@ -52,34 +52,54 @@ const StatewideRespiratoryClinicsCapacityTable = props => {
       </thead>
       <tbody>
         <tr>
-          <td>South</td>
-          <td>Melville Street</td>
+          <td rowSpan={2}>South</td>
+          <td rowSpan={2}>Melville Street</td>
           {renderCellInput(
             'South - Melville Street Clinic - Operating Hours',
-            { contentEditable: false, rowSpan: 1 },
+            { contentEditable: false, },
           )}
         </tr>
         <tr>
-          <td>North</td>
-          <td>Wellington</td>
+          {renderCellError(
+            'South - Melville Street Clinic - Operating Hours',
+          )}
+        </tr>
+        <tr>
+          <td rowSpan={2}>North</td>
+          <td rowSpan={2}>Wellington</td>
           {renderCellInput(
             'North - Wellington Clinic - Operating Hours', 
-            { contentEditable: false, rowSpan: 1 },
+            { contentEditable: false, },
           )}
         </tr>
         <tr>
-          <td rowSpan={2}>North West</td>
-          <td>Portside drive-through</td>
+          {renderCellError(
+            'North - Wellington Clinic - Operating Hours',
+          )}
+        </tr>
+        <tr>
+          <td rowSpan={4}>North West</td>
+          <td rowSpan={2}>Portside drive-through</td>
           {renderCellInput(
             'North West - Portside drive-through - Operating Hours',
-            { contentEditable: false, rowSpan: 1 },
+            { contentEditable: false },
           )}
         </tr>
         <tr>
-          <td>East Devonport drive-through</td>
+          {renderCellError(
+            'North West - Portside drive-through - Operating Hours',
+          )}
+        </tr>
+        <tr>
+          <td rowSpan={2}>East Devonport drive-through</td>
           {renderCellInput(
             'North West - East Devonport drive-through - Operating Hours',
-            { contentEditable: false, rowSpan: 1 },
+            { contentEditable: false },
+          )}
+        </tr>
+        <tr>
+          {renderCellError(
+            'North West - East Devonport drive-through - Operating Hours',
           )}
         </tr>
       </tbody>
