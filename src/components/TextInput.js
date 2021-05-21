@@ -40,6 +40,7 @@ const TextInput = props => {
           setValue(e.target.value)
           //debugger
           onChangeText(e.target.value)
+          debugger
         }}
         value={value}
         key={id}
