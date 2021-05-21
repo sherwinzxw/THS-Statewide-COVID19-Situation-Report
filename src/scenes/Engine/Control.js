@@ -8,6 +8,7 @@ import ConfirmedCasesTable from './../ConfirmedCasesTable'
 import HealthECCDailySnapshotTable from './../HealthECCDailySnapshotTable'
 import StatewideRespiratoryClinicsCapacityTable from './../StatewideRespiratoryClinicsCapacityTable'
 import PersonsTestedTable from '../PersonsTestedTable'
+import ReportVersionInformationTable from '../ReportVersionInformationTable'
 
 const Control = props => {
   const { 
@@ -15,6 +16,8 @@ const Control = props => {
     text, 
     type,
     onChangeValue,
+    value,
+    id,
     ...controlProps
   } = props
 
@@ -26,39 +29,62 @@ const Control = props => {
     case 'header-two': return <h2>{text}</h2>
     case 'header-five': return <><h5>{text}</h5><hr /></>
     case 'Number': return <NumberInput 
-        header={header}
-        onChange={onChangeValue}
-        {...controlProps}
-      />
+      header={header}
+      onChange={onChangeValue}
+      value={value}
+      id={id}
+      {...controlProps}
+    />
     case 'RichText': return <RichTextArea
       header={header}
       onChangeText={onChangeValue}
+      value={value}
+      id={id}
       {...controlProps}
     />
     case 'Text': return <TextInput 
       header={header}
       onChangeText={onChangeValue}
+      value={value}
+      id={id}
       {...controlProps}
     />
-    case 'DataLabel': return <p>{header}</p>
+    case 'DataLabel': return <p id={id}>
+      <span style={{fontWeight: 'bold'}}>{header}</span>: {value}
+    </p>
     case 'ConfirmedCases': return <ConfirmedCasesTable
       header={header}
       onChangeValue={onChangeValue}
+      value={value}
+      id={id}
       {...controlProps}
     />
     case 'HealthECCDailySnapshot': return <HealthECCDailySnapshotTable
       header={header}
       onChangeValue={onChangeValue}
+      value={value}
+      id={id}
       {...controlProps}
     />
     case 'StatewideRespiratoryClinicsCapacity': return <StatewideRespiratoryClinicsCapacityTable
       header={header}
       onChangeValue={onChangeValue}
+      value={value}
+      id={id}
       {...controlProps}
     />
     case 'PersonsTested': return <PersonsTestedTable
       header={header}
       onChangeValue={onChangeValue}
+      value={value}
+      id={id}
+      {...controlProps}
+    />
+    case 'ReportVersionInformation': return <ReportVersionInformationTable
+      header={header}
+      onChangeValue={onChangeValue}
+      value={value}
+      id={id}
       {...controlProps}
     />
     default:

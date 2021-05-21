@@ -204,6 +204,8 @@ const Page = props => {
         title="Download CSV Import Template" 
         onPress={onExportCSV}
       />
+      <br />
+      <br />
       {layout.map(o => <Form {...o} onChangeValue={onChangeValue} />)}
       <div className="dropZone">
         <div className="dropZoneInner" />

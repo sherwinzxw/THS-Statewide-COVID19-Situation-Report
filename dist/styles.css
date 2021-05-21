@@ -278,11 +278,12 @@ td, th {
   padding: 0.5rem;
 }
 
-table>thead>tr>th {
+table>thead>tr>th, table tr>th.header-one {
   background-color: #dbdbdb;
   font-weight: normal;
   text-align: center;
 }
+
 
 
 table>thead>tr.header-two>th {

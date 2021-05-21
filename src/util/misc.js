@@ -8,6 +8,9 @@ import {
 } from './../scenes/StatewideRespiratoryClinicsCapacityTable'
 import { 
   controlMap as personsTestedControlsMap } from './../scenes/PersonsTestedTable'
+import { 
+  controlMap as reportVersionInformationControlsMap
+} from './../scenes/ReportVersionInformationTable'
 
 
 /**
@@ -282,6 +285,11 @@ export const combineStatewideRespiratoryClinicsCapacityControls = groupControls(
 export const combinePersonsTestedControls = groupControls({
   controlMap: personsTestedControlsMap,
   newKey: 'PersonsTested',
+})
+
+export const combineReportVersionInformationControls = groupControls({
+  controlMap: reportVersionInformationControlsMap,
+  newKey: 'ReportVersionInformation',
 })
 
 /**
