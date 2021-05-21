@@ -14,6 +14,8 @@ const TextInput = props => {
     maxLength,
     value: defaultValue = '',
     id,
+    className,
+    inputRef,
   } = props
 
   var [value, setValue] = useState(defaultValue)
@@ -26,6 +28,7 @@ const TextInput = props => {
       ['Control']: true,
       ['TextInput']: true,
       ['invalid']: invalid,
+      [className || '']: true
     })}
   >
     {header ? <label>{header}</label> : null}
@@ -40,6 +43,7 @@ const TextInput = props => {
         }}
         value={value}
         key={id}
+        ref={inputRef}
       /> :
       <input 
         id={id}
@@ -50,6 +54,7 @@ const TextInput = props => {
         }}
         value={value}
         key={id}
+        ref={inputRef}
       />}
     {errorMessage ? <p className="errorMessage">{errorMessage}</p> : null}
   </div>

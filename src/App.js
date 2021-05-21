@@ -7,13 +7,14 @@ import Header from './scenes/Header'
 import Requests, { useRequestsContext } from './Requests'
 import { runOnControl } from './util/misc'
 
-const { useEffect, useState, Fragment } = React
+const { useEffect, useState, Fragment, useRef } = React
 
 const App = props => {
   const { modalContent } = props
   var [schema, setSchema] = useState()
   var [reportId, setReportId] = useState()
   var [errorMessage, setErrorMessage] = useState('')
+  const engineRef = useRef()
 
   const { getViews, getControls, getControlValues } = useRequestsContext()
 
@@ -32,9 +33,9 @@ const App = props => {
       var forms = Object.entries(controlsByView).map(
         ([viewId, controls], index) => {
           var layout = controls.map(r => {
-            if (r.controlIdentifier == 'Control_DA09325A-FF65-4507-B1B4-4FA36E54B2B0'){
+            /*if (r.controlIdentifier == 'Control_DA09325A-FF65-4507-B1B4-4FA36E54B2B0'){
               debugger
-            }
+            }*/
             return { 
               key: r.controlIdentifier, 
               type: r.ref_Type, 
@@ -86,6 +87,7 @@ const App = props => {
           schema={schema} 
           reportId={reportId}
           onError={e => setErrorMessage(e.message)}
+          ref={engineRef}
         /> : 
         <p>Loading...</p>
       }

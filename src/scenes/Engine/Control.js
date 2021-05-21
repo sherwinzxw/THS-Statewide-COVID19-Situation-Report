@@ -2,6 +2,7 @@ import * as React from 'react'
 import { 
   TextInput,
   NumberInput,
+  RichTextArea,
 } from './../../components'
 import ConfirmedCasesTable from './../ConfirmedCasesTable'
 import HealthECCDailySnapshotTable from './../HealthECCDailySnapshotTable'
@@ -17,9 +18,9 @@ const Control = props => {
     ...controlProps
   } = props
 
-  if (controlProps.id == 'Control_DA09325A-FF65-4507-B1B4-4FA36E54B2B0'){
+  /*if (controlProps.id == 'Control_DA09325A-FF65-4507-B1B4-4FA36E54B2B0'){
     debugger
-  }
+  }*/
 
   switch(type){
     case 'header-two': return <h2>{text}</h2>
@@ -29,10 +30,9 @@ const Control = props => {
         onChange={onChangeValue}
         {...controlProps}
       />
-    case 'RichText': return <TextInput 
+    case 'RichText': return <RichTextArea
       header={header}
       onChangeText={onChangeValue}
-      multiline
       {...controlProps}
     />
     case 'Text': return <TextInput 
