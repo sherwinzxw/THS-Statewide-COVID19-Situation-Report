@@ -79,7 +79,7 @@ const App = props => {
   }, [])
 
   return <Fragment>
-    <Header />
+    {/*<Header />*/}
     <div className="App">
       {errorMessage ? <p className="ErrorMessage">{errorMessage}</p> : null}
       {schema ? 

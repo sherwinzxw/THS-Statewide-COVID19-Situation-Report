@@ -13,7 +13,7 @@ import {
 
 import { 
   controlMap as respiratoryClinicAppointmentsControlsMap
-} from './../scenes/RespiratoryClinicAppointments'
+} from './../scenes/RespiratoryClinicAppointmentsTable'
 
 /**
  * Split an array of objects by a specific key value.
