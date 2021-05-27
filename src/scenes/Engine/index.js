@@ -1,6 +1,7 @@
 import * as React from 'react'
 import Page from './Page'
-import { debounce, runOnControl } from './../../util/misc'
+import { runOnControl } from './../../util/controls'
+import { debounce } from './../../util/misc'
 import { useRequestsContext } from './../../Requests'
 
 const { useCallback, useRef, useState } = React

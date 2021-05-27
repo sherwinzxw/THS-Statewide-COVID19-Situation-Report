@@ -5,7 +5,7 @@ import AppErrorBoundary from './AppErrorBoundary'
 import Modals from './Modals'
 import Header from './scenes/Header'
 import Requests, { useRequestsContext } from './Requests'
-import { runOnControl } from './util/misc'
+import { runOnControl } from './util/controls'
 
 const { useEffect, useState, Fragment, useRef } = React
 

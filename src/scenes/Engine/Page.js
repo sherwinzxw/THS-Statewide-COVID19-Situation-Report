@@ -4,11 +4,13 @@ import classNames from 'classnames'
 import { Card, Button } from './../../components'
 import { 
   exportCSV, 
-  runOnControl, 
   convertObjToCsv, 
   convertCsvToObj, 
   debounce,
 } from './../../util/misc'
+import {
+  runOnControl,
+} from './../../util/controls'
 import { useModalsContext } from './../../Modals'
 import PreApprovalPrompt from './../PreApprovalPrompt'
 

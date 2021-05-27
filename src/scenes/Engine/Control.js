@@ -4,12 +4,12 @@ import {
   NumberInput,
   RichTextArea,
 } from './../../components'
-import ConfirmedCasesTable from './../ConfirmedCasesTable'
-import HealthECCDailySnapshotTable from './../HealthECCDailySnapshotTable'
-import StatewideRespiratoryClinicsCapacityTable from './../StatewideRespiratoryClinicsCapacityTable'
-import PersonsTestedTable from '../PersonsTestedTable'
-import ReportVersionInformationTable from '../ReportVersionInformationTable'
-import RespiratoryClinicAppointmentsTable from '../RespiratoryClinicAppointmentsTable'
+import ConfirmedCasesTable from '../../tables/ConfirmedCasesTable'
+import HealthECCDailySnapshotTable from '../../tables/HealthECCDailySnapshotTable'
+import StatewideRespiratoryClinicsCapacityTable from './../../tables/StatewideRespiratoryClinicsCapacityTable'
+import PersonsTestedTable from '../../tables/PersonsTestedTable'
+import ReportVersionInformationTable from '../../tables/ReportVersionInformationTable'
+import RespiratoryClinicAppointmentsTable from '../../tables/RespiratoryClinicAppointmentsTable'
 import EmergencyDepartmentPresentationsWithILITable from '../../tables/EmergencyDepartmentPresentationsWithILITable'
 
 const Control = props => {

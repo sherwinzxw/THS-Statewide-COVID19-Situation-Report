@@ -8,7 +8,7 @@ import {
   combineReportVersionInformationControls,
   combineRespiratoryClinicAppointmentControls,
   combineEmergencyDepartmentPresentationsWithILIControlMap,
-} from './../../util/misc'
+} from './../../util/controls'
 
 const Form = props => {
   var { layout, onChangeValue } = props
