@@ -1,9 +1,8 @@
 
 const controlMap = {
-  'Control_E1CB505E-ACD1-442E-9EF1-D63E23970632': 'Pfizer First Doses',
-  'Control_B50C1E98-3C80-454D-B83A-066360BCD187': 'Pfizer Second Doses',
-  'Control_BACC731A-57FE-4132-AEEA-79684DD6D83B': 'AstraZeneca First Doses',
-  'Control_E0BAB991-4698-4328-944D-37CC48D88433': 'AstraZeneca Second Doses',
+  'Control_392BE8B0-E9F2-4D7B-80E7-C5BE27D38278': 'State Government',
+  'Control_FB3399C6-36E9-4AA2-B1AB-E12B863FD15D': 'Aged Care',
+  'Control_1D3EBE4D-84BB-4479-B492-4F8EAA26A70D': 'Primary Care',
 }
 
 export default controlMap

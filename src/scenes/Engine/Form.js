@@ -9,7 +9,8 @@ import {
   combineRespiratoryClinicAppointmentControls,
   combineEmergencyDepartmentPresentationsWithILIControlMap,
   combineAvailableBedsControlMap,
-  combineVaccinesAdministeredDailyControlMap,
+  combineVaccinesAdministeredDailyStateGovernmentControlMap,
+  combineVaccinesAdministeredCumulativeStateGovernmentControlMap,
   combineVaccinesAdministeredCumulativeControlMap,
 } from './../../util/controls'
 
@@ -23,7 +24,8 @@ const Form = props => {
     combineRespiratoryClinicAppointmentControls,
     combineEmergencyDepartmentPresentationsWithILIControlMap,
     combineAvailableBedsControlMap,
-    combineVaccinesAdministeredDailyControlMap,
+    combineVaccinesAdministeredDailyStateGovernmentControlMap,
+    combineVaccinesAdministeredCumulativeStateGovernmentControlMap,
     combineVaccinesAdministeredCumulativeControlMap,
   )(props)
 
@@ -36,6 +38,8 @@ const Form = props => {
       key={o.key}
       id={o.key}
     />)}
+
+
   </div>
 }
 

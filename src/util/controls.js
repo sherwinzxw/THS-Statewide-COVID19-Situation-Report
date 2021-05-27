@@ -16,8 +16,10 @@ import {
 import emergencyDepartmentPresentationsWithILIControlMap 
   from './../tables/EmergencyDepartmentPresentationsWithILITable/controlMap'
 import availableBedsControlMap from './../tables/AvailableBedsTable/controlMap'
-import vaccinesAdministeredDailyControlMap from 
-  './../tables/VaccinesAdministeredDailyTable/controlMap'
+import vaccinesAdministeredDailyStateGovernmentControlMap from 
+  '../tables/VaccinesAdministeredDailyStateGovernmentTable/controlMap'
+import vaccinesAdministeredCumulativeStateGovernmentControlMap from 
+  '../tables/VaccinesAdministeredCumulativeStateGovernmentTable/controlMap'
 import vaccinesAdministeredCumulativeControlMap from 
   '../tables/VaccinesAdministeredCumulativeTable/controlMap'
 
@@ -146,9 +148,14 @@ export const combineAvailableBedsControlMap = groupControls({
   newKey: 'AvailableBeds',
 })
 
-export const combineVaccinesAdministeredDailyControlMap = groupControls({
-  controlMap: vaccinesAdministeredDailyControlMap,
-  newKey: 'VaccinesAdministeredDaily',
+export const combineVaccinesAdministeredDailyStateGovernmentControlMap = groupControls({
+  controlMap: vaccinesAdministeredDailyStateGovernmentControlMap,
+  newKey: 'VaccinesAdministeredDailyStateGovernment',
+})
+
+export const combineVaccinesAdministeredCumulativeStateGovernmentControlMap = groupControls({
+  controlMap: vaccinesAdministeredCumulativeStateGovernmentControlMap,
+  newKey: 'VaccinesAdministeredCumulativeStateGovernment',
 })
 
 export const combineVaccinesAdministeredCumulativeControlMap = groupControls({

@@ -39,45 +39,44 @@ const VaccinesAdministeredCumulativeTable = props => {
     {({ renderCellError, renderCellInput }) => <Fragment>
       <thead>
         <tr className="header-one">
-          <th>Provider / setting</th>
-          <th>Vaccines administered</th>
+          <th></th>
+          <th>Pfizer</th>
+          <th>AstraZeneca</th>
+          <th>Total</th>
         </tr>
       </thead>
       <tbody>
         <tr>
-          <td rowSpan={2}>State Government*</td>
-          {renderCellInput('State Government')}
-        </tr>
-        <tr>
-          {renderCellError('State Government')}
-        </tr>
-        <tr>
-          <td rowSpan={2}>Aged Care**</td>
-          {renderCellInput('Aged Care')}
-        </tr>
-        <tr>
-          {renderCellError('Aged Care')}
-        </tr>
-        <tr>
-          <td rowSpan={2}>Primary Care**</td>
-          {renderCellInput('Primary Care')}
-        </tr>
-        <tr>
-          {renderCellError('Primary Care')}
-        </tr>
-      </tbody>
-      <tfoot>
-        <tr>
-          <td>Total</td>
-          <td>
+          <td rowSpan={2}>First doses</td>
+          {renderCellInput('Pfizer First Doses')}
+          {renderCellInput('Pfizer Second Doses')}
+          <td rowSpan={2}>
             {formatNumber(
-              parseIntOrZero(value[controlsLabelMap['State Government']])
-              + parseIntOrZero(value[controlsLabelMap['Aged Care']])
-              + parseIntOrZero(value[controlsLabelMap['Primary Care']])
+              parseIntOrZero(value[controlsLabelMap['Pfizer First Doses']])
+              + parseIntOrZero(value[controlsLabelMap['Pfizer Second Doses']])
             )}
           </td>
         </tr>
-      </tfoot>
+        <tr>
+          {renderCellError('Pfizer First Doses')}
+          {renderCellError('Pfizer Second Doses')}
+        </tr>
+        <tr>
+          <td rowSpan={2}>Second doses</td>
+          {renderCellInput('AstraZeneca First Doses')}
+          {renderCellInput('AstraZeneca Second Doses')}
+          <td rowSpan={2}>
+            {formatNumber(
+              parseIntOrZero(value[controlsLabelMap['AstraZeneca First Doses']])
+              + parseIntOrZero(value[controlsLabelMap['AstraZeneca Second Doses']])
+            )}
+          </td>
+        </tr>
+        <tr>
+          {renderCellError('AstraZeneca First Doses')}
+          {renderCellError('AstraZeneca Second Doses')}
+        </tr>
+      </tbody>
     </Fragment>}
   </Table>
 }

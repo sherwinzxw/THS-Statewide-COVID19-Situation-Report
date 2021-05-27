@@ -12,7 +12,8 @@ import ReportVersionInformationTable from '../../tables/ReportVersionInformation
 import RespiratoryClinicAppointmentsTable from '../../tables/RespiratoryClinicAppointmentsTable'
 import EmergencyDepartmentPresentationsWithILITable from '../../tables/EmergencyDepartmentPresentationsWithILITable'
 import AvailableBedsTable from '../../tables/AvailableBedsTable'
-import VaccinesAdministeredDailyTable from '../../tables/VaccinesAdministeredDailyTable'
+import VaccinesAdministeredDailyStateGovernmentTable from '../../tables/VaccinesAdministeredDailyStateGovernmentTable'
+import VaccinesAdministeredCumulativeStateGovernmentTable from '../../tables/VaccinesAdministeredCumulativeStateGovernmentTable'
 import VaccinesAdministeredCumulativeTable from '../../tables/VaccinesAdministeredCumulativeTable'
 
 const Control = props => {
@@ -121,7 +122,14 @@ const Control = props => {
       id={id}
       {...controlProps}
     />
-    case 'VaccinesAdministeredDaily': return <VaccinesAdministeredDailyTable
+    case 'VaccinesAdministeredDailyStateGovernment': return <VaccinesAdministeredDailyStateGovernmentTable
+      header={header}
+      onChangeValue={onChangeValue}
+      value={value}
+      id={id}
+      {...controlProps}
+    />
+    case 'VaccinesAdministeredCumulativeStateGovernment': return <VaccinesAdministeredCumulativeStateGovernmentTable
       header={header}
       onChangeValue={onChangeValue}
       value={value}
