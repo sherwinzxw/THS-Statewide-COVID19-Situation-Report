@@ -12,6 +12,7 @@ import ReportVersionInformationTable from '../../tables/ReportVersionInformation
 import RespiratoryClinicAppointmentsTable from '../../tables/RespiratoryClinicAppointmentsTable'
 import EmergencyDepartmentPresentationsWithILITable from '../../tables/EmergencyDepartmentPresentationsWithILITable'
 import AvailableBedsTable from '../../tables/AvailableBedsTable'
+import VaccinesAdministeredDailyTable from '../../tables/VaccinesAdministeredDailyTable'
 
 const Control = props => {
   const { 
@@ -50,6 +51,14 @@ const Control = props => {
       onChangeText={onChangeValue}
       value={value}
       id={id}
+      {...controlProps}
+    />
+    case 'Textarea': return <TextInput 
+      header={header}
+      onChangeText={onChangeValue}
+      value={value}
+      id={id}
+      multiline
       {...controlProps}
     />
     case 'DataLabel': return <p id={id}>
@@ -105,6 +114,13 @@ const Control = props => {
       {...controlProps}
     />
     case 'AvailableBeds': return <AvailableBedsTable
+      header={header}
+      onChangeValue={onChangeValue}
+      value={value}
+      id={id}
+      {...controlProps}
+    />
+    case 'VaccinesAdministeredDaily': return <VaccinesAdministeredDailyTable
       header={header}
       onChangeValue={onChangeValue}
       value={value}
