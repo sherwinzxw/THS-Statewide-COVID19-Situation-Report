@@ -49,34 +49,52 @@ const VaccinesAdministeredDailyTable = props => {
         <tr>
           <td rowSpan={2}>First doses</td>
           {renderCellInput('Pfizer First Doses')}
-          {renderCellInput('Pfizer Second Doses')}
+          {renderCellInput('AstraZeneca First Doses')}
           <td rowSpan={2}>
             {formatNumber(
               parseIntOrZero(value[controlsLabelMap['Pfizer First Doses']])
-              + parseIntOrZero(value[controlsLabelMap['Pfizer Second Doses']])
+              + parseIntOrZero(value[controlsLabelMap['AstraZeneca First Doses']])
             )}
           </td>
         </tr>
         <tr>
           {renderCellError('Pfizer First Doses')}
-          {renderCellError('Pfizer Second Doses')}
+          {renderCellError('AstraZeneca First Doses')}
         </tr>
         <tr>
           <td rowSpan={2}>Second doses</td>
-          {renderCellInput('AstraZeneca First Doses')}
+          {renderCellInput('Pfizer Second Doses')}
           {renderCellInput('AstraZeneca Second Doses')}
           <td rowSpan={2}>
             {formatNumber(
-              parseIntOrZero(value[controlsLabelMap['AstraZeneca First Doses']])
+              parseIntOrZero(value[controlsLabelMap['Pfizer Second Doses']])
               + parseIntOrZero(value[controlsLabelMap['AstraZeneca Second Doses']])
             )}
           </td>
         </tr>
         <tr>
-          {renderCellError('AstraZeneca First Doses')}
+          {renderCellError('Pfizer Second Doses')}
           {renderCellError('AstraZeneca Second Doses')}
         </tr>
       </tbody>
+      <tfoot>
+        <tr>
+          <td>Cumulative</td>
+          <td>
+            {formatNumber(
+              parseIntOrZero(value[controlsLabelMap['Pfizer First Doses']])
+              + parseIntOrZero(value[controlsLabelMap['Pfizer Second Doses']])
+            )}
+          </td>
+          <td>
+            {formatNumber(
+              parseIntOrZero(value[controlsLabelMap['AstraZeneca First Doses']])
+              + parseIntOrZero(value[controlsLabelMap['AstraZeneca Second Doses']])
+            )}
+          </td>
+          <td></td>
+        </tr>
+      </tfoot>
     </Fragment>}
   </Table>
 }
