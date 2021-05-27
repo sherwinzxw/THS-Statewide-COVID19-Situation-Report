@@ -13,6 +13,7 @@ import RespiratoryClinicAppointmentsTable from '../../tables/RespiratoryClinicAp
 import EmergencyDepartmentPresentationsWithILITable from '../../tables/EmergencyDepartmentPresentationsWithILITable'
 import AvailableBedsTable from '../../tables/AvailableBedsTable'
 import VaccinesAdministeredDailyTable from '../../tables/VaccinesAdministeredDailyTable'
+import VaccinesAdministeredCumulativeTable from '../../tables/VaccinesAdministeredCumulativeTable'
 
 const Control = props => {
   const { 
@@ -121,6 +122,13 @@ const Control = props => {
       {...controlProps}
     />
     case 'VaccinesAdministeredDaily': return <VaccinesAdministeredDailyTable
+      header={header}
+      onChangeValue={onChangeValue}
+      value={value}
+      id={id}
+      {...controlProps}
+    />
+    case 'VaccinesAdministeredCumulative': return <VaccinesAdministeredCumulativeTable
       header={header}
       onChangeValue={onChangeValue}
       value={value}

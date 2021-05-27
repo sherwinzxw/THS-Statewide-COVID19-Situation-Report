@@ -10,6 +10,7 @@ import {
   combineEmergencyDepartmentPresentationsWithILIControlMap,
   combineAvailableBedsControlMap,
   combineVaccinesAdministeredDailyControlMap,
+  combineVaccinesAdministeredCumulativeControlMap,
 } from './../../util/controls'
 
 const Form = props => {
@@ -23,6 +24,7 @@ const Form = props => {
     combineEmergencyDepartmentPresentationsWithILIControlMap,
     combineAvailableBedsControlMap,
     combineVaccinesAdministeredDailyControlMap,
+    combineVaccinesAdministeredCumulativeControlMap,
   )(props)
 
   return <div className="Form" id={props.id}>
