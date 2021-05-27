@@ -33,9 +33,6 @@ const App = props => {
       var forms = Object.entries(controlsByView).map(
         ([viewId, controls], index) => {
           var layout = controls.map(r => {
-            /*if (r.controlIdentifier == 'Control_DA09325A-FF65-4507-B1B4-4FA36E54B2B0'){
-              debugger
-            }*/
             return { 
               key: r.controlIdentifier, 
               type: r.ref_Type, 

@@ -11,6 +11,7 @@ import PersonsTestedTable from '../../tables/PersonsTestedTable'
 import ReportVersionInformationTable from '../../tables/ReportVersionInformationTable'
 import RespiratoryClinicAppointmentsTable from '../../tables/RespiratoryClinicAppointmentsTable'
 import EmergencyDepartmentPresentationsWithILITable from '../../tables/EmergencyDepartmentPresentationsWithILITable'
+import AvailableBedsTable from '../../tables/AvailableBedsTable'
 
 const Control = props => {
   const { 
@@ -97,6 +98,13 @@ const Control = props => {
       {...controlProps}
     />
     case 'EmergencyDepartmentPresentationsWithILI': return <EmergencyDepartmentPresentationsWithILITable
+      header={header}
+      onChangeValue={onChangeValue}
+      value={value}
+      id={id}
+      {...controlProps}
+    />
+    case 'AvailableBeds': return <AvailableBedsTable
       header={header}
       onChangeValue={onChangeValue}
       value={value}

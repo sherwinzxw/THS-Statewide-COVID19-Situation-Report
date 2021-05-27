@@ -65,9 +65,17 @@ body {
   color: red;
 }
 
-.ErrorMessage {
+.ErrorMessage, .errorMessage {
   color: red;
   margin: 10px 20px;
+}
+
+
+.cellErrorMessage {
+  color: red;
+  margin: 10px 0px;
+  margin-right: 5px;
+  font-size: 10px;
 }
 
 h5 {
@@ -309,4 +317,10 @@ td.errorMessage {
   padding-left: 2px;
   padding-right: 2px;
   font-size: 10px;
+}
+
+.editableSpan {
+  min-width: 10px;
+  padding: 5px;
+  display: inline-block;
 }

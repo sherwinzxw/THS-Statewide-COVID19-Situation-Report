@@ -8,18 +8,21 @@ import {
   combineReportVersionInformationControls,
   combineRespiratoryClinicAppointmentControls,
   combineEmergencyDepartmentPresentationsWithILIControlMap,
+  combineAvailableBedsControlMap,
 } from './../../util/controls'
 
 const Form = props => {
-  var { layout, onChangeValue } = props
-  var { layout, onChangeValue } = combineConfirmedCasesControls({ layout, onChangeValue })
-  var { layout, onChangeValue } = combineHealthECCDailySnapshotControls({ layout, onChangeValue })
-  var { layout, onChangeValue } = combineStatewideRespiratoryClinicsCapacityControls({ layout, onChangeValue })
-  var { layout, onChangeValue } = combinePersonsTestedControls({ layout, onChangeValue })
-  var { layout, onChangeValue } = combineReportVersionInformationControls({ layout, onChangeValue })
-  var { layout, onChangeValue } = combineRespiratoryClinicAppointmentControls({ layout, onChangeValue })
-  var { layout, onChangeValue } = combineEmergencyDepartmentPresentationsWithILIControlMap({ layout, onChangeValue })
-  
+  var { layout, onChangeValue } = compose(
+    combineConfirmedCasesControls,
+    combineHealthECCDailySnapshotControls,
+    combineStatewideRespiratoryClinicsCapacityControls,
+    combinePersonsTestedControls,
+    combineReportVersionInformationControls,
+    combineRespiratoryClinicAppointmentControls,
+    combineEmergencyDepartmentPresentationsWithILIControlMap,
+    combineAvailableBedsControlMap,
+  )(props)
+
   return <div className="Form" id={props.id}>
     {layout.map(o => <Control 
       {...o} 
@@ -33,3 +36,9 @@ const Form = props => {
 }
 
 export default Form
+
+const compose = (...methods) => props => {
+  return methods.reduce((acc, method) => {
+    return method(acc)
+  }, props)
+}

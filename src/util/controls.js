@@ -15,6 +15,7 @@ import {
 } from './../tables/RespiratoryClinicAppointmentsTable'
 import emergencyDepartmentPresentationsWithILIControlMap 
   from './../tables/EmergencyDepartmentPresentationsWithILITable/controlMap'
+import availableBedsControlMap from './../tables/AvailableBedsTable/controlMap'
 
 
 /**
@@ -52,6 +53,7 @@ export const groupControls = ({ controlMap, newKey }) => (params) => {
   var replacePoint = layout.findIndex(control => {
     return !!controlMap[control.key]
   })
+
   // If we don't find any of the respective controls then don't inject this
   // custom control
   if (replacePoint == -1)
@@ -133,4 +135,9 @@ export const combineRespiratoryClinicAppointmentControls = groupControls({
 export const combineEmergencyDepartmentPresentationsWithILIControlMap = groupControls({
   controlMap: emergencyDepartmentPresentationsWithILIControlMap,
   newKey: 'EmergencyDepartmentPresentationsWithILI',
+})
+
+export const combineAvailableBedsControlMap = groupControls({
+  controlMap: availableBedsControlMap,
+  newKey: 'AvailableBeds',
 })
