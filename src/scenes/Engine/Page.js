@@ -206,7 +206,11 @@ const Page = props => {
       />
       <br />
       <br />
-      {layout.map(o => <Form {...o} onChangeValue={onChangeValue} />)}
+      {layout.map(o => <Form 
+        {...o} 
+        onChangeValue={onChangeValue} 
+        id={o.key}
+      />)}
       <div className="dropZone">
         <div className="dropZoneInner" />
       </div>

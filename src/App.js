@@ -3,7 +3,7 @@ import Engine from './scenes/Engine'
 import { splitObjectsByKeyValue } from './util/misc'
 import AppErrorBoundary from './AppErrorBoundary'
 import Modals from './Modals'
-//import Header from './scenes/Header'
+import Header from './scenes/Header'
 import Requests, { useRequestsContext } from './Requests'
 import { runOnControl } from './util/misc'
 
@@ -79,7 +79,7 @@ const App = props => {
   }, [])
 
   return <Fragment>
-    {/*<Header />*/}
+    {NODE_ENV == 'development' ? <Header /> : null}
     <div className="App">
       {errorMessage ? <p className="ErrorMessage">{errorMessage}</p> : null}
       {schema ? 

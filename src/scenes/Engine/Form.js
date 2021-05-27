@@ -7,6 +7,7 @@ import {
   combinePersonsTestedControls,
   combineReportVersionInformationControls,
   combineRespiratoryClinicAppointmentControls,
+  combineEmergencyDepartmentPresentationsWithILIControlMap,
 } from './../../util/misc'
 
 const Form = props => {
@@ -17,8 +18,9 @@ const Form = props => {
   var { layout, onChangeValue } = combinePersonsTestedControls({ layout, onChangeValue })
   var { layout, onChangeValue } = combineReportVersionInformationControls({ layout, onChangeValue })
   var { layout, onChangeValue } = combineRespiratoryClinicAppointmentControls({ layout, onChangeValue })
+  var { layout, onChangeValue } = combineEmergencyDepartmentPresentationsWithILIControlMap({ layout, onChangeValue })
   
-  return <div className="Form">
+  return <div className="Form" id={props.id}>
     {layout.map(o => <Control 
       {...o} 
       onChangeValue={v => {

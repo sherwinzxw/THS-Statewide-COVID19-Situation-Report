@@ -37,32 +37,40 @@ const EditableTable = props => {
 
   }
 
-  const renderCellInput = (controlLabel, props) => {
+  const renderCellInput = (controlLabel, props = {}) => {
+    const { cellType, ...otherProps } = props
     var key = cLHash[controlLabel]
     if (!key)
       throw new Error(`Invalid control label '${controlLabel}'.`)
-    return <td 
-      className={classNames({
+
+    if (cellType == 'th')
+      var cell = <th>{value[key] || ''}</th>
+    else
+      var cell = <td>{value[key] || ''}</td>
+
+    return React.cloneElement(cell, {
+      className: classNames({
         userInput: true,
         userInputWithError: !!errorMessage[key],
-      })}
-      contentEditable
-      onInput={onInput.bind(this, key)}
-      key={key}
-      rowSpan={errorMessage[key] ? 1 : 2}
-      id={key}
-      {...props}
-    >
-      {value[key] || ''}
-    </td>
+      }),
+      contentEditable: true,
+      onInput: onInput.bind(this, key),
+      key,
+      rowSpan: errorMessage[key] ? 1 : 2,
+      id: key,
+      ...otherProps
+    })
   }
-
-  const renderCellError = (controlLabel, props) => {
+  
+  const renderCellError = (controlLabel, props = {}) => {
+    const { cellType, ...otherProps } = props
     var key = cLHash[controlLabel]
     if (!key)
       throw new Error(`Invalid control label '${controlLabel}'.`)
     var msg = errorMessage[key]
     if (!msg) return null
+    if (cellType == 'th')
+      return <th className="errorMessage" {...props}>{msg}</th>
     return <td className="errorMessage" {...props}>{msg}</td>
   }
 

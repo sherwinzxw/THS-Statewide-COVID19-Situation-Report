@@ -10,10 +10,11 @@ import {
 import { 
   controlMap as reportVersionInformationControlsMap
 } from './../scenes/ReportVersionInformationTable'
-
 import { 
   controlMap as respiratoryClinicAppointmentsControlsMap
 } from './../scenes/RespiratoryClinicAppointmentsTable'
+import emergencyDepartmentPresentationsWithILIControlMap 
+  from './../tables/EmergencyDepartmentPresentationsWithILITable/controlMap'
 
 /**
  * Split an array of objects by a specific key value.
@@ -297,6 +298,11 @@ export const combineReportVersionInformationControls = groupControls({
 export const combineRespiratoryClinicAppointmentControls = groupControls({
   controlMap: respiratoryClinicAppointmentsControlsMap,
   newKey: 'RespiratoryClinicAppointments',
+})
+
+export const combineEmergencyDepartmentPresentationsWithILIControlMap = groupControls({
+  controlMap: emergencyDepartmentPresentationsWithILIControlMap,
+  newKey: 'EmergencyDepartmentPresentationsWithILI',
 })
 
 /**

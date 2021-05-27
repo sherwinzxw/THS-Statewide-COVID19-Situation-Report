@@ -10,6 +10,7 @@ import StatewideRespiratoryClinicsCapacityTable from './../StatewideRespiratoryC
 import PersonsTestedTable from '../PersonsTestedTable'
 import ReportVersionInformationTable from '../ReportVersionInformationTable'
 import RespiratoryClinicAppointmentsTable from '../RespiratoryClinicAppointmentsTable'
+import EmergencyDepartmentPresentationsWithILITable from '../../tables/EmergencyDepartmentPresentationsWithILITable'
 
 const Control = props => {
   const { 
@@ -89,6 +90,13 @@ const Control = props => {
       {...controlProps}
     />    
     case 'RespiratoryClinicAppointments': return <RespiratoryClinicAppointmentsTable
+      header={header}
+      onChangeValue={onChangeValue}
+      value={value}
+      id={id}
+      {...controlProps}
+    />
+    case 'EmergencyDepartmentPresentationsWithILI': return <EmergencyDepartmentPresentationsWithILITable
       header={header}
       onChangeValue={onChangeValue}
       value={value}
