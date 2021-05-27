@@ -15,6 +15,7 @@ import AvailableBedsTable from '../../tables/AvailableBedsTable'
 import VaccinesAdministeredDailyStateGovernmentTable from '../../tables/VaccinesAdministeredDailyStateGovernmentTable'
 import VaccinesAdministeredCumulativeStateGovernmentTable from '../../tables/VaccinesAdministeredCumulativeStateGovernmentTable'
 import VaccinesAdministeredCumulativeTable from '../../tables/VaccinesAdministeredCumulativeTable'
+import CheckInTASApplicationTable from '../../tables/CheckInTASApplicationTable'
 
 const Control = props => {
   const { 
@@ -137,6 +138,13 @@ const Control = props => {
       {...controlProps}
     />
     case 'VaccinesAdministeredCumulative': return <VaccinesAdministeredCumulativeTable
+      header={header}
+      onChangeValue={onChangeValue}
+      value={value}
+      id={id}
+      {...controlProps}
+    />
+    case 'CheckInTASApplication': return <CheckInTASApplicationTable
       header={header}
       onChangeValue={onChangeValue}
       value={value}
