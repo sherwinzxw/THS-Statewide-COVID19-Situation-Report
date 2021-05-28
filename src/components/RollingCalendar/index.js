@@ -14,7 +14,12 @@ const { useRef, useState, Fragment } = React
 
 const RollingCalendar = props => {
 
-  const { onChangeValue, value: defaultValue, id } = props
+  const { 
+    onChangeValue, 
+    value: defaultValue, 
+    id, 
+    header,
+  } = props
 
   var now = new Date()
   var nowStr = formatToLocalDateString(now)
@@ -54,6 +59,7 @@ const RollingCalendar = props => {
   {({ renderCellError, renderCellInput }) => <Fragment>
       <thead>
         <tr>
+          <th />
           <th>{formatDate(addDays(now, -6))}</th>
           <th>{formatDate(addDays(now, -5))}</th>
           <th>{formatDate(addDays(now, -4))}</th>
@@ -61,11 +67,12 @@ const RollingCalendar = props => {
           <th>{formatDate(addDays(now, -2))}</th>
           <th>{formatDate(addDays(now, -1))}</th>
           <th>{formatDate(now)}</th>
-          <th>Weekly total</th>
+          <th>Total</th>
         </tr>
       </thead>
       <tbody>
         <tr>
+          <td rowSpan={2}>{header}</td>
           {renderCellInput('Today -6')}
           {renderCellInput('Today -5')}
           {renderCellInput('Today -4')}
