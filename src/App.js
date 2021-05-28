@@ -14,6 +14,7 @@ const App = props => {
   var [schema, setSchema] = useState()
   var [reportId, setReportId] = useState()
   var [errorMessage, setErrorMessage] = useState('')
+  var [userRole, setUserRole] = useState()
   const engineRef = useRef()
 
   const { getViews, getControls, getCurrentUser } = useRequestsContext()
@@ -23,7 +24,14 @@ const App = props => {
     ;(async () => {
 
       /**/
-      var controls = await getControls()
+      var [
+        controls,
+        currentUser, 
+      ] = await Promise.all([
+        getControls(),
+        getCurrentUser(),
+      ])
+      setUserRole(currentUser.ref_Role)
       setReportId(findReportId(controls))
       var controlsByView = splitObjectsByKeyValue(controls, 'fk_ViewIdentifier')
       const [ views ] = await Promise.all([
@@ -39,6 +47,7 @@ const App = props => {
               header: r.label, 
               maxLength: r.maxLength,
               value: r.value,
+              receiptStatus: r.receiptStatus,
             }
           })
           var view = views.find(v => v && v.viewIdentifier == viewId)
@@ -85,6 +94,7 @@ const App = props => {
           reportId={reportId}
           onError={e => setErrorMessage(e.message)}
           ref={engineRef}
+          userRole={userRole}
         /> : 
         <p>Loading...</p>
       }

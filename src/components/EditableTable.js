@@ -2,15 +2,20 @@ import * as React from 'react'
 import classNames from 'classnames'
 import { swapKeysWithValues } from './../util/misc'
 
+const { useRef } = React
+
 const EditableTable = props => {
 
   const {
     onChangeValue,
     controlMap,
     errorMessage,
-    value,
+    value: defaultValue,
     children,
+    id,
   } = props
+
+  const value = useRef(defaultValue || {}).current
 
   const cLHash = swapKeysWithValues(controlMap)
 
@@ -29,12 +34,8 @@ const EditableTable = props => {
     var selection = window.getSelection()
     selection.removeAllRanges()
     selection.addRange(range)
-
-    onChangeValue({
-      ...value,
-      [key]: inputValue,
-    })
-
+    value[key] = inputValue
+    onChangeValue({ ...value})
   }
 
   const renderCellInput = (controlLabel, props = {}) => {
@@ -79,7 +80,7 @@ const EditableTable = props => {
     renderCellError,
     controlLabelHashmap: cLHash,
   }
-  return <table>
+  return <table id={id}>
     {children(childProps)}
   </table>
 }

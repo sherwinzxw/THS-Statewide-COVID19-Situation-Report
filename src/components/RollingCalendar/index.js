@@ -8,20 +8,23 @@ import {
   padZero,
   validateRollingCalValue,
 } from './util'
+import { formatNumber, parseIntOrZero } from '../../util/misc'
 
 const { useRef, useState, Fragment } = React
 
 const RollingCalendar = props => {
 
-  const { onChangeValue, value } = props
-
-  validateRollingCalValue(value)
-
-  if (value !== undefined && value !== null && value instanceof Array === false)
-    throw new Error(`Invalid 'value' (${value}) for Rolling Calendar, expected array or null.`)
+  const { onChangeValue, value: defaultValue, id } = props
 
   var now = new Date()
   var nowStr = formatToLocalDateString(now)
+  
+  validateRollingCalValue(defaultValue)
+
+  const [value, setValue] = useState(defaultValue ?
+    mapRollingCalendarInputToTableInput({ input: defaultValue || [], now: nowStr }) :
+    {})
+  
 
   const controlMap = {
     'Today -6': 'Today -6',
@@ -34,6 +37,7 @@ const RollingCalendar = props => {
   }
 
   const onTableChangeValue = values => {
+    setValue(values)
     onChangeValue(mapTableInputToRollingCalendarInput({ 
       input: values, 
       now: nowStr,
@@ -41,10 +45,11 @@ const RollingCalendar = props => {
   }
 
   return <Table
-    value={mapRollingCalendarInputToTableInput({ input: value || [], now: nowStr })} 
+    value={value} 
     onChangeValue={onTableChangeValue}
     errorMessage={{}}
     controlMap={controlMap}
+    id={id}
   >
   {({ renderCellError, renderCellInput }) => <Fragment>
       <thead>
@@ -68,7 +73,17 @@ const RollingCalendar = props => {
           {renderCellInput('Today -2')}
           {renderCellInput('Today -1')}
           {renderCellInput('Today')}
-          <td rowSpan={2} />
+          <td rowSpan={2}>
+            {formatNumber(
+              parseIntOrZero(value['Today -6']) +
+              parseIntOrZero(value['Today -5']) +
+              parseIntOrZero(value['Today -4']) +
+              parseIntOrZero(value['Today -3']) +
+              parseIntOrZero(value['Today -2']) +
+              parseIntOrZero(value['Today -1']) +
+              parseIntOrZero(value['Today'])
+            )}
+          </td>
         </tr>
         <tr>
           {renderCellError('Today -6')}

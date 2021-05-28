@@ -7,7 +7,7 @@ import { useRequestsContext } from './../../Requests'
 const { useCallback, useRef, useState } = React
 
 const Engine = props => {
-  const { schema, reportId, onError } = props
+  const { schema, reportId, onError, userRole } = props
 
   var localErrorProps = useRef({}).current
   var localValueProps = useRef({}).current
@@ -73,6 +73,7 @@ const Engine = props => {
         {...o}
         onChangeValue={onChangeValue}
         key={o.key}
+        userRole={userRole}
       />
     })}
     

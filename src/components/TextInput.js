@@ -1,6 +1,6 @@
 import * as React from 'react'
 import classNames from 'classnames'
-
+import { RECEIPT_STATUS_ENUM } from './../util/controls'
 
 const { useState, useEffect } = React
 
@@ -16,6 +16,7 @@ const TextInput = props => {
     id,
     className,
     inputRef,
+    receiptStatus,
   } = props
 
   var [value, setValue] = useState(defaultValue)
@@ -28,7 +29,11 @@ const TextInput = props => {
       ['Control']: true,
       ['TextInput']: true,
       ['invalid']: invalid,
-      [className || '']: true
+      [className || '']: true,
+      ['SubmittedForApproval']: receiptStatus == RECEIPT_STATUS_ENUM.SUBMITTED_FOR_APPROVAL,
+      ['Approved']: receiptStatus == RECEIPT_STATUS_ENUM.APPROVED,
+      ['SubmittedForAuthorisation']: receiptStatus == RECEIPT_STATUS_ENUM.SUBMITTED_FOR_AUTHORISATION,
+      ['Authorised']: receiptStatus == RECEIPT_STATUS_ENUM.AUTHORISED,
     })}
   >
     {header ? <label>{header}</label> : null}

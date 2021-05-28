@@ -22,7 +22,7 @@ const debouncedRemoveDropZoneFlag = debounce(function(ele){
 
 
 const Page = props => {
-  const { layout, onChangeValue } = props
+  const { layout, onChangeValue, userRole } = props
   const { showModal } = useModalsContext()
 
   const pageRef = useRef()
@@ -104,8 +104,12 @@ const Page = props => {
     o => {
       const { type, header, key, value } = o
       switch(type){
+        case 'header-one': 
         case 'header-two': 
-        case 'header-five': return
+        case 'header-three': 
+        case 'header-four': 
+        case 'header-five': 
+        case 'header-six': return
         case 'Number':
         case 'RichText':
         case 'DataLabel':
@@ -212,6 +216,7 @@ const Page = props => {
         {...o} 
         onChangeValue={onChangeValue} 
         id={o.key}
+        useRole={userRole}
       />)}
       <div className="dropZone">
         <div className="dropZoneInner" />

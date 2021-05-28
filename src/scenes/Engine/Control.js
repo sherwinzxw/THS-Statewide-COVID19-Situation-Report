@@ -26,6 +26,8 @@ const Control = props => {
     onChangeValue,
     value,
     id,
+    //receiptStatus,
+    //userRole,
     ...controlProps
   } = props
 

@@ -56,6 +56,7 @@ export const groupControls = ({ controlMap, newKey }) => (params) => {
   var { 
     layout, 
     onChangeValue, 
+    ...otherProps
   } = params
   
   var replacePoint = layout.findIndex(control => {
@@ -99,7 +100,7 @@ export const groupControls = ({ controlMap, newKey }) => (params) => {
       originalOnChangeValue({ value, key })
     })
   }
-  return  { layout, onChangeValue }
+  return  { layout, onChangeValue, ...otherProps }
 }
 
 /**
@@ -169,3 +170,11 @@ export const combineCheckInTASApplicationControlMap = groupControls({
   controlMap: checkInTASApplicationControlMap,
   newKey: 'CheckInTASApplication',
 })
+
+
+export const RECEIPT_STATUS_ENUM = {
+  'SUBMITTED_FOR_APPROVAL': 'Submitted for Approval',
+  'APPROVED': 'Approved',
+  'SUBMITTED_FOR_AUTHORISATION': 'Submitted for Authorisation',
+  'AUTHORISED': 'Authorised',
+}

@@ -16,7 +16,7 @@ import {
 } from './../../util/controls'
 
 const Form = props => {
-  var { layout, onChangeValue } = compose(
+  var { layout, onChangeValue, userRole } = compose(
     combineConfirmedCasesControls,
     combineHealthECCDailySnapshotControls,
     combineStatewideRespiratoryClinicsCapacityControls,
@@ -39,6 +39,7 @@ const Form = props => {
       }}
       key={o.key}
       id={o.key}
+      userRole={userRole}
     />)}
 
 
