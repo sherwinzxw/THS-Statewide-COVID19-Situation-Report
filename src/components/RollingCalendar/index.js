@@ -1,15 +1,24 @@
 import * as React from 'react'
 import Table from '../EditableTable'
+import { 
+  mapRollingCalendarInputToTableInput,
+  mapTableInputToRollingCalendarInput,
+  formatToLocalDateString,
+  addDays,
+  padZero,
+} from './util'
 
 const { useRef, useState, Fragment } = React
 
 const RollingCalendar = props => {
 
-  //const { value } = props
+  const { onChangeValue, value } = props
+
+  if (value !== null && value instanceof Array === false)
+    throw new Error(`Invalid 'value' (${value}) for Rolling Calendar, expected array or null.`)
 
   var now = new Date()
-
-  var values = useRef({})
+  var nowStr = formatToLocalDateString(now)
 
   const controlMap = {
     'Today -6': 'Today -6',
@@ -22,11 +31,14 @@ const RollingCalendar = props => {
   }
 
   const onTableChangeValue = values => {
-
+    onChangeValue(mapTableInputToRollingCalendarInput({ 
+      input: values, 
+      now,
+    }))
   }
 
   return <Table
-    value={value} 
+    value={mapRollingCalendarInputToTableInput({ input: value || [], now: nowStr })} 
     onChangeValue={onTableChangeValue}
     errorMessage={{}}
     controlMap={controlMap}
@@ -54,6 +66,15 @@ const RollingCalendar = props => {
           {renderCellInput('Today -1')}
           {renderCellInput('Today')}
         </tr>
+        <tr>
+          {renderCellError('Today -6')}
+          {renderCellError('Today -5')}
+          {renderCellError('Today -4')}
+          {renderCellError('Today -3')}
+          {renderCellError('Today -2')}
+          {renderCellError('Today -1')}
+          {renderCellError('Today')}
+        </tr>
       </tbody>
     </Fragment>}
   </Table>
@@ -61,12 +82,6 @@ const RollingCalendar = props => {
 
 export default RollingCalendar
 
-
-function addDays(date, days){
-  var newDate = new Date(date)
-  newDate.setDate(newDate.getDate() + days)
-  return newDate
-}
 
 function formatDate(date){
   return `${padZero(date.getDate())}/${padZero(date.getMonth() + 1)}`

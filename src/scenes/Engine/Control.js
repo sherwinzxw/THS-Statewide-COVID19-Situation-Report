@@ -152,13 +152,13 @@ const Control = props => {
       id={id}
       {...controlProps}
     />
-    case 'Rolling Calendar': return <RollingCalendar
+    /*case 'Rolling Calendar': return <RollingCalendar
       header={header}
       onChangeValue={onChangeValue}
       value={value}
       id={id}
       {...controlProps}
-    />
+    />*/
     default:
       return <p>Unknown control type: {type}</p>
   }

@@ -140,7 +140,7 @@ function padZeroFromEnd(str, length = 2){
 }
 
 
-function addDays(date, days){
+export function addDays(date, days){
   var newDate = new Date(date)
   newDate.setDate(newDate.getDate() + days)
   return newDate
