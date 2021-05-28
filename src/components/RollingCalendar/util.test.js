@@ -5,37 +5,37 @@ describe('RollingCalendar#util', () => {
     it('should map rolling calendar data to table data', () => {
       var input = [
         {
-          "inputValue": "100",
+          "value": "100",
           "effectiveFrom": "2021-05-10T00:00:00.00",
           "effectiveTo": "2021-05-10T23:59:59.99"
         },
         {
-          "inputValue": "200",
+          "value": "200",
           "effectiveFrom": "2021-05-11T00:00:00.00",
           "effectiveTo": "2021-05-11 23:59:59.99"
         },
         {
-          "inputValue": "300",
+          "value": "300",
           "effectiveFrom": "2021-05-12T00:00:00.00",
           "effectiveTo": "2021-05-12T23:59:59.99"
         },
         {
-          "inputValue": "400",
+          "value": "400",
           "effectiveFrom": "2021-05-13T00:00:00.00",
           "effectiveTo": "2021-05-13T23:59:59.99"
         },
         {
-          "inputValue": "500",
+          "value": "500",
           "effectiveFrom": "2021-05-14T00:00:00.00",
           "effectiveTo": "2021-05-14T23:59:59.99"
         },
         {
-          "inputValue": "600",
+          "value": "600",
           "effectiveFrom": "2021-05-15T00:00:00.00",
           "effectiveTo": "2021-05-15T23:59:59.99"
         },
         {
-          "inputValue": "700",
+          "value": "700",
           "effectiveFrom": "2021-05-16T00:00:00.00",
           "effectiveTo": "2021-05-16T23:59:59.99"
         }
@@ -58,37 +58,37 @@ describe('RollingCalendar#util', () => {
     it('should shift everything back by one if today is the next day on', () => {
       var input = [
         {
-          "inputValue": "100",
+          "value": "100",
           "effectiveFrom": "2021-05-10T00:00:00.00",
           "effectiveTo": "2021-05-10T23:59:59.99"
         },
         {
-          "inputValue": "200",
+          "value": "200",
           "effectiveFrom": "2021-05-11T00:00:00.00",
           "effectiveTo": "2021-05-11 23:59:59.99"
         },
         {
-          "inputValue": "300",
+          "value": "300",
           "effectiveFrom": "2021-05-12T00:00:00.00",
           "effectiveTo": "2021-05-12T23:59:59.99"
         },
         {
-          "inputValue": "400",
+          "value": "400",
           "effectiveFrom": "2021-05-13T00:00:00.00",
           "effectiveTo": "2021-05-13T23:59:59.99"
         },
         {
-          "inputValue": "500",
+          "value": "500",
           "effectiveFrom": "2021-05-14T00:00:00.00",
           "effectiveTo": "2021-05-14T23:59:59.99"
         },
         {
-          "inputValue": "600",
+          "value": "600",
           "effectiveFrom": "2021-05-15T00:00:00.00",
           "effectiveTo": "2021-05-15T23:59:59.99"
         },
         {
-          "inputValue": "700",
+          "value": "700",
           "effectiveFrom": "2021-05-16T00:00:00.00",
           "effectiveTo": "2021-05-16T23:59:59.99"
         }
@@ -127,37 +127,37 @@ describe('RollingCalendar#util', () => {
       })
       expect(result).toEqual([
         {
-          "inputValue": "100",
+          "value": "100",
           "effectiveFrom": "2021-05-10 00:00:00.000",
           "effectiveTo": "2021-05-10 23:59:59.999"
         },
         {
-          "inputValue": "200",
+          "value": "200",
           "effectiveFrom": "2021-05-11 00:00:00.000",
           "effectiveTo": "2021-05-11 23:59:59.999"
         },
         {
-          "inputValue": "300",
+          "value": "300",
           "effectiveFrom": "2021-05-12 00:00:00.000",
           "effectiveTo": "2021-05-12 23:59:59.999"
         },
         {
-          "inputValue": "400",
+          "value": "400",
           "effectiveFrom": "2021-05-13 00:00:00.000",
           "effectiveTo": "2021-05-13 23:59:59.999"
         },
         {
-          "inputValue": "500",
+          "value": "500",
           "effectiveFrom": "2021-05-14 00:00:00.000",
           "effectiveTo": "2021-05-14 23:59:59.999"
         },
         {
-          "inputValue": "600",
+          "value": "600",
           "effectiveFrom": "2021-05-15 00:00:00.000",
           "effectiveTo": "2021-05-15 23:59:59.999"
         },
         {
-          "inputValue": "700",
+          "value": "700",
           "effectiveFrom": "2021-05-16 00:00:00.000",
           "effectiveTo": "2021-05-16 23:59:59.999"
         }
@@ -181,38 +181,37 @@ describe('RollingCalendar#util', () => {
       })
       expect(result).toEqual([
         {
-          "inputValue": '200',
+          "value": '200',
           "effectiveFrom": "2021-05-11 00:00:00.000",
           "effectiveTo": "2021-05-11 23:59:59.999"
         },
         {
-          "inputValue": '300',
+          "value": '300',
           "effectiveFrom": "2021-05-12 00:00:00.000",
           "effectiveTo": "2021-05-12 23:59:59.999"
         },
         {
-          "inputValue": '400',
+          "value": '400',
           "effectiveFrom": "2021-05-13 00:00:00.000",
           "effectiveTo": "2021-05-13 23:59:59.999"
         },
         {
-          "inputValue": '500',
+          "value": '500',
           "effectiveFrom": "2021-05-14 00:00:00.000",
           "effectiveTo": "2021-05-14 23:59:59.999"
         },
         {
-          "inputValue": '600',
+          "value": '600',
           "effectiveFrom": "2021-05-15 00:00:00.000",
           "effectiveTo": "2021-05-15 23:59:59.999"
         },
         {
-          "inputValue": '700',
+          "value": '700',
           "effectiveFrom": "2021-05-16 00:00:00.000",
           "effectiveTo": "2021-05-16 23:59:59.999"
         },
-
         {
-          "inputValue": '',
+          "value": '',
           "effectiveFrom": "2021-05-17 00:00:00.000",
           "effectiveTo": "2021-05-17 23:59:59.999"
         }

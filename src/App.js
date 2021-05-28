@@ -16,7 +16,7 @@ const App = props => {
   var [errorMessage, setErrorMessage] = useState('')
   const engineRef = useRef()
 
-  const { getViews, getControls, getControlValues } = useRequestsContext()
+  const { getViews, getControls, getCurrentUser } = useRequestsContext()
 
   useEffect(() => {
 
@@ -38,7 +38,7 @@ const App = props => {
               type: r.ref_Type, 
               header: r.label, 
               maxLength: r.maxLength,
-              value: r.inputValue,
+              value: r.value,
             }
           })
           var view = views.find(v => v && v.viewIdentifier == viewId)
@@ -108,5 +108,5 @@ const findReportId = controls => {
   var control = controls.find(c => {
     return c.controlIdentifier == 'Control_0C9067D0-A17C-42CE-9496-9A8C5EDF47C7'
   })
-  return control ? control.inputValue : null
+  return control ? control.value : null
 }

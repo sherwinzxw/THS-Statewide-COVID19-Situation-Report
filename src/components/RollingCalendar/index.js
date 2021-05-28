@@ -6,6 +6,7 @@ import {
   formatToLocalDateString,
   addDays,
   padZero,
+  validateRollingCalValue,
 } from './util'
 
 const { useRef, useState, Fragment } = React
@@ -14,7 +15,9 @@ const RollingCalendar = props => {
 
   const { onChangeValue, value } = props
 
-  if (value !== null && value instanceof Array === false)
+  validateRollingCalValue(value)
+
+  if (value !== undefined && value !== null && value instanceof Array === false)
     throw new Error(`Invalid 'value' (${value}) for Rolling Calendar, expected array or null.`)
 
   var now = new Date()
@@ -33,7 +36,7 @@ const RollingCalendar = props => {
   const onTableChangeValue = values => {
     onChangeValue(mapTableInputToRollingCalendarInput({ 
       input: values, 
-      now,
+      now: nowStr,
     }))
   }
 
@@ -65,6 +68,7 @@ const RollingCalendar = props => {
           {renderCellInput('Today -2')}
           {renderCellInput('Today -1')}
           {renderCellInput('Today')}
+          <td rowSpan={2} />
         </tr>
         <tr>
           {renderCellError('Today -6')}

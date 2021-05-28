@@ -18,7 +18,7 @@ export const mapRollingCalendarInputToTableInput = (params) => {
         throw new Error('Expected \'effectiveFrom\' to be a local date string.')
       var from = new Date(val.effectiveFrom)
       if (from >= thisDayStart){
-        thisDayResult = val['inputValue']
+        thisDayResult = val['value']
       }
     }
     if (!thisDayResult)
@@ -40,38 +40,38 @@ export const mapTableInputToRollingCalendarInput = (params) => {
   var thisDayStart = new Date(now.getFullYear(), now.getMonth(), now.getDate())
   return [
     {
-      "inputValue": input['Today -6'],
+      "value": input['Today -6'],
       "effectiveFrom": formatToLocalDateString(addDays(thisDayStart, -6)),
       "effectiveTo": formatToLocalDateString(addMs(addDays(thisDayStart, -5), -1)),
     },
     {
-      "inputValue": input['Today -5'],
+      "value": input['Today -5'],
       "effectiveFrom": formatToLocalDateString(addDays(thisDayStart, -5)),
       "effectiveTo": formatToLocalDateString(addMs(addDays(thisDayStart, -4), -1)),
     },
     {
-      "inputValue": input['Today -4'],
+      "value": input['Today -4'],
       "effectiveFrom": formatToLocalDateString(addDays(thisDayStart, -4)),
       "effectiveTo": formatToLocalDateString(addMs(addDays(thisDayStart, -3), -1)),
     },
     {
-      "inputValue": input['Today -3'],
+      "value": input['Today -3'],
       "effectiveFrom": formatToLocalDateString(addDays(thisDayStart, -3)),
       "effectiveTo": formatToLocalDateString(addMs(addDays(thisDayStart, -2), -1)),
     },
     {
-      "inputValue": input['Today -2'],
+      "value": input['Today -2'],
       "effectiveFrom": formatToLocalDateString(addDays(thisDayStart, -2)),
       "effectiveTo": formatToLocalDateString(addMs(addDays(thisDayStart, -1), -1)),
     },
     {
-      "inputValue": input['Today -1'],
+      "value": input['Today -1'],
       "effectiveFrom": formatToLocalDateString(addDays(thisDayStart, -1)),
       "effectiveTo": formatToLocalDateString(addMs(thisDayStart, -1)),
     },
 
     {
-      "inputValue": input['Today'],
+      "value": input['Today'],
       "effectiveFrom": formatToLocalDateString(thisDayStart),
       "effectiveTo": formatToLocalDateString(addMs(addDays(thisDayStart, 1), -1)),
     }
@@ -150,4 +150,19 @@ function addMs(date, ms){
   var newDate = new Date(date)
   newDate.setMilliseconds(newDate.getMilliseconds() + ms)
   return newDate
+}
+
+export const validateRollingCalValue = (value) => {
+  if (value === null || value === undefined) return
+  if (value instanceof Array === false)
+    throw new Error('Expected Array for rolling calendar value')
+  value.forEach(validateRollingCalItem)
+}
+
+const validateRollingCalItem = item => {
+  const { effectiveFrom, effectiveTo } = item
+  if (typeof effectiveFrom !== 'string')
+    throw new Error('Expected string type for rolling calendar \'effectiveFrom\'.')
+  if (typeof effectiveTo !== 'string')
+    throw new Error('Expected string type for rolling calendar \'effectiveTo\'.')
 }

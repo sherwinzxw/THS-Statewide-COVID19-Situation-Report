@@ -39,7 +39,7 @@ export const putControlValue = callApi => async function(params){
     body: JSON.stringify({
       reportID: Number(reportId),
       controlIdentifier: controlId,
-      userInput: value,
+      value: value,
       // When the control is a drop down, this is the value of the selected
       // drop down. And the InputValue is the text value
       //ref_ReferenceID: null,
@@ -54,4 +54,8 @@ export const submitData = callApi => async function(params){
   const { preApproved } = params
   return callApi(`api/SitUserInputReceipts?submission=true&preapproval=${
     preApproved ? 'True' : 'False'}`)
+}
+
+export const getCurrentUser = callApi => async function(){
+  return callApi(`api/SitUsers?search=${encodeURIComponent('Windows User')}`)
 }

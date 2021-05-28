@@ -181,6 +181,8 @@ export const swapKeysWithValues = function(obj){
 }
 
 export const isValidControl = function(control){
+  if (!control.controlIdentifier)
+    throw new Error('Control is missing \'controlIdentifier\' prop.')
   if (!control.fk_ViewIdentifier){
     console.error(new Error(`
       Control ${control.controlIdentifier} is invalid. It has no 
