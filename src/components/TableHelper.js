@@ -59,14 +59,12 @@ const TableHelper = props => {
   }
 
   const onFocus = (e) => {
-    //setTimeout(() => {
-      var range = document.createRange()
-      range.selectNodeContents(e.target)
-      //range.collapse(false)
-      var selection = window.getSelection()
-      selection.removeAllRanges()
-      selection.addRange(range)
-    //}, 4)
+    var range = document.createRange()
+    range.selectNodeContents(e.target)
+    //range.collapse(false)
+    var selection = window.getSelection()
+    selection.removeAllRanges()
+    selection.addRange(range)
   }
 
   const renderCellInput = (controlLabel, props = {}) => {

@@ -41,17 +41,17 @@ describe('RollingCalendar#util', () => {
         }
       ]
 
-      var now = '2021-05-16 16:00:00'
+      var dayStr = '2021-05-16 16:00:00'
 
-      var result = methods.mapRollingCalendarInputToTableInput({ input, now })
+      var result = methods.mapRollingCalendarInputToTableInput({ input, dayStr })
       expect(result).toEqual({
-        'Today -6': '100',
-        'Today -5': '200',
-        'Today -4': '300',
-        'Today -3': '400',
-        'Today -2': '500',
-        'Today -1': '600',
-        'Today': '700',
+        'Day -6': '100',
+        'Day -5': '200',
+        'Day -4': '300',
+        'Day -3': '400',
+        'Day -2': '500',
+        'Day -1': '600',
+        'Day': '700',
       })
     })
 
@@ -94,17 +94,17 @@ describe('RollingCalendar#util', () => {
         }
       ]
 
-      var now = '2021-05-17 16:00:00'
+      var dayStr = '2021-05-17 16:00:00'
 
-      var result = methods.mapRollingCalendarInputToTableInput({ input, now })
+      var result = methods.mapRollingCalendarInputToTableInput({ input, dayStr })
       expect(result).toEqual({
-        'Today -6': '200',
-        'Today -5': '300',
-        'Today -4': '400',
-        'Today -3': '500',
-        'Today -2': '600',
-        'Today -1': '700',
-        'Today': '',
+        'Day -6': '200',
+        'Day -5': '300',
+        'Day -4': '400',
+        'Day -3': '500',
+        'Day -2': '600',
+        'Day -1': '700',
+        'Day': '',
       })
     })
   })
@@ -112,18 +112,18 @@ describe('RollingCalendar#util', () => {
   describe('#mapTableInputToRollingCalendarInput', () => {
     it('should map table values to the input the server wants', () => {
       var tableInput = {
-        'Today -6': '100',
-        'Today -5': '200',
-        'Today -4': '300',
-        'Today -3': '400',
-        'Today -2': '500',
-        'Today -1': '600',
-        'Today': '700',
+        'Day -6': '100',
+        'Day -5': '200',
+        'Day -4': '300',
+        'Day -3': '400',
+        'Day -2': '500',
+        'Day -1': '600',
+        'Day': '700',
       }
-      var now = '2021-05-16 17:00:00.00'
+      var dayStr = '2021-05-16 17:00:00.00'
       var result = methods.mapTableInputToRollingCalendarInput({ 
         input: tableInput,
-        now,
+        dayStr,
       })
       expect(result).toEqual([
         {
@@ -166,18 +166,18 @@ describe('RollingCalendar#util', () => {
 
     it('should map table values to the input the server wants II', () => {
       var tableInput = {
-        'Today -6': '200',
-        'Today -5': '300',
-        'Today -4': '400',
-        'Today -3': '500',
-        'Today -2': '600',
-        'Today -1': '700',
-        'Today': '',
+        'Day -6': '200',
+        'Day -5': '300',
+        'Day -4': '400',
+        'Day -3': '500',
+        'Day -2': '600',
+        'Day -1': '700',
+        'Day': '',
       }
-      var now = '2021-05-17 17:00:00.00'
+      var dayStr = '2021-05-17 17:00:00.00'
       var result = methods.mapTableInputToRollingCalendarInput({ 
         input: tableInput,
-        now,
+        dayStr,
       })
       expect(result).toEqual([
         {

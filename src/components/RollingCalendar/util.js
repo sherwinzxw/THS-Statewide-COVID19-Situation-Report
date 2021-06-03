@@ -7,15 +7,15 @@ import {
 
 
 export const mapRollingCalendarInputToTableInput = (params) => {
-  const { now: nowStr, input } = params
-  if (isLocalDateStr(nowStr) == false)
-    throw new Error('\'now\' must be a local date.')
+  const { dayStr, input } = params
+  if (isLocalDateStr(dayStr) == false)
+    throw new Error('\'dayStr\' must be a local date string.')
 
-  var now = new Date(nowStr)
-  var thisDayStart = new Date(now.getFullYear(), now.getMonth(), now.getDate())
+  var day = new Date(dayStr)
+  var thisDayStart = new Date(day.getFullYear(), day.getMonth(), day.getDate())
   var resultObj = {}
   var inputClone = input.slice(0)
-  var day = 0
+  var dayIndex = 0
   do {
 
     var thisDayResult = null
@@ -31,54 +31,54 @@ export const mapRollingCalendarInputToTableInput = (params) => {
     if (!thisDayResult)
       thisDayResult = ''
 
-    resultObj['Today' + (day ? (' ' + day) : '')] = thisDayResult
+    resultObj['Day' + (dayIndex ? (' ' + dayIndex) : '')] = thisDayResult
     thisDayStart.setDate(thisDayStart.getDate() - 1)
-    day--
-  } while (day > -7);
+    dayIndex--
+  } while (dayIndex > -7);
   return resultObj
 }
 
 export const mapTableInputToRollingCalendarInput = (params) => {
-  const { now: nowStr, input } = params
-  if (isLocalDateStr(nowStr) == false)
-    throw new Error('\'now\' must be a local date.')
+  const { dayStr, input } = params
+  if (isLocalDateStr(dayStr) == false)
+    throw new Error('\'dayStr\' must be a local date.')
 
-  var now = new Date(nowStr)
-  var thisDayStart = new Date(now.getFullYear(), now.getMonth(), now.getDate())
+  var day = new Date(dayStr)
+  var thisDayStart = new Date(day.getFullYear(), day.getMonth(), day.getDate())
   return [
     {
-      "value": input['Today -6'],
+      "value": input['Day -6'],
       "effectiveFrom": formatToLocalDateString(addDays(thisDayStart, -6)),
       "effectiveTo": formatToLocalDateString(addMs(addDays(thisDayStart, -5), -1)),
     },
     {
-      "value": input['Today -5'],
+      "value": input['Day -5'],
       "effectiveFrom": formatToLocalDateString(addDays(thisDayStart, -5)),
       "effectiveTo": formatToLocalDateString(addMs(addDays(thisDayStart, -4), -1)),
     },
     {
-      "value": input['Today -4'],
+      "value": input['Day -4'],
       "effectiveFrom": formatToLocalDateString(addDays(thisDayStart, -4)),
       "effectiveTo": formatToLocalDateString(addMs(addDays(thisDayStart, -3), -1)),
     },
     {
-      "value": input['Today -3'],
+      "value": input['Day -3'],
       "effectiveFrom": formatToLocalDateString(addDays(thisDayStart, -3)),
       "effectiveTo": formatToLocalDateString(addMs(addDays(thisDayStart, -2), -1)),
     },
     {
-      "value": input['Today -2'],
+      "value": input['Day -2'],
       "effectiveFrom": formatToLocalDateString(addDays(thisDayStart, -2)),
       "effectiveTo": formatToLocalDateString(addMs(addDays(thisDayStart, -1), -1)),
     },
     {
-      "value": input['Today -1'],
+      "value": input['Day -1'],
       "effectiveFrom": formatToLocalDateString(addDays(thisDayStart, -1)),
       "effectiveTo": formatToLocalDateString(addMs(thisDayStart, -1)),
     },
 
     {
-      "value": input['Today'],
+      "value": input['Day'],
       "effectiveFrom": formatToLocalDateString(thisDayStart),
       "effectiveTo": formatToLocalDateString(addMs(addDays(thisDayStart, 1), -1)),
     }
@@ -88,6 +88,7 @@ export const mapTableInputToRollingCalendarInput = (params) => {
 
 
 export const validateRollingCalValue = (value) => {
+
   if (value === null || value === undefined) return
   if (value instanceof Array === false)
     throw new Error('Expected Array for rolling calendar value')
@@ -100,4 +101,6 @@ const validateRollingCalItem = item => {
     throw new Error('Expected string type for rolling calendar \'effectiveFrom\'.')
   if (typeof effectiveTo !== 'string')
     throw new Error('Expected string type for rolling calendar \'effectiveTo\'.')
+  if (item.hasOwnProperty('value') == false)
+    throw new Error('Expected rolling calendar items to have a \'value\' prop.')
 }

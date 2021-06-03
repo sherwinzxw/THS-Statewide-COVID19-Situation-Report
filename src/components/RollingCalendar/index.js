@@ -10,9 +10,10 @@ import {
   formatToLocalDateString, 
   addDays,
   formatToShortDateMonth as formatDate,
+  getStartOfDay,
 } from './../../util/date'
 
-const { useRef, useState, Fragment } = React
+const { useRef, useState, Fragment, useEffect } = React
 
 const RollingCalendar = props => {
 
@@ -22,28 +23,44 @@ const RollingCalendar = props => {
     header,
   } = props
   
-  const now = new Date()
+  const now = getStartOfDay(new Date()).valueOf()
+  const [weekIndex, setWeekIndex] = useState(0)
+
+  const viewLastWeek = () => setWeekIndex(-1)
+  const viewThisWeek = () => setWeekIndex(0)
 
   return <table>
     <thead>
       <tr>
         <th />
-        <th>{formatDate(addDays(now, -6))}</th>
-        <th>{formatDate(addDays(now, -5))}</th>
-        <th>{formatDate(addDays(now, -4))}</th>
-        <th>{formatDate(addDays(now, -3))}</th>
-        <th>{formatDate(addDays(now, -2))}</th>
-        <th>{formatDate(addDays(now, -1))}</th>
-        <th>{formatDate(now)}</th>
+        <th>
+          {weekIndex == 0 ? 
+            <button onClick={viewLastWeek}>⬅️</button> : 
+            <button onClick={viewThisWeek}>➡️</button>}
+          {formatDate(addDays(now, -6 + (7 * weekIndex)))}
+        </th>
+        <th>{formatDate(addDays(now, -5 + (7 * weekIndex)))}</th>
+        <th>{formatDate(addDays(now, -4 + (7 * weekIndex)))}</th>
+        <th>{formatDate(addDays(now, -3 + (7 * weekIndex)))}</th>
+        <th>{formatDate(addDays(now, -2 + (7 * weekIndex)))}</th>
+        <th>{formatDate(addDays(now, -1 + (7 * weekIndex)))}</th>
+        <th>{formatDate(addDays(now, 7 * weekIndex))}</th>
         <th>Total</th>
       </tr>
     </thead>
     <tbody>
-      <RollingRow
+      {weekIndex == 0 ? <RollingRow
+        key="this-week"
         value={value} 
         onChangeValue={onChangeValue}
         label={header}
-      />
+      />  : <RollingRow
+        key="last-week"
+        value={value} 
+        onChangeValue={onChangeValue}
+        label={header}
+        dateEnd={(new Date(addDays(now, 7 * weekIndex))).valueOf()}
+      />}
     </tbody>
   </table>
 }
@@ -56,36 +73,37 @@ export const RollingRow = props => {
     value: defaultValue, 
     onChangeValue,
     label,
+    dateEnd,
   } = props
 
   validateRollingCalValue(defaultValue)
 
   const controlMap = {
-    'Today -6': 'Today -6',
-    'Today -5': 'Today -5',
-    'Today -4': 'Today -4',
-    'Today -3': 'Today -3',
-    'Today -2': 'Today -2',
-    'Today -1': 'Today -1',
-    'Today': 'Today',
+    'Day -6': 'Day -6',
+    'Day -5': 'Day -5',
+    'Day -4': 'Day -4',
+    'Day -3': 'Day -3',
+    'Day -2': 'Day -2',
+    'Day -1': 'Day -1',
+    'Day': 'Day',
   }
 
 
-  var now = new Date()
-  var nowStr = formatToLocalDateString(now)
+  var day = dateEnd ? new Date(dateEnd) : new Date()
+  var dayStr = formatToLocalDateString(day)
 
   const onTableChangeValue = values => {
     valueRef.current = values
     setRenderHash(new Date())
     onChangeValue(mapTableInputToRollingCalendarInput({ 
       input: values, 
-      now: nowStr,
+      dayStr,
     }))
   }
 
   const [renderHash, setRenderHash] = useState()
   const valueRef = useRef(defaultValue ?
-    mapRollingCalendarInputToTableInput({ input: defaultValue || [], now: nowStr }) :
+    mapRollingCalendarInputToTableInput({ input: defaultValue || [], dayStr }) :
     {})
   const value = valueRef.current
 
@@ -99,33 +117,33 @@ export const RollingRow = props => {
     {({ renderCellError, renderCellInput }) => <Fragment>
       <tr>
         <td rowSpan={2}>{label}</td>
-        {renderCellInput('Today -6')}
-        {renderCellInput('Today -5')}
-        {renderCellInput('Today -4')}
-        {renderCellInput('Today -3')}
-        {renderCellInput('Today -2')}
-        {renderCellInput('Today -1')}
-        {renderCellInput('Today')}
+        {renderCellInput('Day -6')}
+        {renderCellInput('Day -5')}
+        {renderCellInput('Day -4')}
+        {renderCellInput('Day -3')}
+        {renderCellInput('Day -2')}
+        {renderCellInput('Day -1')}
+        {renderCellInput('Day')}
         <td rowSpan={2}>
           {formatNumber(
-            parseIntOrZero(value['Today -6']) +
-            parseIntOrZero(value['Today -5']) +
-            parseIntOrZero(value['Today -4']) +
-            parseIntOrZero(value['Today -3']) +
-            parseIntOrZero(value['Today -2']) +
-            parseIntOrZero(value['Today -1']) +
-            parseIntOrZero(value['Today'])
+            parseIntOrZero(value['Day -6']) +
+            parseIntOrZero(value['Day -5']) +
+            parseIntOrZero(value['Day -4']) +
+            parseIntOrZero(value['Day -3']) +
+            parseIntOrZero(value['Day -2']) +
+            parseIntOrZero(value['Day -1']) +
+            parseIntOrZero(value['Day'])
           )}
         </td>
       </tr>
       <tr>
-        {renderCellError('Today -6')}
-        {renderCellError('Today -5')}
-        {renderCellError('Today -4')}
-        {renderCellError('Today -3')}
-        {renderCellError('Today -2')}
-        {renderCellError('Today -1')}
-        {renderCellError('Today')}
+        {renderCellError('Day -6')}
+        {renderCellError('Day -5')}
+        {renderCellError('Day -4')}
+        {renderCellError('Day -3')}
+        {renderCellError('Day -2')}
+        {renderCellError('Day -1')}
+        {renderCellError('Day')}
       </tr>
     </Fragment>}
   </TableHelper>
