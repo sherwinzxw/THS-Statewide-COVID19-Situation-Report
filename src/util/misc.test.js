@@ -135,4 +135,11 @@ describe('misc', () => {
       expect(result).toBe(0)
     })
   })
+
+  describe('#padZero', () => {
+    it('should pad a zero', () => {
+      var result = methods.padZero(5)
+      expect(result).toBe('05')
+    })
+  })
 })

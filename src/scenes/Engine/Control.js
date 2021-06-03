@@ -17,6 +17,7 @@ import VaccinesAdministeredCumulativeStateGovernmentTable from '../../tables/Vac
 import VaccinesAdministeredCumulativeTable from '../../tables/VaccinesAdministeredCumulativeTable'
 import CheckInTASApplicationTable from '../../tables/CheckInTASApplicationTable'
 import RollingCalendar from '../../components/RollingCalendar'
+import RespiratoryClinicPresentationsTable from '../../tables/RespiratoryClinicPresentationsTable'
 
 const Control = props => {
   const { 
@@ -155,6 +156,13 @@ const Control = props => {
       {...controlProps}
     />
     case 'Rolling Calendar': return <RollingCalendar
+      header={header}
+      onChangeValue={onChangeValue}
+      value={value}
+      id={id}
+      {...controlProps}
+    />
+    case 'RespiratoryClinicPresentations': return <RespiratoryClinicPresentationsTable
       header={header}
       onChangeValue={onChangeValue}
       value={value}

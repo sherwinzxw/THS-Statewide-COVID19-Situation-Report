@@ -4,6 +4,16 @@ import { swapKeysWithValues } from './../util/misc'
 
 const { useRef } = React
 
+/**
+ * @typedef EditableTableProps
+ * @property {Function} onChangeValue
+ * @property {object} controlMap
+ * @property {object} errorMessage This is a hash map of control keys to error
+ * messages.
+ * @property {object} value This is a hash map of control keys to values.
+ *
+ * @param {EditableTableProps} props
+ */
 const EditableTable = props => {
 
   const {

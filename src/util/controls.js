@@ -24,6 +24,8 @@ import vaccinesAdministeredCumulativeControlMap from
   '../tables/VaccinesAdministeredCumulativeTable/controlMap'
 import checkInTASApplicationControlMap from 
   '../tables/CheckInTASApplicationTable/controlMap'
+import respiratoryClinicPresentationsControlMap from 
+  '../tables/RespiratoryClinicPresentationsTable/controlMap'
 
 
 /**
@@ -169,6 +171,11 @@ export const combineVaccinesAdministeredCumulativeControlMap = groupControls({
 export const combineCheckInTASApplicationControlMap = groupControls({
   controlMap: checkInTASApplicationControlMap,
   newKey: 'CheckInTASApplication',
+})
+
+export const combineRespiratoryClinicPresentationsControlMap = groupControls({
+  controlMap: respiratoryClinicPresentationsControlMap,
+  newKey: 'RespiratoryClinicPresentations',
 })
 
 

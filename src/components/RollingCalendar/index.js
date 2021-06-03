@@ -3,12 +3,14 @@ import Table from '../EditableTable'
 import { 
   mapRollingCalendarInputToTableInput,
   mapTableInputToRollingCalendarInput,
-  formatToLocalDateString,
-  addDays,
-  padZero,
   validateRollingCalValue,
 } from './util'
 import { formatNumber, parseIntOrZero } from '../../util/misc'
+import { 
+  formatToLocalDateString, 
+  addDays,
+  formatToShortDateMonth as formatDate,
+} from './../../util/date'
 
 const { useRef, useState, Fragment } = React
 
@@ -109,8 +111,6 @@ const RollingCalendar = props => {
 export default RollingCalendar
 
 
-function formatDate(date){
-  return `${padZero(date.getDate())}/${padZero(date.getMonth() + 1)}`
-}
+
 
 

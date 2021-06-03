@@ -208,3 +208,21 @@ export const parseIntOrZero = function(str){
     return 0
   return Number(str)
 }
+
+
+
+export function padZero(str, length = 2){
+  str = String(str)
+  while (str.length < length){
+    str = '0' + str
+  }
+  return str
+}
+
+export function padZeroFromEnd(str, length = 2){
+  str = String(str)
+  while (str.length < length){
+    str = str + '0'
+  }
+  return str
+}
