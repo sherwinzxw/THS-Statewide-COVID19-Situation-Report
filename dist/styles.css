@@ -292,7 +292,17 @@ table>thead>tr>th, table tr>th.header-one {
   text-align: center;
 }
 
+table tr.blue>th {
+  background-color: #d9e2f2;
+}
 
+table tr.light-grey>th, table tr.light-grey>td {
+  background-color: #dbdbdb;
+}
+
+table tr.grey>th, table tr.grey>td {
+  background-color: #bdbdbd;
+}
 
 table>thead>tr.header-two>th {
   background-color: #dbdbdb;

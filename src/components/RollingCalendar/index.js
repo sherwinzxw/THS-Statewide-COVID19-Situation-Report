@@ -21,14 +21,8 @@ const RollingCalendar = props => {
     value, 
     header,
   } = props
-
-  
   
   const now = new Date()
-
-  
-  
-  
 
   return <table>
     <thead>
@@ -56,9 +50,7 @@ const RollingCalendar = props => {
 
 export default RollingCalendar
 
-
-
-const RollingRow = props => {
+export const RollingRow = props => {
 
   const { 
     value: defaultValue, 
@@ -83,23 +75,26 @@ const RollingRow = props => {
   var nowStr = formatToLocalDateString(now)
 
   const onTableChangeValue = values => {
-    setValue(values)
+    valueRef.current = values
+    setRenderHash(new Date())
     onChangeValue(mapTableInputToRollingCalendarInput({ 
       input: values, 
       now: nowStr,
     }))
   }
 
-  const [value, setValue] = useState(defaultValue ?
+  const [renderHash, setRenderHash] = useState()
+  const valueRef = useRef(defaultValue ?
     mapRollingCalendarInputToTableInput({ input: defaultValue || [], now: nowStr }) :
     {})
-  
+  const value = valueRef.current
 
   return <TableHelper
     value={value} 
     onChangeValue={onTableChangeValue}
     errorMessage={{}}
     controlMap={controlMap}
+    renderHash={renderHash}
   >
     {({ renderCellError, renderCellInput }) => <Fragment>
       <tr>

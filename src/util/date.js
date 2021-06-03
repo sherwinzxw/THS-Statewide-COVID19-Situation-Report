@@ -69,3 +69,7 @@ export function addMs(date, ms){
   newDate.setMilliseconds(newDate.getMilliseconds() + ms)
   return newDate
 }
+
+export function getStartOfDay(date){
+  return new Date(date.getFullYear(), date.getMonth(), date.getDate())
+}

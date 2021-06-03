@@ -1,4 +1,4 @@
-import * as methods from './util'
+import * as methods from './date'
 
 describe('#date', () => {
 
@@ -32,5 +32,13 @@ describe('#date', () => {
       expect(result).toBe('2021-05-11 23:59:59.990')
     })
   })
-  
+
+  describe('#getStartOfDay', () => {
+    it('should return the start of the day', () => {
+      var testDate = new Date(2021, 5, 3, 12, 9)
+      var result = methods.getStartOfDay(testDate)
+      expect(result.valueOf()).toBe((new Date(2021, 5, 3)).valueOf())
+    })
+  })
+
 })
