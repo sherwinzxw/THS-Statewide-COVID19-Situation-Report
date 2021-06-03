@@ -1,9 +1,9 @@
 import * as React from 'react'
-import { EditableTable as Table } from './../../components'
+import { TableHelper } from './../../components'
 import { swapKeysWithValues, formatNumber, parseIntOrZero } from './../../util/misc'
 import controlMap from './controlMap'
 
-const { Fragment, useState, useEffect } = React
+const { useState, useEffect } = React
 
 const controlsLabelMap = swapKeysWithValues(controlMap)
 
@@ -17,6 +17,7 @@ const EmergencyDepartmentPresentationsWithILITable = props => {
     value: defaultValue, 
     onChangeValue: parentOnChangeValue,
     errorMessage,
+    id,
   } = props
 
   const [value, setValue] = useState(defaultValue)
@@ -29,13 +30,13 @@ const EmergencyDepartmentPresentationsWithILITable = props => {
     setValue(defaultValue)
   }, [defaultValue])
 
-  return <Table 
+  return <TableHelper 
     value={value} 
     onChangeValue={onChangeValue}
     errorMessage={errorMessage}
     controlMap={controlMap}
   >
-    {({ renderCellError, renderCellInput }) => <Fragment>
+    {({ renderCellError, renderCellInput }) => <table id={id}>
       <thead>
         <tr className="header-one">
           <th>Current resource availability</th>
@@ -167,8 +168,8 @@ const EmergencyDepartmentPresentationsWithILITable = props => {
           {renderCellError('MCH Patients requiring ICU or Critical Care')}
         </tr>
       </tbody>
-    </Fragment>}
-  </Table>
+    </table>}
+  </TableHelper>
 }
 
 export default EmergencyDepartmentPresentationsWithILITable

@@ -1,7 +1,7 @@
 import * as React from 'react'
-import { EditableTable as Table } from './../../components'
+import { TableHelper } from './../../components'
 
-const { Fragment, useState, useEffect } = React
+const { useState, useEffect } = React
 
 /**
  * These are the specific controls this component will render.
@@ -24,6 +24,7 @@ const StatewideRespiratoryClinicsCapacityTable = props => {
     value: defaultValue, 
     onChangeValue: parentOnChangeValue,
     errorMessage,
+    id,
   } = props
 
   const [value, setValue] = useState(defaultValue)
@@ -36,13 +37,13 @@ const StatewideRespiratoryClinicsCapacityTable = props => {
     setValue(defaultValue)
   }, [defaultValue])
 
-  return <Table 
+  return <TableHelper 
     value={value} 
     onChangeValue={onChangeValue}
     errorMessage={errorMessage}
     controlMap={controlMap}
   >
-    {({ renderCellError, renderCellInput }) => <Fragment>
+    {({ renderCellError, renderCellInput }) => <table id={id}>
       <thead>
         <tr className="header-one">
           <th>Location</th>
@@ -103,8 +104,8 @@ const StatewideRespiratoryClinicsCapacityTable = props => {
           )}
         </tr>
       </tbody>
-    </Fragment>}
-  </Table>
+    </table>}
+  </TableHelper>
 }
 
 export default StatewideRespiratoryClinicsCapacityTable

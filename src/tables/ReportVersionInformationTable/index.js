@@ -1,7 +1,7 @@
 import * as React from 'react'
-import { EditableTable as Table } from './../../components'
+import { TableHelper } from './../../components'
 
-const { Fragment, useState, useEffect } = React
+const { useState, useEffect } = React
 
 /**
  * These are the specific controls this component will render.
@@ -32,6 +32,7 @@ const ReportVersionInformationTable = props => {
     value: defaultValue, 
     onChangeValue: parentOnChangeValue,
     errorMessage,
+    id,
   } = props
 
   const [value, setValue] = useState(defaultValue)
@@ -44,13 +45,14 @@ const ReportVersionInformationTable = props => {
     setValue(defaultValue)
   }, [defaultValue])
 
-  return <Table 
+  return <TableHelper 
     value={value} 
     onChangeValue={onChangeValue}
     errorMessage={errorMessage}
     controlMap={controlMap}
+    
   >
-    {({ renderCellError, renderCellInput }) => <Fragment>
+    {({ renderCellError, renderCellInput }) => <table id={id}>
       <tbody>
         <tr>
           <th className="header-one" style={cellStyle}>Report number</th>
@@ -79,8 +81,8 @@ const ReportVersionInformationTable = props => {
           {renderCellInput('Distribution', { contentEditable: false, colSpan: 3, rowSpan: 1, cellStyle })}
         </tr>
       </tbody>
-    </Fragment>}
-  </Table>
+    </table>}
+  </TableHelper>
 }
 
 export default ReportVersionInformationTable

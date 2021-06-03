@@ -1,15 +1,15 @@
 import * as React from 'react'
-import { EditableTable as Table } from './../../components'
+import { TableHelper } from './../../components'
 
-const { Fragment, useState, useEffect } = React
+const { useState, useEffect } = React
 
 /**
  * These are the specific controls this component will render.
  */
 export const controlMap = {
-    'Control_3FD4CD18-44EB-4308-990A-2363BDA0DA91':'Melville Street',
-    'Control_c2faaba1-da7a-4bdb-9a01-af7a851529df':'East Devonport',
-    'Control_AAD8C6A2-8293-4029-A950-DD0059FCFC8A':'Wellington Street',
+  'Control_3FD4CD18-44EB-4308-990A-2363BDA0DA91':'Melville Street',
+  'Control_c2faaba1-da7a-4bdb-9a01-af7a851529df':'East Devonport',
+  'Control_AAD8C6A2-8293-4029-A950-DD0059FCFC8A':'Wellington Street',
 }
 
 
@@ -23,6 +23,7 @@ const RespiratoryClinicAppointmentsTable = props => {
     value: defaultValue, 
     onChangeValue: parentOnChangeValue,
     errorMessage,
+    id,
   } = props
 
   const [value, setValue] = useState(defaultValue)
@@ -35,13 +36,13 @@ const RespiratoryClinicAppointmentsTable = props => {
     setValue(defaultValue)
   }, [defaultValue])
 
-  return <Table 
+  return <TableHelper 
     value={value} 
     onChangeValue={onChangeValue}
     errorMessage={errorMessage}
     controlMap={controlMap}
   >
-    {({ renderCellError, renderCellInput }) => <Fragment>
+    {({ renderCellError, renderCellInput }) => <table id={id}>
       <thead>
         <tr className="header-one">
           <th>Location</th>
@@ -86,8 +87,8 @@ const RespiratoryClinicAppointmentsTable = props => {
           )}
         </tr>       
       </tbody>
-    </Fragment>}
-  </Table>
+    </table>}
+  </TableHelper>
 }
 
 export default RespiratoryClinicAppointmentsTable

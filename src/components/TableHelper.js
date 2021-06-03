@@ -1,6 +1,6 @@
 import * as React from 'react'
 import classNames from 'classnames'
-import { swapKeysWithValues } from './../util/misc'
+import { swapKeysWithValues } from '../util/misc'
 
 const { useRef } = React
 
@@ -12,9 +12,11 @@ const { useRef } = React
  * messages.
  * @property {object} value This is a hash map of control keys to values.
  *
+ * A component that passes down some helper methods for rendering table
+ * input fields and error fields.
  * @param {EditableTableProps} props
  */
-const EditableTable = props => {
+const TableHelper = props => {
 
   const {
     onChangeValue,
@@ -22,8 +24,12 @@ const EditableTable = props => {
     errorMessage,
     value: defaultValue,
     children,
-    id,
   } = props
+
+  if (!controlMap){
+    debugger
+    throw new Error('\'controlMap\' is required.')
+  }
 
   const value = useRef(defaultValue || {}).current
 
@@ -90,9 +96,7 @@ const EditableTable = props => {
     renderCellError,
     controlLabelHashmap: cLHash,
   }
-  return <table id={id}>
-    {children(childProps)}
-  </table>
+  return children(childProps)
 }
 
-export default EditableTable
+export default TableHelper

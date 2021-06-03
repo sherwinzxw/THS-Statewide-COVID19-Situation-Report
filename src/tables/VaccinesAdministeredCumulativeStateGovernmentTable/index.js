@@ -1,10 +1,9 @@
 import * as React from 'react'
-import { EditableTable as Table } from '../../components'
+import { TableHelper } from '../../components'
 import { swapKeysWithValues, formatNumber, parseIntOrZero } from '../../util/misc'
 import controlMap from './controlMap'
 
-const { Fragment, useState, useEffect } = React
-
+const { useState, useEffect } = React
 
 const controlsLabelMap = swapKeysWithValues(controlMap)
 
@@ -18,6 +17,7 @@ const VaccinesAdministeredCumulativeTable = props => {
     value: defaultValue, 
     onChangeValue: parentOnChangeValue,
     errorMessage,
+    id,
   } = props
 
   const [value, setValue] = useState(defaultValue)
@@ -30,13 +30,13 @@ const VaccinesAdministeredCumulativeTable = props => {
     setValue(defaultValue)
   }, [defaultValue])
 
-  return <Table 
+  return <TableHelper 
     value={value} 
     onChangeValue={onChangeValue}
     errorMessage={errorMessage}
     controlMap={controlMap}
   >
-    {({ renderCellError, renderCellInput }) => <Fragment>
+    {({ renderCellError, renderCellInput }) => <table id={id}>
       <thead>
         <tr className="header-one">
           <th></th>
@@ -77,8 +77,8 @@ const VaccinesAdministeredCumulativeTable = props => {
           {renderCellError('AstraZeneca Second Doses')}
         </tr>
       </tbody>
-    </Fragment>}
-  </Table>
+    </table>}
+  </TableHelper>
 }
 
 export default VaccinesAdministeredCumulativeTable

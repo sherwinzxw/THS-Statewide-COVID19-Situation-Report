@@ -64,7 +64,7 @@ export function addDays(date, days){
   return newDate
 }
 
-function addMs(date, ms){
+export function addMs(date, ms){
   var newDate = new Date(date)
   newDate.setMilliseconds(newDate.getMilliseconds() + ms)
   return newDate

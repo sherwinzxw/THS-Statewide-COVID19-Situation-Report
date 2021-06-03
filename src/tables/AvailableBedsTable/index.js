@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { EditableTable as Table } from '../../components'
+import { TableHelper } from '../../components'
 import { swapKeysWithValues, formatNumber, parseIntOrZero } from './../../util/misc'
 import controlMap from './controlMap'
 
@@ -19,6 +19,7 @@ const AvailableBedsTable = props => {
     value: defaultValue, 
     onChangeValue: parentOnChangeValue,
     errorMessage,
+    id,
   } = props
 
   const [value, setValue] = useState(defaultValue)
@@ -72,13 +73,13 @@ const AvailableBedsTable = props => {
     </div>
   }
 
-  return <Table 
+  return <TableHelper 
     value={value} 
     onChangeValue={onChangeValue}
     errorMessage={errorMessage}
     controlMap={controlMap}
   >
-    {({ renderCellError, renderCellInput }) => <Fragment>
+    {({ renderCellError, renderCellInput }) => <table id={id}>
     <thead>
         <tr className="header-one">
           <th></th>
@@ -253,8 +254,8 @@ const AvailableBedsTable = props => {
           </td>
         </tr>
       </tfoot>
-    </Fragment>}
-  </Table>
+    </table>}
+  </TableHelper>
 }
 
 export default AvailableBedsTable

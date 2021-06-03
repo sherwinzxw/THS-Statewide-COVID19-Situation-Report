@@ -1,5 +1,5 @@
 import * as React from 'react'
-import Table from '../EditableTable'
+import TableHelper from '../TableHelper'
 import { 
   mapRollingCalendarInputToTableInput,
   mapTableInputToRollingCalendarInput,
@@ -18,20 +18,55 @@ const RollingCalendar = props => {
 
   const { 
     onChangeValue, 
-    value: defaultValue, 
-    id, 
+    value, 
     header,
   } = props
 
-  var now = new Date()
-  var nowStr = formatToLocalDateString(now)
   
-  validateRollingCalValue(defaultValue)
+  
+  const now = new Date()
 
-  const [value, setValue] = useState(defaultValue ?
-    mapRollingCalendarInputToTableInput({ input: defaultValue || [], now: nowStr }) :
-    {})
   
+  
+  
+
+  return <table>
+    <thead>
+      <tr>
+        <th />
+        <th>{formatDate(addDays(now, -6))}</th>
+        <th>{formatDate(addDays(now, -5))}</th>
+        <th>{formatDate(addDays(now, -4))}</th>
+        <th>{formatDate(addDays(now, -3))}</th>
+        <th>{formatDate(addDays(now, -2))}</th>
+        <th>{formatDate(addDays(now, -1))}</th>
+        <th>{formatDate(now)}</th>
+        <th>Total</th>
+      </tr>
+    </thead>
+    <tbody>
+      <RollingRow
+        value={value} 
+        onChangeValue={onChangeValue}
+        label={header}
+      />
+    </tbody>
+  </table>
+}
+
+export default RollingCalendar
+
+
+
+const RollingRow = props => {
+
+  const { 
+    value: defaultValue, 
+    onChangeValue,
+    label,
+  } = props
+
+  validateRollingCalValue(defaultValue)
 
   const controlMap = {
     'Today -6': 'Today -6',
@@ -43,6 +78,10 @@ const RollingCalendar = props => {
     'Today': 'Today',
   }
 
+
+  var now = new Date()
+  var nowStr = formatToLocalDateString(now)
+
   const onTableChangeValue = values => {
     setValue(values)
     onChangeValue(mapTableInputToRollingCalendarInput({ 
@@ -51,66 +90,48 @@ const RollingCalendar = props => {
     }))
   }
 
-  return <Table
+  const [value, setValue] = useState(defaultValue ?
+    mapRollingCalendarInputToTableInput({ input: defaultValue || [], now: nowStr }) :
+    {})
+  
+
+  return <TableHelper
     value={value} 
     onChangeValue={onTableChangeValue}
     errorMessage={{}}
     controlMap={controlMap}
-    id={id}
   >
-  {({ renderCellError, renderCellInput }) => <Fragment>
-      <thead>
-        <tr>
-          <th />
-          <th>{formatDate(addDays(now, -6))}</th>
-          <th>{formatDate(addDays(now, -5))}</th>
-          <th>{formatDate(addDays(now, -4))}</th>
-          <th>{formatDate(addDays(now, -3))}</th>
-          <th>{formatDate(addDays(now, -2))}</th>
-          <th>{formatDate(addDays(now, -1))}</th>
-          <th>{formatDate(now)}</th>
-          <th>Total</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td rowSpan={2}>{header}</td>
-          {renderCellInput('Today -6')}
-          {renderCellInput('Today -5')}
-          {renderCellInput('Today -4')}
-          {renderCellInput('Today -3')}
-          {renderCellInput('Today -2')}
-          {renderCellInput('Today -1')}
-          {renderCellInput('Today')}
-          <td rowSpan={2}>
-            {formatNumber(
-              parseIntOrZero(value['Today -6']) +
-              parseIntOrZero(value['Today -5']) +
-              parseIntOrZero(value['Today -4']) +
-              parseIntOrZero(value['Today -3']) +
-              parseIntOrZero(value['Today -2']) +
-              parseIntOrZero(value['Today -1']) +
-              parseIntOrZero(value['Today'])
-            )}
-          </td>
-        </tr>
-        <tr>
-          {renderCellError('Today -6')}
-          {renderCellError('Today -5')}
-          {renderCellError('Today -4')}
-          {renderCellError('Today -3')}
-          {renderCellError('Today -2')}
-          {renderCellError('Today -1')}
-          {renderCellError('Today')}
-        </tr>
-      </tbody>
+    {({ renderCellError, renderCellInput }) => <Fragment>
+      <tr>
+        <td rowSpan={2}>{label}</td>
+        {renderCellInput('Today -6')}
+        {renderCellInput('Today -5')}
+        {renderCellInput('Today -4')}
+        {renderCellInput('Today -3')}
+        {renderCellInput('Today -2')}
+        {renderCellInput('Today -1')}
+        {renderCellInput('Today')}
+        <td rowSpan={2}>
+          {formatNumber(
+            parseIntOrZero(value['Today -6']) +
+            parseIntOrZero(value['Today -5']) +
+            parseIntOrZero(value['Today -4']) +
+            parseIntOrZero(value['Today -3']) +
+            parseIntOrZero(value['Today -2']) +
+            parseIntOrZero(value['Today -1']) +
+            parseIntOrZero(value['Today'])
+          )}
+        </td>
+      </tr>
+      <tr>
+        {renderCellError('Today -6')}
+        {renderCellError('Today -5')}
+        {renderCellError('Today -4')}
+        {renderCellError('Today -3')}
+        {renderCellError('Today -2')}
+        {renderCellError('Today -1')}
+        {renderCellError('Today')}
+      </tr>
     </Fragment>}
-  </Table>
+  </TableHelper>
 }
-
-export default RollingCalendar
-
-
-
-
-

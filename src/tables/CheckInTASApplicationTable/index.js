@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { EditableTable as Table } from '../../components'
+import { TableHelper } from '../../components'
 import { swapKeysWithValues, formatNumber, parseIntOrZero } from '../../util/misc'
 import controlMap from './controlMap'
 
@@ -18,6 +18,7 @@ const CheckInTASApplicationTable = props => {
     value: defaultValue, 
     onChangeValue: parentOnChangeValue,
     errorMessage,
+    id,
   } = props
 
   const [value, setValue] = useState(defaultValue)
@@ -30,13 +31,13 @@ const CheckInTASApplicationTable = props => {
     setValue(defaultValue)
   }, [defaultValue])
 
-  return <Table 
+  return <TableHelper 
     value={value} 
     onChangeValue={onChangeValue}
     errorMessage={errorMessage}
     controlMap={controlMap}
   >
-    {({ renderCellError, renderCellInput }) => <Fragment>
+    {({ renderCellError, renderCellInput }) => <table id={id}>
       <tbody>
         <tr>
           <td rowSpan={2}>Total number of registered venues</td>
@@ -60,8 +61,8 @@ const CheckInTASApplicationTable = props => {
           {renderCellError('Welcome pack sent in the past week')}
         </tr>
       </tbody>
-    </Fragment>}
-  </Table>
+    </table>}
+  </TableHelper>
 }
 
 export default CheckInTASApplicationTable
