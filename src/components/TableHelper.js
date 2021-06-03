@@ -54,6 +54,17 @@ const TableHelper = props => {
     onChangeValue({ ...value})
   }
 
+  const onFocus = (e) => {
+    //setTimeout(() => {
+      var range = document.createRange()
+      range.selectNodeContents(e.target)
+      //range.collapse(false)
+      var selection = window.getSelection()
+      selection.removeAllRanges()
+      selection.addRange(range)
+    //}, 4)
+  }
+
   const renderCellInput = (controlLabel, props = {}) => {
     const { cellType, ...otherProps } = props
     var key = cLHash[controlLabel]
@@ -75,6 +86,7 @@ const TableHelper = props => {
       key,
       rowSpan: errorMessage[key] ? 1 : 2,
       id: key,
+      onFocus: onFocus.bind(this),
       ...otherProps
     })
   }
