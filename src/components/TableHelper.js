@@ -40,7 +40,11 @@ const TableHelper = props => {
     // html element and the browser will do the formatting to handle the paste
     // but this extracts only the text content and replaces the input with
     // only that.
+    
     var inputValue = e.target.innerText
+    // Replace new lines because they can't be rendered correctly without
+    // <pre tags
+    inputValue = inputValue.replace(/\n/g, '')
     e.target.innerText = inputValue
 
     // This will remove the cursor to the end of the pasted content

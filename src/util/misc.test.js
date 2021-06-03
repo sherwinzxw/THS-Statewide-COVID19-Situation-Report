@@ -134,6 +134,10 @@ describe('misc', () => {
       var result = methods.parseIntOrZero('q03s')
       expect(result).toBe(0)
     })
+    it('should still parse a number with errounous whitespace', () => {
+      var result = methods.parseIntOrZero('345\n')
+      expect(result).toBe(345)
+    })
   })
 
   describe('#padZero', () => {
