@@ -107,6 +107,37 @@ describe('RollingCalendar#util', () => {
         'Day': '',
       })
     })
+
+    it('should get last weeks values', () => {
+      var input = [
+        {"value":"9","effectiveFrom":"2021-05-29T00:00:00","effectiveTo":"2021-05-30T00:00:00"},
+        {"value":"9","effectiveFrom":"2021-05-30T00:00:00","effectiveTo":"2021-05-31T00:00:00"},
+        {"value":"9","effectiveFrom":"2021-05-31T00:00:00","effectiveTo":"2021-06-01T00:00:00"},
+        {"value":"9","effectiveFrom":"2021-06-01T00:00:00","effectiveTo":"2021-06-02T00:00:00"},
+        {"value":"9","effectiveFrom":"2021-06-02T00:00:00","effectiveTo":"2021-06-03T00:00:00"},
+        {"value":"9","effectiveFrom":"2021-06-03T00:00:00","effectiveTo":"2021-06-04T00:00:00"},
+        {"value":"2","effectiveFrom":"2021-06-04T00:00:00","effectiveTo":"2021-06-05T00:00:00"},
+        {"value":"10","effectiveFrom":"2021-05-22T00:00:00","effectiveTo":"2021-05-23T00:00:00"},
+        {"value":"9","effectiveFrom":"2021-05-23T00:00:00","effectiveTo":"2021-05-24T00:00:00"},
+        {"value":"9","effectiveFrom":"2021-05-24T00:00:00","effectiveTo":"2021-05-25T00:00:00"},
+        {"value":"5","effectiveFrom":"2021-05-25T00:00:00","effectiveTo":"2021-05-26T00:00:00"},
+        {"value":"9","effectiveFrom":"2021-05-26T00:00:00","effectiveTo":"2021-05-27T00:00:00"},
+        {"value":"9","effectiveFrom":"2021-05-27T00:00:00","effectiveTo":"2021-05-28T00:00:00"},
+        {"value":"11","effectiveFrom":"2021-05-28T00:00:00","effectiveTo":"2021-05-29T00:00:00"}
+      ]
+      var dayStr = '2021-05-28 00:00:00.000'
+
+      var result = methods.mapRollingCalendarInputToTableInput({ input, dayStr })
+      expect(result).toEqual({
+        'Day -6': '10',
+        'Day -5': '9',
+        'Day -4': '9',
+        'Day -3': '5',
+        'Day -2': '9',
+        'Day -1': '9',
+        'Day': '11',
+      })
+    })
   })
 
   describe('#mapTableInputToRollingCalendarInput', () => {
@@ -214,6 +245,62 @@ describe('RollingCalendar#util', () => {
           "value": '',
           "effectiveFrom": "2021-05-17 00:00:00.000",
           "effectiveTo": "2021-05-17 23:59:59.999"
+        }
+      ])
+    })
+
+    it('should get last weeks values', () => {
+
+      var tableInput = {
+        'Day -6': '10',
+        'Day -5': '9',
+        'Day -4': '9',
+        'Day -3': '5',
+        'Day -2': '9',
+        'Day -1': '9',
+        'Day': '11',
+      }
+      var dayStr = '2021-05-28 00:00:00.000'
+
+      var result = methods.mapTableInputToRollingCalendarInput({ 
+        input: tableInput,
+        dayStr,
+      })
+      expect(result).toEqual([
+        {
+          "value": "10",
+          "effectiveFrom": "2021-05-22 00:00:00.000",
+          "effectiveTo": "2021-05-22 23:59:59.999"
+        },
+        {
+          "value": "9",
+          "effectiveFrom": "2021-05-23 00:00:00.000",
+          "effectiveTo": "2021-05-23 23:59:59.999"
+        },
+        {
+          "value": "9",
+          "effectiveFrom": "2021-05-24 00:00:00.000",
+          "effectiveTo": "2021-05-24 23:59:59.999"
+        },
+        {
+          "value": "5",
+          "effectiveFrom": "2021-05-25 00:00:00.000",
+          "effectiveTo": "2021-05-25 23:59:59.999"
+        },
+        {
+          "value": "9",
+          "effectiveFrom": "2021-05-26 00:00:00.000",
+          "effectiveTo": "2021-05-26 23:59:59.999"
+        },
+        {
+          "value": "9",
+          "effectiveFrom": "2021-05-27 00:00:00.000",
+          "effectiveTo": "2021-05-27 23:59:59.999"
+        },
+        {
+          "value": "11",
+          "effectiveFrom": "2021-05-28 00:00:00.000",
+          "effectiveTo": "2021-05-28 23:59:59.999"
         }
       ])
     })

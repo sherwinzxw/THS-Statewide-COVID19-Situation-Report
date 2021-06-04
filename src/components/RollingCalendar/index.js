@@ -18,18 +18,38 @@ const { useRef, useState, Fragment, useEffect } = React
 const RollingCalendar = props => {
 
   const { 
-    onChangeValue, 
-    value, 
+    onChangeValue: parentOnChangeValue, 
+    value: defaultValue, 
     header,
+    id,
   } = props
+
   
   const now = getStartOfDay(new Date()).valueOf()
   const [weekIndex, setWeekIndex] = useState(0)
+  const [renderHash, setRenderHash] = useState()
+  const valueRef = useRef(defaultValue || {})
+  const value = valueRef.current
+
+  const onChangeValue = (value) => {
+    // Replace each item that got updated
+    var newArray = valueRef.current.slice(0)
+    value.forEach(dto => {
+      var match = newArray.find(dto2 => 
+        formatToLocalDateString(new Date(dto.effectiveFrom)) == 
+        formatToLocalDateString(new Date(dto2.effectiveFrom)))
+      if (!match)
+        newArray.push(value)
+      match.value = dto.value
+    })
+    valueRef.current = newArray
+    parentOnChangeValue(valueRef.current)
+  }
 
   const viewLastWeek = () => setWeekIndex(-1)
   const viewThisWeek = () => setWeekIndex(0)
 
-  return <table>
+  return <table id={id}>
     <thead>
       <tr>
         <th />
@@ -49,7 +69,7 @@ const RollingCalendar = props => {
       </tr>
     </thead>
     <tbody>
-      {weekIndex == 0 ? <RollingRow
+      {(weekIndex == 0) ? <RollingRow
         key="this-week"
         value={value} 
         onChangeValue={onChangeValue}
@@ -59,7 +79,7 @@ const RollingCalendar = props => {
         value={value} 
         onChangeValue={onChangeValue}
         label={header}
-        dateEnd={(new Date(addDays(now, 7 * weekIndex))).valueOf()}
+        dateEnd={(new Date(addDays(now, - 7))).valueOf()}
       />}
     </tbody>
   </table>

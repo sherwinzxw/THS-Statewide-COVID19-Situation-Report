@@ -138,6 +138,10 @@ describe('misc', () => {
       var result = methods.parseIntOrZero('345\n')
       expect(result).toBe(345)
     })
+    it('should convert null to 0', () => {
+      var result = methods.parseIntOrZero(null)
+      expect(result).toBe(0)
+    })
   })
 
   describe('#padZero', () => {

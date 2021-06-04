@@ -204,7 +204,7 @@ export const formatNumber = function(num){
 }
 
 export const parseIntOrZero = function(str){
-  str = str.replace(/\s+/g, '')
+  str = (str || '').replace(/\s+/g, '')
   if (/[^0-9]/.test(str))
     return 0
   return Number(str)

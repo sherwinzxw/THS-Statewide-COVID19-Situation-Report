@@ -15,6 +15,8 @@ export const mapRollingCalendarInputToTableInput = (params) => {
   var thisDayStart = new Date(day.getFullYear(), day.getMonth(), day.getDate())
   var resultObj = {}
   var inputClone = input.slice(0)
+  // Sort by effectiveFrom
+  inputClone.sort(sortByEffectiveFrom)
   var dayIndex = 0
   do {
 
@@ -36,6 +38,12 @@ export const mapRollingCalendarInputToTableInput = (params) => {
     dayIndex--
   } while (dayIndex > -7);
   return resultObj
+}
+
+function sortByEffectiveFrom(a, b){
+  if (a.effectiveFrom < b.effectiveFrom) return -1
+  if (a.effectiveFrom > b.effectiveFrom) return 1
+  return 0
 }
 
 export const mapTableInputToRollingCalendarInput = (params) => {
