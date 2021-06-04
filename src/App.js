@@ -55,6 +55,7 @@ const App = props => {
             text: view.description || `Form ${index + 1}`,
             type: "header-five",
             key: viewId,
+            timestamp: view.view_timestamp
           })
           
           return {
