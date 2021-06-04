@@ -19,6 +19,7 @@ import VaccinesAdministeredCumulativeTable from '../../tables/VaccinesAdminister
 import CheckInTASApplicationTable from '../../tables/CheckInTASApplicationTable'
 import RollingCalendar, { RollingCalendarMulti } from '../../components/RollingCalendar'
 import RespiratoryClinicPresentationsTable from '../../tables/RespiratoryClinicPresentationsTable'
+import { formatToReadableDateTime } from './../../util/date'
 
 const Control = props => {
   const { 
@@ -28,6 +29,7 @@ const Control = props => {
     onChangeValue,
     value,
     id,
+    timestamp,
     //receiptStatus,
     //userRole,
     ...controlProps
@@ -39,7 +41,16 @@ const Control = props => {
 
   switch(type){
     case 'header-two': return <h2>{text}</h2>
-    case 'header-five': return <><h5>{text} <span class="small">(data last updated at {timestamp})</span></h5><hr /></>
+    case 'header-five': return <>
+      <h5>
+        {text} 
+        {timestamp ? 
+          <span class="small timestamp-note">
+            {' '}(data last updated at {formatToReadableDateTime(new Date(timestamp))})
+          </span> : null}
+      </h5>
+      <hr />
+    </>
     case 'Number': return <NumberInput 
       header={header}
       onChange={onChangeValue}

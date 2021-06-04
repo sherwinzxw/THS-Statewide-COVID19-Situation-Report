@@ -365,3 +365,10 @@ td.errorMessage {
   padding: 5px;
   display: inline-block;
 }
+
+.timestamp-note {
+  color: grey;
+  font-size: 10px;
+  font-weight: normal;
+  font-style: italic;
+}

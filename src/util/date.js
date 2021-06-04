@@ -73,3 +73,61 @@ export function addMs(date, ms){
 export function getStartOfDay(date){
   return new Date(date.getFullYear(), date.getMonth(), date.getDate())
 }
+
+/**
+ * Formats a date object into a readable date string.
+ * @param {Date} date
+ * @returns {string}
+ */
+export function formatToReadableDateTime(d){
+  return formatToReadableDate(d) + ' ' + formatToReadableTime(d)
+}
+
+/**
+ * Formats a date object into a readable date string. e.g 04/06/2021
+ * @param {Date} date
+ * @returns {string}
+ */
+export function formatToReadableDate(d){
+  if (d instanceof Date == false || isNaN(d))
+    throw new Error('Date is invalid.')
+  
+  return padZero(d.getDate()) + '/' + 
+    padZero(d.getMonth() + 1) + '/' + 
+    d.getFullYear()
+}
+
+
+/**
+ * Get a date's time in a readable format eg. 11AM, 1PM
+ * If its noon it will return 'Noon' and 'Midnight' for 12AM so avoid
+ * ambiguity between AM and PM
+ * @param {date} date
+ * @param {boolean} unambiguous12hour Defaults to true, when specified shows
+ * 12:00 as Noon and 00:00 as midnight else sticks to 12:00 and 00:00
+ * @returns {string}
+ */
+export function formatToReadableTime(date, unambiguous12hour = true){
+  if (date instanceof Date == false || isNaN(date))
+    throw new Error('Date is invalid.')
+  
+  var hours = date.getHours()
+  var minutes = date.getMinutes()
+  var meridiem = hours / 12 >= 1 ? 'PM' : 'AM'
+  if (minutes == 0) {
+    if (unambiguous12hour) {
+      if (hours == 0) return 'Midnight'
+      if (hours == 12) return 'Noon'
+    }
+    if (meridiem == 'PM') {
+      hours = hours - 12
+      return hours + 'PM'
+    }
+    return hours + 'AM'
+  }
+  // Format the minutes to 2dp
+  minutes += ''
+  if (minutes.length == 1) minutes = '0' + minutes
+
+  return hours + '.' + minutes + meridiem
+}

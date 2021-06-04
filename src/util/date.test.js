@@ -41,4 +41,20 @@ describe('#date', () => {
     })
   })
 
+  describe('formatToReadableTime()', () => {
+    it('should diplay the correct PM for noon', () => {
+      var date = new Date('2018-07-10T12:45:22')
+
+      var result = methods.formatToReadableTime(date)
+      expect(result).toBe('12.45PM')
+    })
+
+    it('should pad the minutes', () => {
+      var date = new Date('2018-07-10T12:05:22')
+
+      var result = methods.formatToReadableTime(date)
+      expect(result).toBe('12.05PM')
+    })
+  })
+
 })
