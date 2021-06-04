@@ -3,6 +3,7 @@ import {
   TextInput,
   NumberInput,
   RichTextArea,
+  MultilineTextInput,
 } from './../../components'
 import ConfirmedCasesTable from '../../tables/ConfirmedCasesTable'
 import HealthECCDailySnapshotTable from '../../tables/HealthECCDailySnapshotTable'
@@ -60,12 +61,11 @@ const Control = props => {
       id={id}
       {...controlProps}
     />
-    case 'Textarea': return <TextInput 
+    case 'Textarea': return <MultilineTextInput 
       header={header}
       onChangeText={onChangeValue}
       value={value}
       id={id}
-      multiline
       {...controlProps}
     />
     case 'DataLabel': return <p id={id}>

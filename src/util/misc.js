@@ -227,3 +227,18 @@ export function padZeroFromEnd(str, length = 2){
   }
   return str
 }
+
+/**
+ * Check if an element is a parent of another element
+ * @param {Element} ele The element in question
+ * @param {Element} parent Check whether or not this is a parent of the
+ * element.
+ * @returns {boolean}
+ */
+export const isParentElement = function (ele, parent) {
+  do {
+    if (ele.parentElement == parent) return true
+    ele = ele.parentElement
+  } while (ele.parentElement && ele.parentElement != document.body)
+  return false
+}
