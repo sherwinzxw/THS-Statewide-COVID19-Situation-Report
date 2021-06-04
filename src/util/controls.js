@@ -185,7 +185,12 @@ const rollingCalendarGroups = [
     'Control_B85DE61A-4889-48A4-AA80-77C02E067BEF': 'Best Western',
     'Control_08B01F7A-1837-4909-B9A5-6F5F849ACB84': 'IBIS Hotel',
     'Control_CDED5C59-4DF2-4CC0-9F66-AFF7719DA425': 'Travel Lodge Airport',
-  }
+  },
+  {
+    'Control_127DB1A4-8CD6-496C-941A-A19C4F133FB1': 'Compliance - Saliva and PCR Tests - Tests conducted',
+    'Control_9AE615FA-DAE8-43F5-986C-415C039E8042': 'Compliance - Saliva and PCR Tests - Onsite >30 minutes',
+  },
+  
 ]
 
 export const combineRollingCalendarControls = (props) => {

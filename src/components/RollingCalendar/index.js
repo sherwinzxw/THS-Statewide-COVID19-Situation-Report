@@ -199,6 +199,7 @@ export const RollingRow = props => {
       }
     })
     valueRef.current = newArray
+    setRenderHash((new Date()).valueOf())
     onChangeValue(valueRef.current)
 
   }
@@ -207,8 +208,10 @@ export const RollingRow = props => {
   const valueRef = useRef(defaultValue || [])
   const value = valueRef.current
 
+  const tableValue = mapRollingCalendarInputToTableInput({ input: value, dayStr })
+
   return <TableHelper
-    value={mapRollingCalendarInputToTableInput({ input: value, dayStr })} 
+    value={tableValue} 
     onChangeValue={onTableChangeValue}
     errorMessage={{}}
     controlMap={controlMap}
@@ -226,13 +229,13 @@ export const RollingRow = props => {
         {renderCellInput('Day')}
         <td rowSpan={2}>
           {formatNumber(
-            parseIntOrZero(value['Day -6']) +
-            parseIntOrZero(value['Day -5']) +
-            parseIntOrZero(value['Day -4']) +
-            parseIntOrZero(value['Day -3']) +
-            parseIntOrZero(value['Day -2']) +
-            parseIntOrZero(value['Day -1']) +
-            parseIntOrZero(value['Day'])
+            parseIntOrZero(tableValue['Day -6']) +
+            parseIntOrZero(tableValue['Day -5']) +
+            parseIntOrZero(tableValue['Day -4']) +
+            parseIntOrZero(tableValue['Day -3']) +
+            parseIntOrZero(tableValue['Day -2']) +
+            parseIntOrZero(tableValue['Day -1']) +
+            parseIntOrZero(tableValue['Day'])
           )}
         </td>
       </tr>
