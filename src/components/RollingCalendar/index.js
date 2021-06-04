@@ -70,23 +70,88 @@ const RollingCalendar = props => {
       </tr>
     </thead>
     <tbody>
-      {(weekIndex == 0) ? <RollingRow
-        key="this-week"
+      <RollingRow
+        key={(weekIndex == 0) ? "this-week" : "last-week"}
         value={value} 
         onChangeValue={onChangeValue}
         label={header}
-      />  : <RollingRow
-        key="last-week"
-        value={value} 
-        onChangeValue={onChangeValue}
-        label={header}
-        dateEnd={(new Date(addDays(now, - 7))).valueOf()}
-      />}
+        dateEnd={(weekIndex == 0) ? undefined : (new Date(addDays(now, - 7))).valueOf()}
+      />
     </tbody>
   </table>
 }
 
 export default RollingCalendar
+
+export const RollingCalendarMulti = props => {
+  const { 
+    onChangeValue: parentOnChangeValue, 
+    value: defaultValue, 
+    header,
+    id,
+  } = props
+
+  
+  const now = getStartOfDay(new Date()).valueOf()
+  const [weekIndex, setWeekIndex] = useState(0)
+  const [renderHash, setRenderHash] = useState()
+  const valueRef = useRef(defaultValue || {})
+  const value = valueRef.current
+
+  const onChangeValue = (controlKey, newValue) => {
+    valueRef.current = {
+      ...value,
+      [controlKey]: newValue,
+    }
+    parentOnChangeValue(valueRef.current)
+  }
+
+  const viewLastWeek = () => setWeekIndex(-1)
+  const viewThisWeek = () => setWeekIndex(0)
+
+  return <table id={id}>
+    <thead>
+      <tr>
+        <th style={{textAlign: 'right'}}>
+          {weekIndex == 0 ? 
+            <button 
+              className="RollingCalendarViewWeekButton" 
+              onClick={viewLastWeek}
+            >
+              ⬅️ View previous week
+            </button> : 
+            <button 
+              className="RollingCalendarViewWeekButton" 
+              onClick={viewThisWeek}
+            >
+              ➡️ View current week
+            </button>}
+          </th>
+        <th>
+          {formatDate(addDays(now, -6 + (7 * weekIndex)))}
+        </th>
+        <th>{formatDate(addDays(now, -5 + (7 * weekIndex)))}</th>
+        <th>{formatDate(addDays(now, -4 + (7 * weekIndex)))}</th>
+        <th>{formatDate(addDays(now, -3 + (7 * weekIndex)))}</th>
+        <th>{formatDate(addDays(now, -2 + (7 * weekIndex)))}</th>
+        <th>{formatDate(addDays(now, -1 + (7 * weekIndex)))}</th>
+        <th>{formatDate(addDays(now, 7 * weekIndex))}</th>
+        <th>Total</th>
+      </tr>
+    </thead>
+    <tbody>
+      {Object.entries(value).map(([controlId, value]) => {
+        return <RollingRow
+          key={controlId + '-' + ((weekIndex == 0) ? "this-week" : "last-week")}
+          value={value} 
+          onChangeValue={(newValue) => onChangeValue(controlId, newValue)}
+          label={header[controlId]}
+          dateEnd={(weekIndex == 0) ? undefined : (new Date(addDays(now, - 7))).valueOf()}
+        />
+      })}
+    </tbody>
+  </table>
+}
 
 export const RollingRow = props => {
 
@@ -126,9 +191,12 @@ export const RollingRow = props => {
       var match = newArray.find(dto2 => 
         formatToLocalDateString(new Date(dto.effectiveFrom)) == 
         formatToLocalDateString(new Date(dto2.effectiveFrom)))
-      if (!match)
-        newArray.push(value)
-      match.value = dto.value
+      if (!match){
+        if (dto.value)
+          newArray.push(dto)
+      } else {
+        match.value = dto.value
+      }
     })
     valueRef.current = newArray
     onChangeValue(valueRef.current)

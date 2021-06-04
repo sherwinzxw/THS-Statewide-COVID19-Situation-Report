@@ -14,6 +14,7 @@ import {
   combineVaccinesAdministeredCumulativeControlMap,
   combineCheckInTASApplicationControlMap,
   combineRespiratoryClinicPresentationsControlMap,
+  combineRollingCalendarControls,
 } from './../../util/controls'
 
 const Form = props => {
@@ -31,6 +32,7 @@ const Form = props => {
     combineVaccinesAdministeredCumulativeControlMap,
     combineCheckInTASApplicationControlMap,
     combineRespiratoryClinicPresentationsControlMap,
+    combineRollingCalendarControls,
   )(props)
 
   return <div className="Form" id={props.id}>

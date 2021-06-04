@@ -72,7 +72,7 @@ export const groupControls = ({ controlMap, newKey }) => (params) => {
 
   layout = layout.slice(0)
 
-  var valuesMap = {}, errorsMap = {}
+  var valuesMap = {}, errorsMap = {}, headersMap = {}
   layout = layout.filter(control => {
     // Hijack this loop to create a hashmap of values too but only if the
     // control is in our control map
@@ -80,6 +80,7 @@ export const groupControls = ({ controlMap, newKey }) => (params) => {
     if (isInMap){
       valuesMap[control.key] = control.value
       errorsMap[control.key] = control.errorMessage
+      headersMap[control.key] = control.header
     }
     // Return the untouched layout
     return !isInMap
@@ -91,6 +92,7 @@ export const groupControls = ({ controlMap, newKey }) => (params) => {
     key: newKey,
     value: valuesMap,
     errorMessage: errorsMap,
+    header: headersMap,
   })
 
   let originalOnChangeValue = onChangeValue
@@ -177,6 +179,23 @@ export const combineRespiratoryClinicPresentationsControlMap = groupControls({
   controlMap: respiratoryClinicPresentationsControlMap,
   newKey: 'RespiratoryClinicPresentations',
 })
+
+const rollingCalendarGroups = [
+  {
+    'Control_B85DE61A-4889-48A4-AA80-77C02E067BEF': 'Best Western',
+    'Control_08B01F7A-1837-4909-B9A5-6F5F849ACB84': 'IBIS Hotel',
+    'Control_CDED5C59-4DF2-4CC0-9F66-AFF7719DA425': 'Travel Lodge Airport',
+  }
+]
+
+export const combineRollingCalendarControls = (props) => {
+  return rollingCalendarGroups.reduce((existingProps, controlMap) => {
+    return groupControls({
+      controlMap,
+      newKey: 'RollingCalendarMulti',
+    })(existingProps)
+  }, props)
+}
 
 
 export const RECEIPT_STATUS_ENUM = {
