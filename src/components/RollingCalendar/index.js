@@ -52,11 +52,22 @@ const RollingCalendar = props => {
   return <table id={id}>
     <thead>
       <tr>
-        <th />
-        <th>
+        <th style={{textAlign: 'right'}}>
           {weekIndex == 0 ? 
-            <button onClick={viewLastWeek}>⬅️</button> : 
-            <button onClick={viewThisWeek}>➡️</button>}
+            <button 
+              className="RollingCalendarViewWeekButton" 
+              onClick={viewLastWeek}
+            >
+              ⬅️ View previous week
+            </button> : 
+            <button 
+              className="RollingCalendarViewWeekButton" 
+              onClick={viewThisWeek}
+            >
+              ➡️ View current week
+            </button>}
+          </th>
+        <th>
           {formatDate(addDays(now, -6 + (7 * weekIndex)))}
         </th>
         <th>{formatDate(addDays(now, -5 + (7 * weekIndex)))}</th>
