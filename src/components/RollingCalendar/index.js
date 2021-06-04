@@ -32,17 +32,7 @@ const RollingCalendar = props => {
   const value = valueRef.current
 
   const onChangeValue = (value) => {
-    // Replace each item that got updated
-    var newArray = valueRef.current.slice(0)
-    value.forEach(dto => {
-      var match = newArray.find(dto2 => 
-        formatToLocalDateString(new Date(dto.effectiveFrom)) == 
-        formatToLocalDateString(new Date(dto2.effectiveFrom)))
-      if (!match)
-        newArray.push(value)
-      match.value = dto.value
-    })
-    valueRef.current = newArray
+    valueRef.current = value
     parentOnChangeValue(valueRef.current)
   }
 
@@ -123,23 +113,34 @@ export const RollingRow = props => {
   var day = dateEnd ? new Date(dateEnd) : new Date()
   var dayStr = formatToLocalDateString(day)
 
-  const onTableChangeValue = values => {
-    valueRef.current = values
-    setRenderHash(new Date())
-    onChangeValue(mapTableInputToRollingCalendarInput({ 
-      input: values, 
+  const onTableChangeValue = tableValues => {
+    
+    var updatedValues = mapTableInputToRollingCalendarInput({ 
+      input: tableValues, 
       dayStr,
-    }))
+    })
+
+    // Replace each item that got updated
+    var newArray = valueRef.current.slice(0)
+    updatedValues.forEach(dto => {
+      var match = newArray.find(dto2 => 
+        formatToLocalDateString(new Date(dto.effectiveFrom)) == 
+        formatToLocalDateString(new Date(dto2.effectiveFrom)))
+      if (!match)
+        newArray.push(value)
+      match.value = dto.value
+    })
+    valueRef.current = newArray
+    onChangeValue(valueRef.current)
+
   }
 
   const [renderHash, setRenderHash] = useState()
-  const valueRef = useRef(defaultValue ?
-    mapRollingCalendarInputToTableInput({ input: defaultValue || [], dayStr }) :
-    {})
+  const valueRef = useRef(defaultValue || [])
   const value = valueRef.current
 
   return <TableHelper
-    value={value} 
+    value={mapRollingCalendarInputToTableInput({ input: value, dayStr })} 
     onChangeValue={onTableChangeValue}
     errorMessage={{}}
     controlMap={controlMap}
