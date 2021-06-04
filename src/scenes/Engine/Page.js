@@ -205,22 +205,22 @@ const Page = props => {
     className={"Page"} 
     ref={pageRef}
   >
-    <Card title="Data Request Form">
-      <Button 
+    <Card title="COVID-19 Situation Report - Data Entry Form">
+      {/* <Button 
         title="Download CSV Import Template" 
         onPress={onExportCSV}
       />
       <br />
-      <br />
+      <br /> */}
       {layout.map(o => <Form 
         {...o} 
         onChangeValue={onChangeValue} 
         id={o.key}
         useRole={userRole}
       />)}
-      <div className="dropZone">
+      {/* <div className="dropZone">
         <div className="dropZoneInner" />
-      </div>
+      </div> */}
 
       <div className="actionButtons">
         <Button 
