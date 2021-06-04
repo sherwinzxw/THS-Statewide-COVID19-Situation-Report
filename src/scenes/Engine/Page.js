@@ -205,7 +205,7 @@ const Page = props => {
     className={"Page"} 
     ref={pageRef}
   >
-    <Card title="Data Request Form">
+    <Card title="COVID-19 Situation Report - Data Entry Form">
       {/* <Button 
         title="Download CSV Import Template" 
         onPress={onExportCSV}
