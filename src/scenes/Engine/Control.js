@@ -39,7 +39,7 @@ const Control = props => {
 
   switch(type){
     case 'header-two': return <h2>{text}</h2>
-    case 'header-five': return <><h5>{text}</h5><hr /></>
+    case 'header-five': return <><h5>{text} <span class="small">(data last updated at {timestamp})</span></h5><hr /></>
     case 'Number': return <NumberInput 
       header={header}
       onChange={onChangeValue}
