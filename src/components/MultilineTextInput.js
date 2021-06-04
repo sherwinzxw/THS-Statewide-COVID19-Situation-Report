@@ -93,6 +93,7 @@ const MultilineTextInput = props => {
     className={classNames({
       ['Control']: true,
       ['MultilineTextInput']: true,
+      ['col-12']: true,
       ['invalid']: invalid,
       [className || '']: true,
       ['SubmittedForApproval']: receiptStatus == RECEIPT_STATUS_ENUM.SUBMITTED_FOR_APPROVAL,
