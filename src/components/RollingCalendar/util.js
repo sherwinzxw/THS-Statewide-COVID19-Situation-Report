@@ -17,6 +17,14 @@ export const mapRollingCalendarInputToTableInput = (params) => {
   var inputClone = input.slice(0)
   // Sort by effectiveFrom
   inputClone.sort(sortByEffectiveFrom)
+  
+  // create array that contains all dates (object) that have value
+  var dateArr = [];
+  for (let i = 0; i < inputClone.length; i++) {
+    let effectiveFromDate = (inputClone[i].effectiveFrom);
+    dateArr.push(new Date(effectiveFromDate))
+  }
+  
   var dayIndex = 0
   do {
 
@@ -32,12 +40,16 @@ export const mapRollingCalendarInputToTableInput = (params) => {
     }
     if (!thisDayResult)
       thisDayResult = ''
-
-    resultObj['Day' + (dayIndex ? (' ' + dayIndex) : '')] = thisDayResult
+    if(isInDateArray(dateArr, thisDayStart))
+      resultObj['Day' + (dayIndex ? (' ' + dayIndex) : '')] = thisDayResult
     thisDayStart.setDate(thisDayStart.getDate() - 1)
     dayIndex--
   } while (dayIndex > -7);
   return resultObj
+}
+
+function isInDateArray(array, value) {
+  return !!array.find(item => { return item.getTime() == value.getTime() });
 }
 
 function sortByEffectiveFrom(a, b){
