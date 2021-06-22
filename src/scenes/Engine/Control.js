@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { 
+import {
   TextInput,
   NumberInput,
   RichTextArea,
@@ -13,6 +13,7 @@ import ReportVersionInformationTable from '../../tables/ReportVersionInformation
 import RespiratoryClinicAppointmentsTable from '../../tables/RespiratoryClinicAppointmentsTable'
 import EmergencyDepartmentPresentationsWithILITable from '../../tables/EmergencyDepartmentPresentationsWithILITable'
 import AvailableBedsTable from '../../tables/AvailableBedsTable'
+import VentilatorCapacityTable from '../../tables/VentilatorCapacityTable'
 import VaccinesAdministeredDailyStateGovernmentTable from '../../tables/VaccinesAdministeredDailyStateGovernmentTable'
 import VaccinesAdministeredCumulativeStateGovernmentTable from '../../tables/VaccinesAdministeredCumulativeStateGovernmentTable'
 import VaccinesAdministeredCumulativeTable from '../../tables/VaccinesAdministeredCumulativeTable'
@@ -22,9 +23,9 @@ import RespiratoryClinicPresentationsTable from '../../tables/RespiratoryClinicP
 import { formatToReadableDateTime } from './../../util/date'
 
 const Control = props => {
-  const { 
-    header, 
-    text, 
+  const {
+    header,
+    text,
     type,
     onChangeValue,
     value,
@@ -39,19 +40,19 @@ const Control = props => {
     debugger
   }*/
 
-  switch(type){
+  switch (type) {
     case 'header-two': return <h2>{text}</h2>
     case 'header-five': return <>
       <h5>
-        {text} 
-        {timestamp ? 
+        {text}
+        {timestamp ?
           <span class="small timestamp-note">
             {' '}(data last updated at {formatToReadableDateTime(new Date(timestamp))})
           </span> : null}
       </h5>
       <hr class="w-100" />
     </>
-    case 'Number': return <NumberInput 
+    case 'Number': return <NumberInput
       header={header}
       onChange={onChangeValue}
       value={value}
@@ -65,14 +66,14 @@ const Control = props => {
       id={id}
       {...controlProps}
     />
-    case 'Text': return <TextInput 
+    case 'Text': return <TextInput
       header={header}
       onChangeText={onChangeValue}
       value={value}
       id={id}
       {...controlProps}
     />
-    case 'Textarea': return <MultilineTextInput 
+    case 'Textarea': return <MultilineTextInput
       header={header}
       onChangeText={onChangeValue}
       value={value}
@@ -80,7 +81,7 @@ const Control = props => {
       {...controlProps}
     />
     case 'DataLabel': return <p id={id}>
-      <span style={{fontWeight: 'bold'}}>{header}</span>: {value}
+      <span style={{ fontWeight: 'bold' }}>{header}</span>: {value}
     </p>
     case 'ConfirmedCases': return <ConfirmedCasesTable
       header={header}
@@ -116,7 +117,7 @@ const Control = props => {
       value={value}
       id={id}
       {...controlProps}
-    />    
+    />
     case 'RespiratoryClinicAppointments': return <RespiratoryClinicAppointmentsTable
       header={header}
       onChangeValue={onChangeValue}
@@ -132,6 +133,13 @@ const Control = props => {
       {...controlProps}
     />
     case 'AvailableBeds': return <AvailableBedsTable
+      header={header}
+      onChangeValue={onChangeValue}
+      value={value}
+      id={id}
+      {...controlProps}
+    />
+    case 'VentilatorCapacityTable': return <VentilatorCapacityTable
       header={header}
       onChangeValue={onChangeValue}
       value={value}

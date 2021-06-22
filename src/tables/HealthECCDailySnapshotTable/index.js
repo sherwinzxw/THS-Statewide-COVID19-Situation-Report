@@ -49,7 +49,7 @@ const HealthECCDailySnapshotTable = props => {
     errorMessage={errorMessage}
     controlMap={controlMap}
   >
-    {({ renderCellError, renderCellInput }) => <div className="table-container col-12"><table id={id}>
+    {({ renderCellError, renderCellInput }) => <div className="table-container"><table id={id}>
       <thead>
         <tr className="header-one">
           <th colSpan={2}>New Cases</th>

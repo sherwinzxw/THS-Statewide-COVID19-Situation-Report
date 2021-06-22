@@ -39,7 +39,7 @@ const ConfirmedCasesTable = props => {
     errorMessage={errorMessage}
     controlMap={controlMap}
   >
-    {({ renderCellError, renderCellInput }) => <div className="table-container col-12"><table id={id}>
+    {({ renderCellError, renderCellInput }) => <div className="table-container"><table id={id}>
       <thead>
         <tr className="header-one">
           <th colSpan={3}>New cases in the last week</th>

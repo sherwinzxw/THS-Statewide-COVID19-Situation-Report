@@ -19,8 +19,8 @@ export const controlMap = {
  */
 const PersonsTestedTable = props => {
 
-  const { 
-    value: defaultValue, 
+  const {
+    value: defaultValue,
     onChangeValue: parentOnChangeValue,
     errorMessage,
     id,
@@ -36,13 +36,13 @@ const PersonsTestedTable = props => {
     setValue(defaultValue)
   }, [defaultValue])
 
-  return <TableHelper 
-    value={value} 
+  return <TableHelper
+    value={value}
     onChangeValue={onChangeValue}
     errorMessage={errorMessage}
     controlMap={controlMap}
   >
-    {({ renderCellError, renderCellInput }) => <div className="table-container col-12"><table id={id}>
+    {({ renderCellError, renderCellInput }) => <div className="table-container"><table id={id}>
       <thead>
         <tr className="header-one">
           <th>Symptoms</th>

@@ -52,7 +52,7 @@ const ReportVersionInformationTable = props => {
     controlMap={controlMap}
     
   >
-    {({ renderCellError, renderCellInput }) => <div className="table-container col-12"><table id={id}>
+    {({ renderCellError, renderCellInput }) => <div className="table-container"><table id={id}>
       <tbody>
         <tr>
           <th className="header-one" style={cellStyle}>Report number</th>

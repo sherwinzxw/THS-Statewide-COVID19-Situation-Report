@@ -79,7 +79,7 @@ const AvailableBedsTable = props => {
     errorMessage={errorMessage}
     controlMap={controlMap}
   >
-    {({ renderCellError, renderCellInput }) => <div className="table-container col-12">
+    {({ renderCellError, renderCellInput }) => <div className="table-container">
       <table id={id}>
         <thead>
           <tr className="header-one">
