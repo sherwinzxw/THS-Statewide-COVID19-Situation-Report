@@ -1,8 +1,8 @@
 import * as React from 'react'
 import Control from './Control'
-import { 
+import {
   combineConfirmedCasesControls,
-  combineHealthECCDailySnapshotControls, 
+  combineHealthECCDailySnapshotControls,
   combineStatewideRespiratoryClinicsCapacityControls,
   combinePersonsTestedControls,
   combineReportVersionInformationControls,
@@ -37,15 +37,15 @@ const Form = props => {
 
   return <div className="Form mb-5" id={props.id}>
     <div className="row">
-      {layout.map(o => <Control 
-        {...o} 
+      {layout.map(o => <div className="control-wrapper col-12"><Control
+        {...o}
         onChangeValue={v => {
           onChangeValue({ value: v, key: o.key })
         }}
         key={o.key}
         id={o.key}
         userRole={userRole}
-      />)}
+      /></div>)}
     </div>
   </div>
 }

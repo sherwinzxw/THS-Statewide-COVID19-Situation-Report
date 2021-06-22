@@ -42,7 +42,7 @@ const PersonsTestedTable = props => {
     errorMessage={errorMessage}
     controlMap={controlMap}
   >
-    {({ renderCellError, renderCellInput }) => <table id={id}>
+    {({ renderCellError, renderCellInput }) => <div className="table-container col-12"><table id={id}>
       <thead>
         <tr className="header-one">
           <th>Symptoms</th>
@@ -72,7 +72,7 @@ const PersonsTestedTable = props => {
           {renderCellError('Yes')}
         </tr>
       </tbody>
-    </table>}
+    </table></div>}
   </TableHelper>
 }
 

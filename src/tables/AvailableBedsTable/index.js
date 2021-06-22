@@ -15,8 +15,8 @@ const hospitalCodes = ['RHH', 'LGH', 'NWRH', 'MCH']
  */
 const AvailableBedsTable = props => {
 
-  const { 
-    value: defaultValue, 
+  const {
+    value: defaultValue,
     onChangeValue: parentOnChangeValue,
     errorMessage,
     id,
@@ -56,7 +56,7 @@ const AvailableBedsTable = props => {
   }
 
   const renderEditSpan = (label) => {
-    return <span 
+    return <span
       className="editableSpan"
       contentEditable
       onInput={onInput.bind(this, controlsLabelMap[label])}
@@ -73,188 +73,190 @@ const AvailableBedsTable = props => {
     </div>
   }
 
-  return <TableHelper 
-    value={value} 
+  return <TableHelper
+    value={value}
     onChangeValue={onChangeValue}
     errorMessage={errorMessage}
     controlMap={controlMap}
   >
-    {({ renderCellError, renderCellInput }) => <table id={id}>
-    <thead>
-        <tr className="header-one">
-          <th></th>
-          <th>ICU routine capacity</th>
-          <th>ICU extended capacity</th>
-          <th>Ventilators</th>
-          <th>Negative pressure rooms</th>
-          <th>Negative flow rooms</th>
-          <th>COVID-19 Isolation beds</th>
-        </tr>
-      </thead>
-      <tbody>
-        {hospitalCodes.map(hospitalCode => <Fragment>
+    {({ renderCellError, renderCellInput }) => <div className="table-container col-12">
+      <table id={id}>
+        <thead>
+          <tr className="header-one">
+            <th></th>
+            <th>ICU routine capacity</th>
+            <th>ICU extended capacity</th>
+            <th>Ventilators</th>
+            <th>Negative pressure rooms</th>
+            <th>Negative flow rooms</th>
+            <th>COVID-19 Isolation beds</th>
+          </tr>
+        </thead>
+        <tbody>
+          {hospitalCodes.map(hospitalCode => <Fragment>
+            <tr>
+              <td rowSpan={2}>{hospitalCode}</td>
+              <td rowSpan={2}>
+                <div>
+                  {renderEditSpan(`${hospitalCode} ICU routine capacity - being used`)}
+                  <span> / </span>
+                  {renderEditSpan(`${hospitalCode} ICU routine capacity`)}
+                </div>
+                {renderErrors(
+                  `${hospitalCode} ICU routine capacity - being used`,
+                  `${hospitalCode} ICU routine capacity`,
+                )}
+              </td>
+              {renderCellInput(`${hospitalCode} ICU extended capacity`)}
+              <td rowSpan={2}>
+                <div>
+                  {renderEditSpan(`${hospitalCode} Ventilators - being used`)}
+                  <span> / </span>
+                  {renderEditSpan(`${hospitalCode} Ventilators`)}
+                </div>
+                {renderErrors(
+                  `${hospitalCode} Ventilators - being used`,
+                  `${hospitalCode} Ventilators`,
+                )}
+              </td>
+              <td rowSpan={2}>
+                <div>
+                  {renderEditSpan(`${hospitalCode} Negative pressure rooms - being occupied`)}
+                  <span> / </span>
+                  {renderEditSpan(`${hospitalCode} Negative pressure rooms - capacity`)}
+                </div>
+                {renderErrors(
+                  `${hospitalCode} Negative pressure rooms - being occupied`,
+                  `${hospitalCode} Negative pressure rooms - capacity`,
+                )}
+              </td>
+              <td rowSpan={2}>
+                <div>
+                  {renderEditSpan(`${hospitalCode} Negative flow rooms - being occupied`)}
+                  <span> / </span>
+                  {renderEditSpan(`${hospitalCode} Negative flow rooms - capacity`)}
+                </div>
+                {renderErrors(
+                  `${hospitalCode} Negative flow rooms - being occupied`,
+                  `${hospitalCode} Negative flow rooms - capacity`,
+                )}
+              </td>
+              <td rowSpan={2}>
+                <div>
+                  {renderEditSpan(`${hospitalCode} COVID-19 Isolation beds - being used`)}
+                  <span> / </span>
+                  {renderEditSpan(`${hospitalCode} COVID-19 Isolation beds - capacity`)}
+                </div>
+                {renderErrors(
+                  `${hospitalCode} COVID-19 Isolation beds - being used`,
+                  `${hospitalCode} COVID-19 Isolation beds - capacity`,
+                )}
+              </td>
+            </tr>
+            <tr>
+              {renderCellError(`${hospitalCode} ICU extended capacity`)}
+            </tr>
+          </Fragment>)}
+        </tbody>
+        <tfoot>
           <tr>
-            <td rowSpan={2}>{hospitalCode}</td>
+            <td>Total</td>
             <td rowSpan={2}>
-              <div>
-                {renderEditSpan(`${hospitalCode} ICU routine capacity - being used`)}
-                <span> / </span>
-                {renderEditSpan(`${hospitalCode} ICU routine capacity`)}
-              </div>
-              {renderErrors(
-                `${hospitalCode} ICU routine capacity - being used`,
-                `${hospitalCode} ICU routine capacity`,
-              )}
+              <span>
+                {formatNumber(
+                  hospitalCodes
+                    .map(code => value[controlsLabelMap[`${code} ICU routine capacity - being used`]])
+                    .reduce((acc, val) => acc + parseIntOrZero(val), 0)
+                )}
+              </span>
+              <span> / </span>
+              <span>
+                {formatNumber(
+                  hospitalCodes
+                    .map(code => value[controlsLabelMap[`${code} ICU routine capacity`]])
+                    .reduce((acc, val) => acc + parseIntOrZero(val), 0)
+                )}
+              </span>
             </td>
-            {renderCellInput(`${hospitalCode} ICU extended capacity`)}
-            <td rowSpan={2}>
-              <div>
-                {renderEditSpan(`${hospitalCode} Ventilators - being used`)}
-                <span> / </span>
-                {renderEditSpan(`${hospitalCode} Ventilators`)}
-              </div>
-              {renderErrors(
-                `${hospitalCode} Ventilators - being used`,
-                `${hospitalCode} Ventilators`,
-              )}
-            </td>
-            <td rowSpan={2}>
-              <div>
-                {renderEditSpan(`${hospitalCode} Negative pressure rooms - being occupied`)}
-                <span> / </span>
-                {renderEditSpan(`${hospitalCode} Negative pressure rooms - capacity`)}
-              </div>
-              {renderErrors(
-                `${hospitalCode} Negative pressure rooms - being occupied`,
-                `${hospitalCode} Negative pressure rooms - capacity`,
+            <td>
+              {formatNumber(
+                hospitalCodes
+                  .map(code => value[controlsLabelMap[`${code} ICU extended capacity`]])
+                  .reduce((acc, val) => acc + parseIntOrZero(val), 0)
               )}
             </td>
             <td rowSpan={2}>
-              <div>
-                {renderEditSpan(`${hospitalCode} Negative flow rooms - being occupied`)}
-                <span> / </span>
-                {renderEditSpan(`${hospitalCode} Negative flow rooms - capacity`)}
-              </div>
-              {renderErrors(
-                `${hospitalCode} Negative flow rooms - being occupied`,
-                `${hospitalCode} Negative flow rooms - capacity`,
-              )}
+              <span>
+                {formatNumber(
+                  hospitalCodes
+                    .map(code => value[controlsLabelMap[`${code} Ventilators - being used`]])
+                    .reduce((acc, val) => acc + parseIntOrZero(val), 0)
+                )}
+              </span>
+              <span> / </span>
+              <span>
+                {formatNumber(
+                  hospitalCodes
+                    .map(code => value[controlsLabelMap[`${code} Ventilators`]])
+                    .reduce((acc, val) => acc + parseIntOrZero(val), 0)
+                )}
+              </span>
             </td>
             <td rowSpan={2}>
-              <div>
-                {renderEditSpan(`${hospitalCode} COVID-19 Isolation beds - being used`)}
-                <span> / </span>
-                {renderEditSpan(`${hospitalCode} COVID-19 Isolation beds - capacity`)}
-              </div>
-              {renderErrors(
-                `${hospitalCode} COVID-19 Isolation beds - being used`,
-                `${hospitalCode} COVID-19 Isolation beds - capacity`,
-              )}
+              <span>
+                {formatNumber(
+                  hospitalCodes
+                    .map(code => value[controlsLabelMap[`${code} Negative pressure rooms - being occupied`]])
+                    .reduce((acc, val) => acc + parseIntOrZero(val), 0)
+                )}
+              </span>
+              <span> / </span>
+              <span>
+                {formatNumber(
+                  hospitalCodes
+                    .map(code => value[controlsLabelMap[`${code} Negative pressure rooms - capacity`]])
+                    .reduce((acc, val) => acc + parseIntOrZero(val), 0)
+                )}
+              </span>
+            </td>
+            <td rowSpan={2}>
+              <span>
+                {formatNumber(
+                  hospitalCodes
+                    .map(code => value[controlsLabelMap[`${code} Negative flow rooms - being occupied`]])
+                    .reduce((acc, val) => acc + parseIntOrZero(val), 0)
+                )}
+              </span>
+              <span> / </span>
+              <span>
+                {formatNumber(
+                  hospitalCodes
+                    .map(code => value[controlsLabelMap[`${code} Negative flow rooms - capacity`]])
+                    .reduce((acc, val) => acc + parseIntOrZero(val), 0)
+                )}
+              </span>
+            </td>
+            <td rowSpan={2}>
+              <span>
+                {formatNumber(
+                  hospitalCodes
+                    .map(code => value[controlsLabelMap[`${code} COVID-19 Isolation beds - being used`]])
+                    .reduce((acc, val) => acc + parseIntOrZero(val), 0)
+                )}
+              </span>
+              <span> / </span>
+              <span>
+                {formatNumber(
+                  hospitalCodes
+                    .map(code => value[controlsLabelMap[`${code} COVID-19 Isolation beds - capacity`]])
+                    .reduce((acc, val) => acc + parseIntOrZero(val), 0)
+                )}
+              </span>
             </td>
           </tr>
-          <tr>
-            {renderCellError(`${hospitalCode} ICU extended capacity`)}
-          </tr>
-        </Fragment>)}
-      </tbody>
-      <tfoot>
-        <tr>
-          <td>Total</td>
-          <td rowSpan={2}>
-            <span>
-              {formatNumber(
-                hospitalCodes
-                  .map(code => value[controlsLabelMap[`${code} ICU routine capacity - being used`]])
-                  .reduce((acc, val) => acc + parseIntOrZero(val), 0)
-              )}
-            </span>
-            <span> / </span>
-            <span>
-              {formatNumber(
-                hospitalCodes
-                  .map(code => value[controlsLabelMap[`${code} ICU routine capacity`]])
-                  .reduce((acc, val) => acc + parseIntOrZero(val), 0)
-              )}
-            </span>
-          </td>
-          <td>
-            {formatNumber(
-              hospitalCodes
-                .map(code => value[controlsLabelMap[`${code} ICU extended capacity`]])
-                .reduce((acc, val) => acc + parseIntOrZero(val), 0)
-            )}
-          </td>
-          <td rowSpan={2}>
-            <span>
-              {formatNumber(
-                hospitalCodes
-                  .map(code => value[controlsLabelMap[`${code} Ventilators - being used`]])
-                  .reduce((acc, val) => acc + parseIntOrZero(val), 0)
-              )}
-            </span>
-            <span> / </span>
-            <span>
-              {formatNumber(
-                hospitalCodes
-                  .map(code => value[controlsLabelMap[`${code} Ventilators`]])
-                  .reduce((acc, val) => acc + parseIntOrZero(val), 0)
-              )}
-            </span>
-          </td>
-          <td rowSpan={2}>
-            <span>
-              {formatNumber(
-                hospitalCodes
-                  .map(code => value[controlsLabelMap[`${code} Negative pressure rooms - being occupied`]])
-                  .reduce((acc, val) => acc + parseIntOrZero(val), 0)
-              )}
-            </span>
-            <span> / </span>
-            <span>
-              {formatNumber(
-                hospitalCodes
-                  .map(code => value[controlsLabelMap[`${code} Negative pressure rooms - capacity`]])
-                  .reduce((acc, val) => acc + parseIntOrZero(val), 0)
-              )}
-            </span>
-          </td>
-          <td rowSpan={2}>
-            <span>
-              {formatNumber(
-                hospitalCodes
-                  .map(code => value[controlsLabelMap[`${code} Negative flow rooms - being occupied`]])
-                  .reduce((acc, val) => acc + parseIntOrZero(val), 0)
-              )}
-            </span>
-            <span> / </span>
-            <span>
-              {formatNumber(
-                hospitalCodes
-                  .map(code => value[controlsLabelMap[`${code} Negative flow rooms - capacity`]])
-                  .reduce((acc, val) => acc + parseIntOrZero(val), 0)
-              )}
-            </span>
-          </td>
-          <td rowSpan={2}>
-            <span>
-              {formatNumber(
-                hospitalCodes
-                  .map(code => value[controlsLabelMap[`${code} COVID-19 Isolation beds - being used`]])
-                  .reduce((acc, val) => acc + parseIntOrZero(val), 0)
-              )}
-            </span>
-            <span> / </span>
-            <span>
-              {formatNumber(
-                hospitalCodes
-                  .map(code => value[controlsLabelMap[`${code} COVID-19 Isolation beds - capacity`]])
-                  .reduce((acc, val) => acc + parseIntOrZero(val), 0)
-              )}
-            </span>
-          </td>
-        </tr>
-      </tfoot>
-    </table>}
+        </tfoot>
+      </table>
+    </div>}
   </TableHelper>
 }
 

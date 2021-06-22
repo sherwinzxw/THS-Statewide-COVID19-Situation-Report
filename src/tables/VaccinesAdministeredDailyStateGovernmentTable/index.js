@@ -36,7 +36,7 @@ const VaccinesAdministeredDailyTable = props => {
     errorMessage={errorMessage}
     controlMap={controlMap}
   >
-    {({ renderCellError, renderCellInput }) => <table id={id}>
+    {({ renderCellError, renderCellInput }) => <div className="table-container col-12"><table id={id}>
       <thead>
         <tr className="header-one">
           <th></th>
@@ -95,7 +95,7 @@ const VaccinesAdministeredDailyTable = props => {
           <td></td>
         </tr>
       </tfoot>
-    </table>}
+    </table></div>}
   </TableHelper>
 }
 

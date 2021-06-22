@@ -16,8 +16,8 @@ const controlsLabelMap = swapKeysWithValues(controlMap)
  */
 const ConfirmedCasesTable = props => {
 
-  const { 
-    value: defaultValue, 
+  const {
+    value: defaultValue,
     onChangeValue: parentOnChangeValue,
     errorMessage,
     id,
@@ -33,13 +33,13 @@ const ConfirmedCasesTable = props => {
     setValue(defaultValue)
   }, [defaultValue])
 
-  return <TableHelper 
-    value={value} 
+  return <TableHelper
+    value={value}
     onChangeValue={onChangeValue}
     errorMessage={errorMessage}
     controlMap={controlMap}
   >
-    {({ renderCellError, renderCellInput }) => <table id={id}>
+    {({ renderCellError, renderCellInput }) => <div className="table-container col-12"><table id={id}>
       <thead>
         <tr className="header-one">
           <th colSpan={3}>New cases in the last week</th>
@@ -222,7 +222,7 @@ const ConfirmedCasesTable = props => {
           </td>
         </tr>
       </tfoot>
-    </table>}
+    </table></div>}
   </TableHelper>
 }
 

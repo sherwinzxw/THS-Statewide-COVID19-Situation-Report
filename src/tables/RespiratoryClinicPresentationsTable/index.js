@@ -56,7 +56,7 @@ const RespiratoryClinicPresentations = props => {
     return null
   }
 
-  return <table renderHash={renderHash} className="RespiratoryClinicPresentationsTable">
+  return <div className="table-container col-12"><table renderHash={renderHash} className="RespiratoryClinicPresentationsTable">
     <thead>
       <tr className="blue">
         <th>Location</th>
@@ -211,7 +211,7 @@ const RespiratoryClinicPresentations = props => {
             parseIntOrZero(findValueForDayRange('Portside Burnie', -5)) +
             parseIntOrZero(findValueForDayRange('Wellington St Launceston', -5)) +
             parseIntOrZero(findValueForDayRange('Melville Street', -5)) +
-            parseIntOrZero(findValueForDayRange('East Devonport', -5)) + 
+            parseIntOrZero(findValueForDayRange('East Devonport', -5)) +
             parseIntOrZero(findValueForDayRange('Ibis Hotel - Guests', -5)) +
             parseIntOrZero(findValueForDayRange('Ibis Hotel - Staff', -5)) +
             parseIntOrZero(findValueForDayRange('Macquarie Point', -5)) +
@@ -251,7 +251,7 @@ const RespiratoryClinicPresentations = props => {
             parseIntOrZero(findValueForDayRange('Portside Burnie', -3)) +
             parseIntOrZero(findValueForDayRange('Wellington St Launceston', -3)) +
             parseIntOrZero(findValueForDayRange('Melville Street', -3)) +
-            parseIntOrZero(findValueForDayRange('East Devonport', -3)) + 
+            parseIntOrZero(findValueForDayRange('East Devonport', -3)) +
             parseIntOrZero(findValueForDayRange('Ibis Hotel - Guests', -3)) +
             parseIntOrZero(findValueForDayRange('Ibis Hotel - Staff', -3)) +
             parseIntOrZero(findValueForDayRange('Macquarie Point', -3)) +
@@ -291,7 +291,7 @@ const RespiratoryClinicPresentations = props => {
             parseIntOrZero(findValueForDayRange('Portside Burnie', -1)) +
             parseIntOrZero(findValueForDayRange('Wellington St Launceston', -1)) +
             parseIntOrZero(findValueForDayRange('Melville Street', -1)) +
-            parseIntOrZero(findValueForDayRange('East Devonport', -1)) + 
+            parseIntOrZero(findValueForDayRange('East Devonport', -1)) +
             parseIntOrZero(findValueForDayRange('Ibis Hotel - Guests', -1)) +
             parseIntOrZero(findValueForDayRange('Ibis Hotel - Staff', -1)) +
             parseIntOrZero(findValueForDayRange('Macquarie Point', -1)) +
@@ -311,7 +311,7 @@ const RespiratoryClinicPresentations = props => {
             parseIntOrZero(findValueForDayRange('Portside Burnie', 0)) +
             parseIntOrZero(findValueForDayRange('Wellington St Launceston', 0)) +
             parseIntOrZero(findValueForDayRange('Melville Street', 0)) +
-            parseIntOrZero(findValueForDayRange('East Devonport', 0)) + 
+            parseIntOrZero(findValueForDayRange('East Devonport', 0)) +
             parseIntOrZero(findValueForDayRange('Ibis Hotel - Guests', 0)) +
             parseIntOrZero(findValueForDayRange('Ibis Hotel - Staff', 0)) +
             parseIntOrZero(findValueForDayRange('Macquarie Point', 0)) +
@@ -485,6 +485,7 @@ const RespiratoryClinicPresentations = props => {
       </tr>
     </tbody>
   </table>
+  </div>
 }
 
 export default RespiratoryClinicPresentations

@@ -20,8 +20,8 @@ export const controlMap = {
  */
 const StatewideRespiratoryClinicsCapacityTable = props => {
 
-  const { 
-    value: defaultValue, 
+  const {
+    value: defaultValue,
     onChangeValue: parentOnChangeValue,
     errorMessage,
     id,
@@ -37,13 +37,13 @@ const StatewideRespiratoryClinicsCapacityTable = props => {
     setValue(defaultValue)
   }, [defaultValue])
 
-  return <TableHelper 
-    value={value} 
+  return <TableHelper
+    value={value}
     onChangeValue={onChangeValue}
     errorMessage={errorMessage}
     controlMap={controlMap}
   >
-    {({ renderCellError, renderCellInput }) => <table id={id}>
+    {({ renderCellError, renderCellInput }) => <div className="table-container col-12"><table id={id}>
       <thead>
         <tr className="header-one">
           <th>Location</th>
@@ -69,7 +69,7 @@ const StatewideRespiratoryClinicsCapacityTable = props => {
           <td rowSpan={2}>North</td>
           <td rowSpan={2}>Wellington</td>
           {renderCellInput(
-            'North - Wellington Clinic - Operating Hours', 
+            'North - Wellington Clinic - Operating Hours',
             { contentEditable: false, },
           )}
         </tr>
@@ -104,7 +104,7 @@ const StatewideRespiratoryClinicsCapacityTable = props => {
           )}
         </tr>
       </tbody>
-    </table>}
+    </table></div>}
   </TableHelper>
 }
 

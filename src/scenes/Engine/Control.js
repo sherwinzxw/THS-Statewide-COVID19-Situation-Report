@@ -49,7 +49,7 @@ const Control = props => {
             {' '}(data last updated at {formatToReadableDateTime(new Date(timestamp))})
           </span> : null}
       </h5>
-      <hr />
+      <hr class="w-100" />
     </>
     case 'Number': return <NumberInput 
       header={header}

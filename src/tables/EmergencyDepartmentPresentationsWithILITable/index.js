@@ -13,8 +13,8 @@ const controlsLabelMap = swapKeysWithValues(controlMap)
  */
 const EmergencyDepartmentPresentationsWithILITable = props => {
 
-  const { 
-    value: defaultValue, 
+  const {
+    value: defaultValue,
     onChangeValue: parentOnChangeValue,
     errorMessage,
     id,
@@ -30,13 +30,13 @@ const EmergencyDepartmentPresentationsWithILITable = props => {
     setValue(defaultValue)
   }, [defaultValue])
 
-  return <TableHelper 
-    value={value} 
+  return <TableHelper
+    value={value}
     onChangeValue={onChangeValue}
     errorMessage={errorMessage}
     controlMap={controlMap}
   >
-    {({ renderCellError, renderCellInput }) => <table id={id}>
+    {({ renderCellError, renderCellInput }) => <div className="table-container col-12"><table id={id}>
       <thead>
         <tr className="header-one">
           <th>Current resource availability</th>
@@ -168,7 +168,7 @@ const EmergencyDepartmentPresentationsWithILITable = props => {
           {renderCellError('MCH Patients requiring ICU or Critical Care')}
         </tr>
       </tbody>
-    </table>}
+    </table></div>}
   </TableHelper>
 }
 

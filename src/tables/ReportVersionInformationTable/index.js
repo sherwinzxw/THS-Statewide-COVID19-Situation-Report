@@ -52,7 +52,7 @@ const ReportVersionInformationTable = props => {
     controlMap={controlMap}
     
   >
-    {({ renderCellError, renderCellInput }) => <table id={id}>
+    {({ renderCellError, renderCellInput }) => <div className="table-container col-12"><table id={id}>
       <tbody>
         <tr>
           <th className="header-one" style={cellStyle}>Report number</th>
@@ -81,7 +81,7 @@ const ReportVersionInformationTable = props => {
           {renderCellInput('Distribution', { contentEditable: false, colSpan: 3, rowSpan: 1, cellStyle })}
         </tr>
       </tbody>
-    </table>}
+    </table></div>}
   </TableHelper>
 }
 

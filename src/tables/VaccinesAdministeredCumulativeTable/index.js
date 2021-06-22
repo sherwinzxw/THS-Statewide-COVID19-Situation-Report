@@ -36,7 +36,7 @@ const VaccinesAdministeredCumulativeTable = props => {
     errorMessage={errorMessage}
     controlMap={controlMap}
   >
-    {({ renderCellError, renderCellInput }) => <table id={id}>
+    {({ renderCellError, renderCellInput }) => <div className="table-container col-12"><table id={id}>
       <thead>
         <tr className="header-one">
           <th>Provider / setting</th>
@@ -78,7 +78,7 @@ const VaccinesAdministeredCumulativeTable = props => {
           </td>
         </tr>
       </tfoot>
-    </table>}
+    </table></div>}
   </TableHelper>
 }
 
