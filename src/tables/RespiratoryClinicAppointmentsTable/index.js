@@ -10,6 +10,9 @@ export const controlMap = {
   'Control_3FD4CD18-44EB-4308-990A-2363BDA0DA91': 'Melville Street',
   'Control_c2faaba1-da7a-4bdb-9a01-af7a851529df': 'East Devonport',
   'Control_AAD8C6A2-8293-4029-A950-DD0059FCFC8A': 'Wellington Street',
+  'Control_791990BA-87EB-4B49-B1A1-606BE374A7F4': 'Macquarie Point',
+  'Control_2EA57D42-F8F6-4B9E-A5A9-F0914BB7F11A': 'Portside Burnie',
+
 }
 
 
@@ -84,6 +87,30 @@ const RespiratoryClinicAppointmentsTable = props => {
         <tr>
           {renderCellError(
             'East Devonport',
+          )}
+        </tr>
+        <tr>
+          <td rowSpan={2}>East Devonport</td>
+          {renderCellInput(
+            'Macquarie Point',
+            { contentEditable: true, },
+          )}
+        </tr>
+        <tr>
+          {renderCellError(
+            'Macquarie Point',
+          )}
+        </tr>
+        <tr>
+          <td rowSpan={2}>East Devonport</td>
+          {renderCellInput(
+            'Port Burnie',
+            { contentEditable: true, },
+          )}
+        </tr>
+        <tr>
+          {renderCellError(
+            'Port Burnie',
           )}
         </tr>
       </tbody>

@@ -85,6 +85,7 @@ const RespiratoryClinicPresentations = props => {
           onValueItemChange(controlLabelMap['East Devonport'], newValue)
         }}
       />
+
       <RollingRow
         label="Portside Burnie"
         value={value[controlLabelMap['Portside Burnie']]}
@@ -100,6 +101,94 @@ const RespiratoryClinicPresentations = props => {
         }}
       />
       <RollingRow
+        label="Macquarie Point"
+        value={value[controlLabelMap['Macquarie Point']]}
+        onChangeValue={(newValue) => {
+          onValueItemChange(controlLabelMap['Macquarie Point'], newValue)
+        }}
+      />
+
+      <tr className="light-grey">
+        <td>Total Fixed Clinics</td>
+        <td>
+          {formatNumber(
+            parseIntOrZero(findValueForDayRange('Portside Burnie', -6)) +
+            parseIntOrZero(findValueForDayRange('Wellington St Launceston', -6)) +
+            parseIntOrZero(findValueForDayRange('Melville Street', -6)) +
+            parseIntOrZero(findValueForDayRange('East Devonport', -6)) +
+            parseIntOrZero(findValueForDayRange('Macquarie Point', -6))
+          )}
+        </td>
+        <td>
+          {formatNumber(
+            parseIntOrZero(findValueForDayRange('Portside Burnie', -5)) +
+            parseIntOrZero(findValueForDayRange('Wellington St Launceston', -5)) +
+            parseIntOrZero(findValueForDayRange('Melville Street', -5)) +
+            parseIntOrZero(findValueForDayRange('East Devonport', -5)) +
+            parseIntOrZero(findValueForDayRange('Macquarie Point', -5))
+          )}
+        </td>
+        <td>
+          {formatNumber(
+            parseIntOrZero(findValueForDayRange('Portside Burnie', -4)) +
+            parseIntOrZero(findValueForDayRange('Wellington St Launceston', -4)) +
+            parseIntOrZero(findValueForDayRange('Melville Street', -4)) +
+            parseIntOrZero(findValueForDayRange('East Devonport', -4)) +
+            parseIntOrZero(findValueForDayRange('Macquarie Point', -4))
+          )}
+        </td>
+        <td>
+          {formatNumber(
+            parseIntOrZero(findValueForDayRange('Portside Burnie', -3)) +
+            parseIntOrZero(findValueForDayRange('Wellington St Launceston', -3)) +
+            parseIntOrZero(findValueForDayRange('Melville Street', -3)) +
+            parseIntOrZero(findValueForDayRange('East Devonport', -3)) +
+            parseIntOrZero(findValueForDayRange('Macquarie Point', -3))
+          )}
+        </td>
+        <td>
+          {formatNumber(
+            parseIntOrZero(findValueForDayRange('Portside Burnie', -2)) +
+            parseIntOrZero(findValueForDayRange('Wellington St Launceston', -2)) +
+            parseIntOrZero(findValueForDayRange('Melville Street', -2)) +
+            parseIntOrZero(findValueForDayRange('East Devonport', -2)) +
+            parseIntOrZero(findValueForDayRange('Macquarie Point', -2))
+          )}
+        </td>
+        <td>
+          {formatNumber(
+            parseIntOrZero(findValueForDayRange('Portside Burnie', -1)) +
+            parseIntOrZero(findValueForDayRange('Wellington St Launceston', -1)) +
+            parseIntOrZero(findValueForDayRange('Melville Street', -1)) +
+            parseIntOrZero(findValueForDayRange('East Devonport', -1)) +
+            parseIntOrZero(findValueForDayRange('Macquarie Point', -1))
+          )}
+        </td>
+        <td>
+          {formatNumber(
+            parseIntOrZero(findValueForDayRange('Portside Burnie', 0)) +
+            parseIntOrZero(findValueForDayRange('Wellington St Launceston', 0)) +
+            parseIntOrZero(findValueForDayRange('Melville Street', 0)) +
+            parseIntOrZero(findValueForDayRange('East Devonport', 0)) +
+            parseIntOrZero(findValueForDayRange('Macquarie Point', 0))
+          )}
+        </td>
+        <td>
+          {([
+            'Wellington St Launceston',
+            'Melville Street',
+            'East Devonport',
+            'Macquarie Point',
+            'Portside Burnie',
+          ]).reduce((cur, label) => {
+            return cur + Object.values(value[controlLabelMap[label]]).reduce((prev, val) => {
+              return prev + parseIntOrZero(val.value)
+            }, 0)
+          }, 0)}
+        </td>
+      </tr>
+
+      <RollingRow
         label="Ibis Hotel - Guests"
         value={value[controlLabelMap['Ibis Hotel - Guests']]}
         onChangeValue={(newValue) => {
@@ -111,13 +200,6 @@ const RespiratoryClinicPresentations = props => {
         value={value[controlLabelMap['Ibis Hotel - Staff']]}
         onChangeValue={(newValue) => {
           onValueItemChange(controlLabelMap['Ibis Hotel - Staff'], newValue)
-        }}
-      />
-      <RollingRow
-        label="Macquarie Point"
-        value={value[controlLabelMap['Macquarie Point']]}
-        onChangeValue={(newValue) => {
-          onValueItemChange(controlLabelMap['Macquarie Point'], newValue)
         }}
       />
       <RollingRow
@@ -169,6 +251,128 @@ const RespiratoryClinicPresentations = props => {
           onValueItemChange(controlLabelMap['Sunrise Hotel'], newValue)
         }}
       />
+
+
+
+      {/* <RollingRow
+        label="Ibis Hotel"
+        value={value[controlLabelMap['Ibis Hotel - Guests']]}
+        onChangeValue={(newValue) => {
+          onValueItemChange(controlLabelMap['Ibis Hotel - Guests'], newValue)
+        }}
+      /> */}
+      <tr className="light-grey">
+        <td>Total Hotel Quarantine</td>
+        <td>
+          {formatNumber(
+            parseIntOrZero(findValueForDayRange('Ibis Hotel - Guests', -6)) +
+            parseIntOrZero(findValueForDayRange('Ibis Hotel - Staff', -6)) +
+            parseIntOrZero(findValueForDayRange('Best Western Hotel - Guest', -6)) +
+            parseIntOrZero(findValueForDayRange('Best Western Hotel - Staff', -6)) +
+            parseIntOrZero(findValueForDayRange('Hotel Peppers Seaport', -6)) +
+            parseIntOrZero(findValueForDayRange('Travel Lodge - Airport', -6)) +
+            parseIntOrZero(findValueForDayRange('Travel Lodge - Hobart', -6)) +
+            parseIntOrZero(findValueForDayRange('Wrest Point', -6)) +
+            parseIntOrZero(findValueForDayRange('Sunrise Hotel', -6))
+          )}
+        </td>
+        <td>
+          {formatNumber(
+            parseIntOrZero(findValueForDayRange('Ibis Hotel - Guests', -5)) +
+            parseIntOrZero(findValueForDayRange('Ibis Hotel - Staff', -5)) +
+            parseIntOrZero(findValueForDayRange('Best Western Hotel - Guest', -5)) +
+            parseIntOrZero(findValueForDayRange('Best Western Hotel - Staff', -5)) +
+            parseIntOrZero(findValueForDayRange('Hotel Peppers Seaport', -5)) +
+            parseIntOrZero(findValueForDayRange('Travel Lodge - Airport', -5)) +
+            parseIntOrZero(findValueForDayRange('Travel Lodge - Hobart', -5)) +
+            parseIntOrZero(findValueForDayRange('Wrest Point', -5)) +
+            parseIntOrZero(findValueForDayRange('Sunrise Hotel', -5))
+          )}
+        </td>
+        <td>
+          {formatNumber(
+            parseIntOrZero(findValueForDayRange('Ibis Hotel - Guests', -4)) +
+            parseIntOrZero(findValueForDayRange('Ibis Hotel - Staff', -4)) +
+            parseIntOrZero(findValueForDayRange('Best Western Hotel - Guest', -4)) +
+            parseIntOrZero(findValueForDayRange('Best Western Hotel - Staff', -4)) +
+            parseIntOrZero(findValueForDayRange('Hotel Peppers Seaport', -4)) +
+            parseIntOrZero(findValueForDayRange('Travel Lodge - Airport', -4)) +
+            parseIntOrZero(findValueForDayRange('Travel Lodge - Hobart', -4)) +
+            parseIntOrZero(findValueForDayRange('Wrest Point', -4)) +
+            parseIntOrZero(findValueForDayRange('Sunrise Hotel', -4))
+          )}
+        </td>
+        <td>
+          {formatNumber(
+            parseIntOrZero(findValueForDayRange('Ibis Hotel - Guests', -3)) +
+            parseIntOrZero(findValueForDayRange('Ibis Hotel - Staff', -3)) +
+            parseIntOrZero(findValueForDayRange('Best Western Hotel - Guest', -3)) +
+            parseIntOrZero(findValueForDayRange('Best Western Hotel - Staff', -3)) +
+            parseIntOrZero(findValueForDayRange('Hotel Peppers Seaport', -3)) +
+            parseIntOrZero(findValueForDayRange('Travel Lodge - Airport', -3)) +
+            parseIntOrZero(findValueForDayRange('Travel Lodge - Hobart', -3)) +
+            parseIntOrZero(findValueForDayRange('Wrest Point', -3)) +
+            parseIntOrZero(findValueForDayRange('Sunrise Hotel', -3))
+          )}
+        </td>
+        <td>
+          {formatNumber(
+            parseIntOrZero(findValueForDayRange('Ibis Hotel - Guests', -2)) +
+            parseIntOrZero(findValueForDayRange('Ibis Hotel - Staff', -2)) +
+            parseIntOrZero(findValueForDayRange('Best Western Hotel - Guest', -2)) +
+            parseIntOrZero(findValueForDayRange('Best Western Hotel - Staff', -2)) +
+            parseIntOrZero(findValueForDayRange('Hotel Peppers Seaport', -2)) +
+            parseIntOrZero(findValueForDayRange('Travel Lodge - Airport', -2)) +
+            parseIntOrZero(findValueForDayRange('Travel Lodge - Hobart', -2)) +
+            parseIntOrZero(findValueForDayRange('Wrest Point', -2)) +
+            parseIntOrZero(findValueForDayRange('Sunrise Hotel', -2))
+          )}
+        </td>
+        <td>
+          {formatNumber(
+            parseIntOrZero(findValueForDayRange('Ibis Hotel - Guests', -1)) +
+            parseIntOrZero(findValueForDayRange('Ibis Hotel - Staff', -1)) +
+            parseIntOrZero(findValueForDayRange('Best Western Hotel - Guest', -1)) +
+            parseIntOrZero(findValueForDayRange('Best Western Hotel - Staff', -1)) +
+            parseIntOrZero(findValueForDayRange('Hotel Peppers Seaport', -1)) +
+            parseIntOrZero(findValueForDayRange('Travel Lodge - Airport', -1)) +
+            parseIntOrZero(findValueForDayRange('Travel Lodge - Hobart', -1)) +
+            parseIntOrZero(findValueForDayRange('Wrest Point', -1)) +
+            parseIntOrZero(findValueForDayRange('Sunrise Hotel', -1))
+          )}
+        </td>
+        <td>
+          {formatNumber(
+            parseIntOrZero(findValueForDayRange('Ibis Hotel - Guests', 0)) +
+            parseIntOrZero(findValueForDayRange('Ibis Hotel - Staff', 0)) +
+            parseIntOrZero(findValueForDayRange('Best Western Hotel - Guest', 0)) +
+            parseIntOrZero(findValueForDayRange('Best Western Hotel - Staff', 0)) +
+            parseIntOrZero(findValueForDayRange('Hotel Peppers Seaport', 0)) +
+            parseIntOrZero(findValueForDayRange('Travel Lodge - Airport', 0)) +
+            parseIntOrZero(findValueForDayRange('Travel Lodge - Hobart', 0)) +
+            parseIntOrZero(findValueForDayRange('Wrest Point', 0)) +
+            parseIntOrZero(findValueForDayRange('Sunrise Hotel', 0))
+          )}
+        </td>
+        <td>
+          {([
+            'Ibis Hotel - Guests',
+            'Ibis Hotel - Staff',
+            'Best Western Hotel - Guest',
+            'Best Western Hotel - Staff',
+            'Hotel Peppers Seaport',
+            'Travel Lodge - Airport',
+            'Travel Lodge - Hobart',
+            'Wrest Point',
+            'Sunrise Hotel'
+          ]).reduce((cur, label) => {
+            return cur + Object.values(value[controlLabelMap[label]]).reduce((prev, val) => {
+              return prev + parseIntOrZero(val.value)
+            }, 0)
+          }, 0)}
+        </td>
+      </tr>
+
       <RollingRow
         label="Hobart Airport"
         value={value[controlLabelMap['Hobart Airport']]}
@@ -185,16 +389,72 @@ const RespiratoryClinicPresentations = props => {
       />
 
       <tr className="light-grey">
-        <td>Total Fixed Clinics</td>
+        <td>Total Ports</td>
+        <td>
+          {formatNumber(
+            parseIntOrZero(findValueForDayRange('Hobart Airport', -6)) +
+            parseIntOrZero(findValueForDayRange('Hobart Port', -6))
+          )}
+        </td>
+        <td>
+          {formatNumber(
+            parseIntOrZero(findValueForDayRange('Hobart Airport', -5)) +
+            parseIntOrZero(findValueForDayRange('Hobart Port', -5))
+          )}
+        </td>
+        <td>
+          {formatNumber(
+            parseIntOrZero(findValueForDayRange('Hobart Airport', -4)) +
+            parseIntOrZero(findValueForDayRange('Hobart Port', -4))
+          )}
+        </td>
+        <td>
+          {formatNumber(
+            parseIntOrZero(findValueForDayRange('Hobart Airport', -3)) +
+            parseIntOrZero(findValueForDayRange('Hobart Port', -3))
+          )}
+        </td>
+        <td>
+          {formatNumber(
+            parseIntOrZero(findValueForDayRange('Hobart Airport', -2)) +
+            parseIntOrZero(findValueForDayRange('Hobart Port', -2))
+          )}
+        </td>
+        <td>
+          {formatNumber(
+            parseIntOrZero(findValueForDayRange('Hobart Airport', -1)) +
+            parseIntOrZero(findValueForDayRange('Hobart Port', -1))
+          )}
+        </td>
+        <td>
+          {formatNumber(
+            parseIntOrZero(findValueForDayRange('Hobart Airport', 0)) +
+            parseIntOrZero(findValueForDayRange('Hobart Port', 0))
+          )}
+        </td>
+        <td>
+          {([
+            'Hobart Airport',
+            'Hobart Port'
+          ]).reduce((cur, label) => {
+            return cur + Object.values(value[controlLabelMap[label]]).reduce((prev, val) => {
+              return prev + parseIntOrZero(val.value)
+            }, 0)
+          }, 0)}
+        </td>
+      </tr>
+
+      <tr className="grey">
+        <td>Grand Total</td>
         <td>
           {formatNumber(
             parseIntOrZero(findValueForDayRange('Portside Burnie', -6)) +
             parseIntOrZero(findValueForDayRange('Wellington St Launceston', -6)) +
             parseIntOrZero(findValueForDayRange('Melville Street', -6)) +
             parseIntOrZero(findValueForDayRange('East Devonport', -6)) +
+            parseIntOrZero(findValueForDayRange('Macquarie Point', -6)) +
             parseIntOrZero(findValueForDayRange('Ibis Hotel - Guests', -6)) +
             parseIntOrZero(findValueForDayRange('Ibis Hotel - Staff', -6)) +
-            parseIntOrZero(findValueForDayRange('Macquarie Point', -6)) +
             parseIntOrZero(findValueForDayRange('Best Western Hotel - Guest', -6)) +
             parseIntOrZero(findValueForDayRange('Best Western Hotel - Staff', -6)) +
             parseIntOrZero(findValueForDayRange('Hotel Peppers Seaport', -6)) +
@@ -212,9 +472,9 @@ const RespiratoryClinicPresentations = props => {
             parseIntOrZero(findValueForDayRange('Wellington St Launceston', -5)) +
             parseIntOrZero(findValueForDayRange('Melville Street', -5)) +
             parseIntOrZero(findValueForDayRange('East Devonport', -5)) +
+            parseIntOrZero(findValueForDayRange('Macquarie Point', -5)) +
             parseIntOrZero(findValueForDayRange('Ibis Hotel - Guests', -5)) +
             parseIntOrZero(findValueForDayRange('Ibis Hotel - Staff', -5)) +
-            parseIntOrZero(findValueForDayRange('Macquarie Point', -5)) +
             parseIntOrZero(findValueForDayRange('Best Western Hotel - Guest', -5)) +
             parseIntOrZero(findValueForDayRange('Best Western Hotel - Staff', -5)) +
             parseIntOrZero(findValueForDayRange('Hotel Peppers Seaport', -5)) +
@@ -232,9 +492,9 @@ const RespiratoryClinicPresentations = props => {
             parseIntOrZero(findValueForDayRange('Wellington St Launceston', -4)) +
             parseIntOrZero(findValueForDayRange('Melville Street', -4)) +
             parseIntOrZero(findValueForDayRange('East Devonport', -4)) +
+            parseIntOrZero(findValueForDayRange('Macquarie Point', -4)) +
             parseIntOrZero(findValueForDayRange('Ibis Hotel - Guests', -4)) +
             parseIntOrZero(findValueForDayRange('Ibis Hotel - Staff', -4)) +
-            parseIntOrZero(findValueForDayRange('Macquarie Point', -4)) +
             parseIntOrZero(findValueForDayRange('Best Western Hotel - Guest', -4)) +
             parseIntOrZero(findValueForDayRange('Best Western Hotel - Staff', -4)) +
             parseIntOrZero(findValueForDayRange('Hotel Peppers Seaport', -4)) +
@@ -252,9 +512,9 @@ const RespiratoryClinicPresentations = props => {
             parseIntOrZero(findValueForDayRange('Wellington St Launceston', -3)) +
             parseIntOrZero(findValueForDayRange('Melville Street', -3)) +
             parseIntOrZero(findValueForDayRange('East Devonport', -3)) +
+            parseIntOrZero(findValueForDayRange('Macquarie Point', -3)) +
             parseIntOrZero(findValueForDayRange('Ibis Hotel - Guests', -3)) +
             parseIntOrZero(findValueForDayRange('Ibis Hotel - Staff', -3)) +
-            parseIntOrZero(findValueForDayRange('Macquarie Point', -3)) +
             parseIntOrZero(findValueForDayRange('Best Western Hotel - Guest', -3)) +
             parseIntOrZero(findValueForDayRange('Best Western Hotel - Staff', -3)) +
             parseIntOrZero(findValueForDayRange('Hotel Peppers Seaport', -3)) +
@@ -272,9 +532,9 @@ const RespiratoryClinicPresentations = props => {
             parseIntOrZero(findValueForDayRange('Wellington St Launceston', -2)) +
             parseIntOrZero(findValueForDayRange('Melville Street', -2)) +
             parseIntOrZero(findValueForDayRange('East Devonport', -2)) +
+            parseIntOrZero(findValueForDayRange('Macquarie Point', -2)) +
             parseIntOrZero(findValueForDayRange('Ibis Hotel - Guests', -2)) +
             parseIntOrZero(findValueForDayRange('Ibis Hotel - Staff', -2)) +
-            parseIntOrZero(findValueForDayRange('Macquarie Point', -2)) +
             parseIntOrZero(findValueForDayRange('Best Western Hotel - Guest', -2)) +
             parseIntOrZero(findValueForDayRange('Best Western Hotel - Staff', -2)) +
             parseIntOrZero(findValueForDayRange('Hotel Peppers Seaport', -2)) +
@@ -292,9 +552,9 @@ const RespiratoryClinicPresentations = props => {
             parseIntOrZero(findValueForDayRange('Wellington St Launceston', -1)) +
             parseIntOrZero(findValueForDayRange('Melville Street', -1)) +
             parseIntOrZero(findValueForDayRange('East Devonport', -1)) +
+            parseIntOrZero(findValueForDayRange('Macquarie Point', -1)) +
             parseIntOrZero(findValueForDayRange('Ibis Hotel - Guests', -1)) +
             parseIntOrZero(findValueForDayRange('Ibis Hotel - Staff', -1)) +
-            parseIntOrZero(findValueForDayRange('Macquarie Point', -1)) +
             parseIntOrZero(findValueForDayRange('Best Western Hotel - Guest', -1)) +
             parseIntOrZero(findValueForDayRange('Best Western Hotel - Staff', -1)) +
             parseIntOrZero(findValueForDayRange('Hotel Peppers Seaport', -1)) +
@@ -312,9 +572,9 @@ const RespiratoryClinicPresentations = props => {
             parseIntOrZero(findValueForDayRange('Wellington St Launceston', 0)) +
             parseIntOrZero(findValueForDayRange('Melville Street', 0)) +
             parseIntOrZero(findValueForDayRange('East Devonport', 0)) +
+            parseIntOrZero(findValueForDayRange('Macquarie Point', 0)) +
             parseIntOrZero(findValueForDayRange('Ibis Hotel - Guests', 0)) +
             parseIntOrZero(findValueForDayRange('Ibis Hotel - Staff', 0)) +
-            parseIntOrZero(findValueForDayRange('Macquarie Point', 0)) +
             parseIntOrZero(findValueForDayRange('Best Western Hotel - Guest', 0)) +
             parseIntOrZero(findValueForDayRange('Best Western Hotel - Staff', 0)) +
             parseIntOrZero(findValueForDayRange('Hotel Peppers Seaport', 0)) +
@@ -324,138 +584,6 @@ const RespiratoryClinicPresentations = props => {
             parseIntOrZero(findValueForDayRange('Sunrise Hotel', 0)) +
             parseIntOrZero(findValueForDayRange('Hobart Airport', 0)) +
             parseIntOrZero(findValueForDayRange('Hobart Port', 0))
-          )}
-        </td>
-        <td>
-          {([
-            'Portside Burnie',
-            'Wellington St Launceston',
-            'Melville Street',
-            'East Devonport'
-          ]).reduce((cur, label) => {
-            return cur + Object.values(value[controlLabelMap[label]]).reduce((prev, val) => {
-              return prev + parseIntOrZero(val.value)
-            }, 0)
-          }, 0)}
-        </td>
-      </tr>
-      {/* <RollingRow
-        label="Ibis Hotel"
-        value={value[controlLabelMap['Ibis Hotel - Guests']]}
-        onChangeValue={(newValue) => {
-          onValueItemChange(controlLabelMap['Ibis Hotel - Guests'], newValue)
-        }}
-      /> */}
-      <tr className="light-grey">
-        <td>Total Hotel Quarantine</td>
-        <td>
-          {formatNumber(
-            parseIntOrZero(findValueForDayRange('Ibis Hotel - Guests', -6))
-          )}
-        </td>
-        <td>
-          {formatNumber(
-            parseIntOrZero(findValueForDayRange('Ibis Hotel - Guests', -5))
-          )}
-        </td>
-        <td>
-          {formatNumber(
-            parseIntOrZero(findValueForDayRange('Ibis Hotel - Guests', -4))
-          )}
-        </td>
-        <td>
-          {formatNumber(
-            parseIntOrZero(findValueForDayRange('Ibis Hotel - Guests', -3))
-          )}
-        </td>
-        <td>
-          {formatNumber(
-            parseIntOrZero(findValueForDayRange('Ibis Hotel - Guests', -2))
-          )}
-        </td>
-        <td>
-          {formatNumber(
-            parseIntOrZero(findValueForDayRange('Ibis Hotel - Guests', -1))
-          )}
-        </td>
-        <td>
-          {formatNumber(
-            parseIntOrZero(findValueForDayRange('Ibis Hotel - Guests', 0))
-          )}
-        </td>
-        <td>
-          {([
-            'Ibis Hotel - Guests'
-          ]).reduce((cur, label) => {
-            return cur + Object.values(value[controlLabelMap[label]]).reduce((prev, val) => {
-              return prev + parseIntOrZero(val.value)
-            }, 0)
-          }, 0)}
-        </td>
-      </tr>
-      <tr className="grey">
-        <td>Grand Total</td>
-        <td>
-          {formatNumber(
-            parseIntOrZero(findValueForDayRange('Portside Burnie', -6)) +
-            parseIntOrZero(findValueForDayRange('Wellington St Launceston', -6)) +
-            parseIntOrZero(findValueForDayRange('Melville Street', -6)) +
-            parseIntOrZero(findValueForDayRange('East Devonport', -6)) +
-            parseIntOrZero(findValueForDayRange('Ibis Hotel - Guests', -6))
-          )}
-        </td>
-        <td>
-          {formatNumber(
-            parseIntOrZero(findValueForDayRange('Portside Burnie', -5)) +
-            parseIntOrZero(findValueForDayRange('Wellington St Launceston', -5)) +
-            parseIntOrZero(findValueForDayRange('Melville Street', -5)) +
-            parseIntOrZero(findValueForDayRange('East Devonport', -5)) +
-            parseIntOrZero(findValueForDayRange('Ibis Hotel - Guests', -5))
-          )}
-        </td>
-        <td>
-          {formatNumber(
-            parseIntOrZero(findValueForDayRange('Portside Burnie', -4)) +
-            parseIntOrZero(findValueForDayRange('Wellington St Launceston', -4)) +
-            parseIntOrZero(findValueForDayRange('Melville Street', -4)) +
-            parseIntOrZero(findValueForDayRange('East Devonport', -4)) +
-            parseIntOrZero(findValueForDayRange('Ibis Hotel - Guests', -4))
-          )}
-        </td>
-        <td>
-          {formatNumber(
-            parseIntOrZero(findValueForDayRange('Portside Burnie', -3)) +
-            parseIntOrZero(findValueForDayRange('Wellington St Launceston', -3)) +
-            parseIntOrZero(findValueForDayRange('Melville Street', -3)) +
-            parseIntOrZero(findValueForDayRange('East Devonport', -3)) +
-            parseIntOrZero(findValueForDayRange('Ibis Hotel - Guests', -3))
-          )}
-        </td>
-        <td>
-          {formatNumber(
-            parseIntOrZero(findValueForDayRange('Portside Burnie', -2)) +
-            parseIntOrZero(findValueForDayRange('Wellington St Launceston', -2)) +
-            parseIntOrZero(findValueForDayRange('Melville Street', -2)) +
-            parseIntOrZero(findValueForDayRange('East Devonport', -2)) +
-            parseIntOrZero(findValueForDayRange('Ibis Hotel - Guests', -2))
-          )}
-        </td>
-        <td>
-          {formatNumber(
-            parseIntOrZero(findValueForDayRange('Portside Burnie', -1)) +
-            parseIntOrZero(findValueForDayRange('Wellington St Launceston', -1)) +
-            parseIntOrZero(findValueForDayRange('Melville Street', -1)) +
-            parseIntOrZero(findValueForDayRange('East Devonport', -1)) +
-            parseIntOrZero(findValueForDayRange('Ibis Hotel - Guests', -1))
-          )}
-        </td>
-        <td>
-          {formatNumber(
-            parseIntOrZero(findValueForDayRange('Portside Burnie', 0)) +
-            parseIntOrZero(findValueForDayRange('Wellington St Launceston', 0)) +
-            parseIntOrZero(findValueForDayRange('Melville Street', 0)) +
-            parseIntOrZero(findValueForDayRange('East Devonport', 0)) +
-            parseIntOrZero(findValueForDayRange('Ibis Hotel - Guests', 0))
           )}
         </td>
         <td>
