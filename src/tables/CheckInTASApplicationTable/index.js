@@ -37,7 +37,7 @@ const CheckInTASApplicationTable = props => {
     errorMessage={errorMessage}
     controlMap={controlMap}
   >
-    {({ renderCellError, renderCellInput }) => <div className="table-container">
+    {({ renderCellError, renderCellInput }) => <div className="table-container col-12">
       <table id={id}>
         <tbody>
           <tr>

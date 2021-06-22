@@ -9,6 +9,7 @@ import {
   combineRespiratoryClinicAppointmentControls,
   combineEmergencyDepartmentPresentationsWithILIControlMap,
   combineAvailableBedsControlMap,
+  combineVentilatorCapacityControlMap,
   combineVaccinesAdministeredDailyStateGovernmentControlMap,
   combineVaccinesAdministeredCumulativeStateGovernmentControlMap,
   combineVaccinesAdministeredCumulativeControlMap,
@@ -27,6 +28,7 @@ const Form = props => {
     combineRespiratoryClinicAppointmentControls,
     combineEmergencyDepartmentPresentationsWithILIControlMap,
     combineAvailableBedsControlMap,
+    combineVentilatorCapacityControlMap,
     combineVaccinesAdministeredDailyStateGovernmentControlMap,
     combineVaccinesAdministeredCumulativeStateGovernmentControlMap,
     combineVaccinesAdministeredCumulativeControlMap,
@@ -37,7 +39,7 @@ const Form = props => {
 
   return <div className="Form mb-5" id={props.id}>
     <div className="row">
-      {layout.map(o => <div className="control-wrapper col-12"><Control
+      {layout.map(o => <div className="control-wrapper"><Control
         {...o}
         onChangeValue={v => {
           onChangeValue({ value: v, key: o.key })

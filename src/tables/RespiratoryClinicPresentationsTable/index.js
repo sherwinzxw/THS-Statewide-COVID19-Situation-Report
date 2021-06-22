@@ -56,7 +56,7 @@ const RespiratoryClinicPresentations = props => {
     return null
   }
 
-  return <div className="table-container"><table renderHash={renderHash} className="RespiratoryClinicPresentationsTable">
+  return <div className="table-container col-12"><table renderHash={renderHash} className="RespiratoryClinicPresentationsTable">
     <thead>
       <tr className="blue">
         <th>Location</th>
