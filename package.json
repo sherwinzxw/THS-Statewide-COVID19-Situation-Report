@@ -8,7 +8,7 @@
   "private": true,
   "scripts": {
     "start": "npx webpack serve --mode development --env API_URL=http://tdc3pr-qvieap01:88",
-    "build": "npx webpack --mode production --env API_URL=",
+    "build": "npx webpack --mode production --env API_URL=https://frontdoor.dev.health.local",
     "test": "jest src"
   },
   "devDependencies": {
