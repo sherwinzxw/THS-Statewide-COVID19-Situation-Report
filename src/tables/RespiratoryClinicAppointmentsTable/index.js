@@ -104,13 +104,13 @@ const RespiratoryClinicAppointmentsTable = props => {
         <tr>
           <td rowSpan={2}>East Devonport</td>
           {renderCellInput(
-            'Port Burnie',
+            'Portside Burnie',
             { contentEditable: true, },
           )}
         </tr>
         <tr>
           {renderCellError(
-            'Port Burnie',
+            'Portside Burnie',
           )}
         </tr>
       </tbody>
