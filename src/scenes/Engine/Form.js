@@ -39,7 +39,7 @@ const Form = props => {
 
   return <div className="Form mb-5" id={props.id}>
     <div className="row">
-      {layout.map(o => <div className="control-wrapper"><Control
+      {layout.map(o => <Control
         {...o}
         onChangeValue={v => {
           onChangeValue({ value: v, key: o.key })
@@ -47,7 +47,7 @@ const Form = props => {
         key={o.key}
         id={o.key}
         userRole={userRole}
-      /></div>)}
+      />)}
     </div>
   </div>
 }
