@@ -138,4 +138,4 @@ const VentilatorCapacityTable = props => {
   </TableHelper>
 }
 
-export default VaccinesAdministeredDailyTable
+export default VentilatorCapacityTable
