@@ -90,7 +90,7 @@ const RespiratoryClinicAppointmentsTable = props => {
           )}
         </tr>
         <tr>
-          <td rowSpan={2}>East Devonport</td>
+          <td rowSpan={2}>Macquarie Point</td>
           {renderCellInput(
             'Macquarie Point',
             { contentEditable: true, },
@@ -102,7 +102,7 @@ const RespiratoryClinicAppointmentsTable = props => {
           )}
         </tr>
         <tr>
-          <td rowSpan={2}>East Devonport</td>
+          <td rowSpan={2}>Portside Burnie</td>
           {renderCellInput(
             'Portside Burnie',
             { contentEditable: true, },
