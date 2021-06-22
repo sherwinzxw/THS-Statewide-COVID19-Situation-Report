@@ -16,6 +16,7 @@ import {
 import emergencyDepartmentPresentationsWithILIControlMap 
   from './../tables/EmergencyDepartmentPresentationsWithILITable/controlMap'
 import availableBedsControlMap from './../tables/AvailableBedsTable/controlMap'
+import ventilatorCapacityControlMap from './../tables/VentilatorCapacityTable/controlMap'
 import vaccinesAdministeredDailyStateGovernmentControlMap from 
   '../tables/VaccinesAdministeredDailyStateGovernmentTable/controlMap'
 import vaccinesAdministeredCumulativeStateGovernmentControlMap from 
@@ -153,6 +154,11 @@ export const combineEmergencyDepartmentPresentationsWithILIControlMap = groupCon
 export const combineAvailableBedsControlMap = groupControls({
   controlMap: availableBedsControlMap,
   newKey: 'AvailableBeds',
+})
+
+export const combineVentilatorCapacityControlMap = groupControls({
+  controlMap: ventilatorCapacityControlMap,
+  newKey: 'VentilatorCapacity',
 })
 
 export const combineVaccinesAdministeredDailyStateGovernmentControlMap = groupControls({

@@ -139,7 +139,7 @@ const Control = props => {
       id={id}
       {...controlProps}
     />
-    case 'VentilatorCapacityTable': return <VentilatorCapacityTable
+    case 'VentilatorCapacity': return <VentilatorCapacityTable
       header={header}
       onChangeValue={onChangeValue}
       value={value}

@@ -11,7 +11,7 @@ const controlsLabelMap = swapKeysWithValues(controlMap)
  * @property {object} props.value This is a hash map of what the original 
  * control id was to the value.
  */
-const VaccinesAdministeredDailyTable = props => {
+const VaccinesAdministeredDailyStateGovernment = props => {
 
   const { 
     value: defaultValue, 
@@ -99,4 +99,4 @@ const VaccinesAdministeredDailyTable = props => {
   </TableHelper>
 }
 
-export default VaccinesAdministeredDailyTable
+export default VaccinesAdministeredDailyStateGovernment
