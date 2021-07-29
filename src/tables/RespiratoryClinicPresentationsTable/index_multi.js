@@ -16,7 +16,7 @@ import {
 const { useRef, useState, Fragment, useEffect } = React
 
 
-export const RespiratoryClinicPresentationsRollingCalendarMulti = props => {
+export const RollingCalendarMulti = props => {
   const { 
     onChangeValue: parentOnChangeValue, 
     value: defaultValue, 
