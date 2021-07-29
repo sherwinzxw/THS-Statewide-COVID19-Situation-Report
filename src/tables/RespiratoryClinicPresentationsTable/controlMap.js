@@ -1,7 +1,6 @@
 
 
 const controlMap = {
-  'Control_D897A5B4-0A19-41E7-9F27-EDF3BAB4E07A': 'Melville Street',
   'Control_4E25CB83-86F9-4C50-B3D5-F588BA2689A5': 'East Devonport',
   'Control_03B1B8AC-DA23-4BCB-89CA-643D50F3DB99': 'Wellington St Launceston',
   'Control_24CE73FA-EC70-4F34-A0F7-5497DFFE21FF': 'Portside Burnie',
@@ -17,6 +16,7 @@ const controlMap = {
   'Control_FDF53DF9-2BAC-43D0-B717-9A017EB7E75A': 'Sunrise Hotel',  
   'Control_66DDF1BE-E90B-4E24-B56A-8B5E31D4D838': 'Hobart Airport',
   'Control_0A1C5FCE-0B5B-4D69-B8C2-F95A9247BB1C': 'Hobart Port',
+  'Control_42d50c22-26f7-4784-b039-4e4e93db2ab0': 'New Clinic(s)'
 }
 
 export default controlMap

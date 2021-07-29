@@ -1,10 +1,10 @@
 import * as React from 'react'
-import TableHelper from './../../components/TableHelper'
+import TableHelper from '../TableHelper'
 import { 
   mapRollingCalendarInputToTableInput,
   mapTableInputToRollingCalendarInput,
   validateRollingCalValue,
-} from './../../components/RollingCalendar/util'
+} from './util'
 import { formatNumber, parseIntOrZero } from '../../util/misc'
 import { 
   formatToLocalDateString, 
@@ -12,10 +12,11 @@ import {
   formatToShortDateMonth as formatDate,
   getStartOfDay,
 } from './../../util/date'
+
 const { useRef, useState, Fragment, useEffect } = React
 
 
-const RespiratoryClinicPresentations = props => {
+export const RespiratoryClinicPresentationsRollingCalendarMulti = props => {
   const { 
     onChangeValue: parentOnChangeValue, 
     value: defaultValue, 
@@ -183,5 +184,3 @@ export const RollingRow = props => {
     </Fragment>}
   </TableHelper>
 }
-
-export default RespiratoryClinicPresentations

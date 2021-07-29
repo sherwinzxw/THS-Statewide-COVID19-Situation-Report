@@ -224,13 +224,13 @@ const Page = props => {
 
       <div className="actionButtons">
         <Button 
-          title="Save as Draft" 
+          title="Save" 
           onPress={onSaveDraft}
         />
-        <Button 
+        {/* <Button 
           title="Submit" 
           onPress={onSubmit}
-        />
+        /> */}
       </div>
 
     </Card>
